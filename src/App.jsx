@@ -19,7 +19,7 @@ function App() {
         <Route path='/login' exact component={Login} />
         <Route path='/logout' exact component={Logout} />
         <Route path='/register' exact component={Register} />
-        <Route path='/Index' exact component={ Index } />
+        <Route path='/index' exact component={ Index } />
       </Switch>
       </BrowserRouter>
     </div>

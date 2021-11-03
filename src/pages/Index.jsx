@@ -4,7 +4,16 @@ import styled from "styled-components"
 import { Post } from '../components/index'
 
 export const Index = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({
+    "pp": [
+      {
+        teamName: "Fav",
+        teamMenber: 3,
+        teamStyle: "エンジョイ",
+        recruitmentMenber:8
+      }
+    ]
+  });
 
     useEffect(
       () => {
@@ -20,35 +29,26 @@ export const Index = () => {
       []
     );
   return (
-    <section>
+    <section className="bg-black">
       <PostWrap className="py-24">
-        <PostList className="flex flex-wrap">
-          {data.map((data) => {
+        <ul className="">
+          {data.pp.map((data,index) => {
             return (
               <Post
                 key={ data.index }
                 teamName={ data.teamName }
                 teamMenber={ data.teamMenber }
-                teamLank={ data.teamLank }
+                teamStyle={ data.teamStyle }
+                recruitmentMenber={ data.recruitmentMenber }
               />
             )
           }) }
-        </PostList>
+        </ul>
       </PostWrap>
     </section>
   )
 }
 
 const PostWrap = styled.div`
-  width:1080px;
   margin:0 auto;
-`
-
-const PostList = styled.ul`
-  .psot-item{
-    margin: 0 50px 50px 0;
-  }
-  .psot-item:nth-child(3n){
-    margin-right:0px;
-  }
 `

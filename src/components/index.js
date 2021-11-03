@@ -1,4 +1,6 @@
+// 投稿
 export { default as Post } from './Post'
+export { default as PostItem } from './post/PostItem'
 
 // ボタン
 export { default as PrimaryButton } from './atoms/button/PrimaryButton'

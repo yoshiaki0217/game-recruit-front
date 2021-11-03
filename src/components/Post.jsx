@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "styled-components";
 import { PrimaryButton,FavoriteButton } from './index'
 

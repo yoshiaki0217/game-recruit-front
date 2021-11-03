@@ -131,7 +131,11 @@ module.exports = {
       },
       textColor: {
         
-      }
+      },
+      colors: {
+        'main': '#4E0866',
+        'sub': '#E8D1F0',
+      },
     },
   },
   variants: {

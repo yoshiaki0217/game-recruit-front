@@ -1,15 +1,15 @@
 import styled from "styled-components"
 
 const PrimaryButton = (props) => {
-  const { children } = props
+  const { children,styles } = props
   return (
-    <Button className="primary-button w-36 py-2 text-center block mx-auto">{ children }</Button>
+    <Button className={styles}>{ children }</Button>
   )
 }
 
 const Button = styled.button`
-  background:#fff;
-  color:#666;
+  display: block;
+  text-align: center;
 `
 export default PrimaryButton
 

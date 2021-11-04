@@ -7,7 +7,7 @@ import { Top } from './pages/Top'
 import { Login } from './pages/Login'
 import { Logout } from './pages/Logout';
 import { Register } from './pages/Register'
-import { Index } from './pages/Index'
+import { PostIndx } from './pages/PostIndx'
 import { Home } from './pages/Home'
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
         <Route path='/login' exact component={Login} />
         <Route path='/logout' exact component={Logout} />
         <Route path='/register' exact component={Register} />
-        <Route path='/Index' exact component={ Index } />
+        <Route path='/post/index' exact component={ PostIndx } />
         <Route path='/home' exact component={ Home } />
       </Switch>
       </BrowserRouter>

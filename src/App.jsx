@@ -9,6 +9,7 @@ import { Logout } from './pages/Logout';
 import { Register } from './pages/Register'
 import { PostIndx } from './pages/PostIndx'
 import { Home } from './pages/Home'
+import { Chat } from './pages/Chat'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path='/register' exact component={Register} />
         <Route path='/post/index' exact component={ PostIndx } />
         <Route path='/home' exact component={ Home } />
+        <Route path='/chat' exact component={ Chat } />
       </Switch>
       </BrowserRouter>
     </div>

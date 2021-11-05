@@ -6,7 +6,7 @@ import Key from '../images/key.svg'
 export const Login = (props) => {
   return (
     <>
-      <LoginSection className="h-screen flex items-center justify-center">
+      <LoginSection className="h-screen bg-main flex items-center justify-center">
         <Content className="w-4/5 py-10">
           <Tiltle className="text-center mb-5 text-3xl">ログイン</Tiltle>
           <from action="" className="login-wrap w-4/10 mx-auto p-10 tracking-widest"> 
@@ -31,7 +31,6 @@ export const Login = (props) => {
 }
 
 const LoginSection = styled.section`
-  background: #4E0866;
   .primary-input{
     text-align:left;
   }

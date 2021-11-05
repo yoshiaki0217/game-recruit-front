@@ -1,23 +1,13 @@
 import styled from 'styled-components'
-import Search from '../images/search.svg'
 import Left from '../images/left-arrow.svg'
 import Siege from '../images/siege_logo.jpg'
 import ChatTextArea from '../components/atoms/input/ChatTextArea'
 
 export const Chat = (props) => {
-  // let rows = 1
-  // const rowsUpdate = (e) => {
-  //   console.log('log')
-  //   console.log(e.target.value)
-  //   console.log(rows)
-  //   rows++
-  //   e.target.setAttribute('rows', rows)
-  //   return true
-  // }
   return (
     <>
-      <ChatSection className="h-screen">
-        <div className="px-4 flex justify-between items-center bg-main h-12 border-b-2 border-sub">
+      <ChatSection className="h-screen bg-sub">
+        <div className="bg-main flex justify-between items-center fixed top-0 z-50 h-12 w-full px-4">
           <button>
             <img src={Left} width="28" height="28" alt="" />
           </button>
@@ -30,19 +20,19 @@ export const Chat = (props) => {
         </div>
 
         <ChatArea>
-          <div className="px-4 bg-sub h-16 border-b-2 border-sub line__contents scroll">
+          <div className="mt-12 mb-16 px-4 py-1 bg-sub line__contents scroll">
             {/* チャット　相手 */}
             <div className="opponent flex items-start py-1">
               <img className="inline rounded-full m-1" src={Siege} width="35" height="35" alt="" />
               <div className="opponent-text">
                 <div className="name">名前</div>
-                <div className="text text-sm">テストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテスト</div>
+                <p className="text text-sm break-words">test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test</p>
               </div>
             </div>
 
             {/* チャット　自分自身 */}
-            <div className="myself flex flex-row items-center myself">
-              <div className="text text-sm">テストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテスト</div>
+            <div className="myself flex flex-row items-center">
+              <p className="text text-sm break-words">test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test</p>
               <span className="date">既読<br />0:30</span>
             </div>
           </div>
@@ -52,7 +42,7 @@ export const Chat = (props) => {
           <div className="w-full p-2 mx-1 rounded-lg bg-white flex items-center">
             <ChatTextArea className="" rows="1" />
           </div>
-          <button className="w-20 h-12 rounded-lg bg-sub p-2 text-white text-xl">送信</button>
+          <button className="w-20 h-12 rounded-lg bg-sub p-2 text-main text-xl">送信</button>
         </div>
       </ChatSection>
     </>
@@ -60,32 +50,16 @@ export const Chat = (props) => {
 }
 
 const ChatSection = styled.section`
-  background: #E8D1F0;
 
-  .search-box {
-    position: relative;
-  }
-
-  .search-box::before {
-    content: "";
-    width: 16px;
-    height: 16px;
-    background: url(${Search}) no-repeat center center / auto 100%;
-    display: inline-block;
-    position: absolute;
-    top: 35%;
-    transform: translateY(-50%);
-    transform: translateX(-600%);
-  }
 `
 
 const ChatArea = styled.div`
-  // overflow: hidden;
+  overflow: hidden;
   font-size: 80%;
 
 /* 会話部分 */
 .line__contents {
-  padding: 10px;
+  // padding: 10px 10px 70px 10px;
   overflow: hidden;
   line-height: 135%;
 }
@@ -100,9 +74,8 @@ const ChatArea = styled.div`
 .opponent {
     width: 100%;
     position: relative;
-    // display: block;
     margin-bottom: 5px;
-    max-width: 80%;
+    max-width: 83%;
     clear: both;
 }
 
@@ -143,7 +116,7 @@ const ChatArea = styled.div`
     position: relative;
     display: block;
     margin: 5px 0;
-    max-width: 75%;
+    max-width: 80%;
     float: right;
     margin-right: 15px;
     clear: both;
@@ -155,7 +128,7 @@ const ChatArea = styled.div`
   border-radius: 20px;
   background-color: #8de055;
   margin: 0;
-  margin-left: 80px;
+  margin-left: 50px;
 }
 
 /* 吹き出し */
@@ -179,13 +152,14 @@ const ChatArea = styled.div`
   display: block;
   width: 100px;
   text-align: right;
-  left: -30px;
+  left: -60px;
   bottom: 0px;
   font-size: 80%;
   color: #000;
 }
 
 `
+
 
 
 

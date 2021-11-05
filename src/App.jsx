@@ -10,6 +10,10 @@ import { Register } from './pages/Register'
 import { PostIndx } from './pages/PostIndx'
 import { Home } from './pages/Home'
 import { Chat } from './pages/Chat'
+import { MyPage } from './pages/MyPage'
+import { MyPageEdit } from './pages/MyPageEdit'
+import { Notification } from './pages/Notification'
+import { NotificationDetail } from './pages/NotificationDetail'
 
 function App() {
   return (
@@ -22,7 +26,11 @@ function App() {
         <Route path='/register' exact component={Register} />
         <Route path='/post/index' exact component={ PostIndx } />
         <Route path='/home' exact component={ Home } />
-        <Route path='/chat' exact component={ Chat } />
+        <Route path='/home/chat' exact component={ Chat } />
+        <Route path='/mypage' exact component={ MyPage } />
+        <Route path='/mypage/edit' exact component={ MyPageEdit } />
+        <Route path='/notification' exact component={ Notification } />
+        <Route path='/notification/detail' exact component={ NotificationDetail } />
       </Switch>
       </BrowserRouter>
     </div>

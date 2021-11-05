@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+// import { useState, useEffect } from 'react';
+// import axios from 'axios';
 import styled from "styled-components"
-import { Post,PrimaryButton } from '../components/index'
+import { Post } from '../components/index'
 
 export const PostIndx = () => {
   const data = 

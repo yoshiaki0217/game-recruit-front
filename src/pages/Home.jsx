@@ -11,7 +11,7 @@ import Footer from '../components/Footer'
 export const Home = (props) => {
   return (
     <>
-      <HomeSection className="h-screen">
+      <HomeSection className="h-screen bg-sub">
         <div className="flex items-center justify-center search-box">
           <input className="m-3 w-56" placeholder="検索" type="search" />
         </div>
@@ -112,8 +112,6 @@ export const Home = (props) => {
 }
 
 const HomeSection = styled.section`
-  background: #E8D1F0;
-
   .search-box {
     position: relative;
   }

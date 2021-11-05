@@ -1,4 +1,4 @@
-// 投稿
+// 投稿一覧
 export { default as Post } from './Post'
 
 // ボタン

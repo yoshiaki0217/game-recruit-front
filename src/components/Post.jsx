@@ -5,9 +5,8 @@ import ProfileLogo from '../images/profileLogo.jpeg'
 
 
 const Post = (props) => {
-  const { teamName, teamMenber, teamStyle, recruitmentMenber, gameName, teamDetail, detailStyle, favoriteBtnStyle,btnText,primaryButtonStyle } = props
+  const { teamName, teamMenber, teamStyle, recruitmentMenber, gameName, teamDetail, detailStyle,favoriteBtn,favoriteBtnStyle,btnText,primaryButtonStyle } = props
   
-  // const [styled, setStyled] = useState()
   const [styledHidden, setStyledHidden] = useState("hidden")
   
   const onClickToggle = () => {
@@ -16,9 +15,16 @@ const Post = (props) => {
   
   return (
     <PostItem className="psot-item w-80 bg-white px-5 py-2 mb-10 m-auto">
-      <div className={ favoriteBtnStyle }>
-        <FavoriteButton />
-      </div>
+      {favoriteBtn && (
+        <div className={ favoriteBtnStyle }>
+          <FavoriteButton />
+        </div>
+      )}
+      {!favoriteBtn && (
+        <p className="bg-sub w-3/10 text-sm text-center flex justify-center ml-auto py-1">
+          <PrimaryButton>編集する</PrimaryButton>
+        </p>
+      )}
       <div className="flex items-center mb-5">
         <p className="profile-logo"><img className="rounded-full" src={ProfileLogo} alt="プロフィール画像" /></p>
         <h3 className="post-team-name text-2xl ml-3 truncate w-6/10">{ teamName }</h3>

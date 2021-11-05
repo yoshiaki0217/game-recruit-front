@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import { useState } from "react";
 import styled from "styled-components";
-import { FavoriteButton,PrimaryButton } from '../components/index'
+import { PrimaryButton, } from '../components/index'
 import ProfileLogo from '../images/profileLogo.jpeg'
 
-
-export const PostDetail = () => {
+export const GroupDetail = (props) => {
+  const btnText = props
   const data = {
       id:1,
       teamName: "FavFavFavFavFavFavFavFavFav",
@@ -19,45 +19,32 @@ export const PostDetail = () => {
   const onClickToggle = () => {
     setStyledHidden(!styledHidden　? "hidden" : "" );
   }
+
   return (
-    <PostDetailWrap className="bg-sub py-20">
-      {/* <Post
-        teamName={ data.teamName }
-        gameName={ data.gameName }
-        teamMenber={ data.teamMenber }
-        teamStyle={ data.teamStyle }
-        recruitmentMenber={data.recruitmentMenber}
-        teamDetail={ data.teamDetail }
-        detailStyle={ "post-detail" }
-        btnText={"応募する"}
-        favoriteBtnStyle={"absolute -top-4 -right-4"}
-        primaryButtonStyle={"bg-sub py-1 px-6 text-sm m-auto"}
-      /> */}
-      <PostItem className="psot-item w-80 bg-white px-5 pb-2 py-6 mb-10 m-auto">
-        <div className="absolute -top-4 -right-4">
-          <FavoriteButton />
-        </div>
+    <GroupDetailWrap className="bg-sub py-20">
+      <PostItem className="psot-item w-80 bg-white px-5 pb-2 pt-6 mb-10 m-auto">
+        <PrimaryButton styles={"bg-sub tex p-1 text-xs ml-auto py-1 px-4"}>編集する</PrimaryButton>
         <div className="flex mb-5">
-          <p className="profile-logo"><img className="rounded-full" src={ProfileLogo} alt="プロフィール画像" /></p>
+          <p className="profile-logo"><img className="rounded-full" src={ ProfileLogo } alt="プロフィール画像" /></p>
           <h3 className="post-team-name text-2xl ml-3 pt-4 break-all w-6.5/10">{ data.teamName }</h3>
         </div>
         <p className="post-list-item truncate">{ data.gameName }</p>
         <p className="post-list-item">ランク帯:<span>{ data.teamStyle }</span></p>
         <p className="post-list-item">募集人数:<span>{ data.recruitmentMenber }</span></p>
         <div className="flex justify-between mb-4">
-          <p className="post-list-item">参加人数:<span>{data.teamMenber}</span></p>
+          <p className="post-list-item">参加人数:<span>{ data.teamMenber }</span></p>
           <div onClick={ onClickToggle }>
-            <PrimaryButton styles={"bg-sub tex p-1 text-xs"}>メンバー一覧</PrimaryButton>
+            <PrimaryButton styles={ "bg-sub tex p-1 text-xs" }>メンバー一覧</PrimaryButton>
           </div>
         </div>
         <div className={ styledHidden }>
           <ul className="friend-list mb-8">
             <li　className="flex items-center mb-3">
-              <p className="firend-logo"><img className="rounded-full" src={ProfileLogo} alt="プロフィール画像" /></p>
+              <p className="firend-logo"><img className="rounded-full" src={ ProfileLogo } alt="プロフィール画像" /></p>
               <p className="ml-2">フレンド名</p>
             </li>
             <li　className="flex items-center">
-              <p className="firend-logo"><img className="rounded-full" src={ProfileLogo} alt="プロフィール画像" /></p>
+              <p className="firend-logo"><img className="rounded-full" src={ ProfileLogo } alt="プロフィール画像" /></p>
               <p className="ml-2">フレンド名</p>
             </li>
           </ul>
@@ -68,13 +55,13 @@ export const PostDetail = () => {
             { data.teamDetail }
           </p>
         </div>
-        <PrimaryButton styles={"bg-sub py-1 px-7 py-2 text-sm m-auto"}>応募する</PrimaryButton>
+        <PrimaryButton styles={"bg-sub py-1 px-7 py-2 text-sm m-auto"}>{ btnText ? "募集する" : "募集をやめる" }</PrimaryButton>
       </PostItem>
-    </PostDetailWrap>
+    </GroupDetailWrap>
   )
 }
 
-const PostDetailWrap = styled.section`
+const GroupDetailWrap = styled.section`
   
 `
 const PostItem = styled.div`
@@ -96,5 +83,9 @@ const PostItem = styled.div`
     padding: 0 3px;
     border:solid 1px #000;
     overflow: hidden;
+  }
+  .primary-button{
+    
+    color:#fff;
   }
 `

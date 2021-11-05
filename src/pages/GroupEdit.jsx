@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import styled from "styled-components";
-import { FavoriteButton,PrimaryButton } from '../components/index'
+import { PrimaryButton,InputText } from '../components/index'
 import ProfileLogo from '../images/profileLogo.jpeg'
 
-
-export const PostDetail = () => {
-  const data = {
+export const GroupEdit = () => {
+  const [gropData, setGropData] = useState(
+    {
       id:1,
       teamName: "FavFavFavFavFavFavFavFavFav",
       gameName: "レインボーシックスレインボーシックスレインボーシックスレインボーシックスレインボーシックスレインボーシックステキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト",
@@ -13,39 +13,29 @@ export const PostDetail = () => {
       teamStyle: "エンジョイ",
       recruitmentMenber: 8,
       teamDetail:"テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト"
-  }
+    }
+  );
   const [styledHidden, setStyledHidden] = useState("hidden")
   
+  const onChangeEvent = (e) => {
+    setGropData(e.target.value);
+  }
+
   const onClickToggle = () => {
     setStyledHidden(!styledHidden　? "hidden" : "" );
   }
   return (
-    <PostDetailWrap className="bg-sub py-20">
-      {/* <Post
-        teamName={ data.teamName }
-        gameName={ data.gameName }
-        teamMenber={ data.teamMenber }
-        teamStyle={ data.teamStyle }
-        recruitmentMenber={data.recruitmentMenber}
-        teamDetail={ data.teamDetail }
-        detailStyle={ "post-detail" }
-        btnText={"応募する"}
-        favoriteBtnStyle={"absolute -top-4 -right-4"}
-        primaryButtonStyle={"bg-sub py-1 px-6 text-sm m-auto"}
-      /> */}
-      <PostItem className="psot-item w-80 bg-white px-5 pb-2 py-6 mb-10 m-auto">
-        <div className="absolute -top-4 -right-4">
-          <FavoriteButton />
+    <GroupDetailWrap className="bg-sub py-20">
+      <PostItem className="psot-item w-80 bg-white px-5 pb-2 pt-6 mb-10 m-auto text-sm">
+        <div className="flex mb-5 items-center">
+          <p className="profile-logo"><img className="rounded-full" src={ ProfileLogo } alt="プロフィール画像" /></p>
+          <InputText styled={ "ml-4 w-7/10" } inputValue={ gropData.teamName } onChange={ onChangeEvent } />
         </div>
-        <div className="flex mb-5">
-          <p className="profile-logo"><img className="rounded-full" src={ProfileLogo} alt="プロフィール画像" /></p>
-          <h3 className="post-team-name text-2xl ml-3 pt-4 break-all w-6.5/10">{ data.teamName }</h3>
-        </div>
-        <p className="post-list-item truncate">{ data.gameName }</p>
-        <p className="post-list-item">ランク帯:<span>{ data.teamStyle }</span></p>
-        <p className="post-list-item">募集人数:<span>{ data.recruitmentMenber }</span></p>
+        <p className="post-list-item truncate ">ゲーム名:<InputText styled={ "ml-4 w-7/10" } inputValue={ gropData.gameName } onChange={ onChangeEvent } /></p>
+        <p className="post-list-item">ランク帯:<InputText styled={ "ml-4 w-7/10" } inputValue={ gropData.teamStyle } onChange={ onChangeEvent } /></p>
+        <p className="post-list-item">募集人数:<InputText styled={"ml-4 w-7/10"} inputValue={gropData.recruitmentMenber} onChange={ onChangeEvent } /></p>
         <div className="flex justify-between mb-4">
-          <p className="post-list-item">参加人数:<span>{data.teamMenber}</span></p>
+          <p className="post-list-item">参加人数:<span>{gropData.teamMenber}</span></p>
           <div onClick={ onClickToggle }>
             <PrimaryButton styles={"bg-sub tex p-1 text-xs"}>メンバー一覧</PrimaryButton>
           </div>
@@ -63,18 +53,16 @@ export const PostDetail = () => {
           </ul>
         </div>
         <p>グループ詳細</p>
-        <div className="post-detail">
-          <p>
-            { data.teamDetail }
-          </p>
-        </div>
-        <PrimaryButton styles={"bg-sub py-1 px-7 py-2 text-sm m-auto"}>応募する</PrimaryButton>
+        <textarea name="" id="" cols="30" rows="10"　className="post-detail">
+          { gropData.teamDetail }
+        </textarea>
+        <PrimaryButton styles={"bg-sub py-1 px-7 py-2 text-sm m-auto"}>保存する</PrimaryButton>
       </PostItem>
-    </PostDetailWrap>
+    </GroupDetailWrap>
   )
 }
 
-const PostDetailWrap = styled.section`
+const GroupDetailWrap = styled.section`
   
 `
 const PostItem = styled.div`
@@ -87,7 +75,10 @@ const PostItem = styled.div`
     width: 40px;
     height: 40px;
   }
-  .post-list-item span{
+  .post-list-item{
+    margin: 0 0 10px 0;
+  }
+  .post-list-item input{
     margin:0 0 0 10px;
   }
   .post-detail{
@@ -96,5 +87,8 @@ const PostItem = styled.div`
     padding: 0 3px;
     border:solid 1px #000;
     overflow: hidden;
+  }
+  .primary-button{
+    color:#fff;
   }
 `

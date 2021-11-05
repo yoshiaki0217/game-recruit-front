@@ -13,6 +13,11 @@ import { PostCreate } from './pages/PostCreate'
 import { PostDetail } from './pages/PostDetail'
 import { GroupDetail } from './pages/GroupDetail'
 import { GroupEdit } from './pages/GroupEdit'
+import { Chat } from './pages/Chat'
+import { MyPage } from './pages/MyPage'
+import { MyPageEdit } from './pages/MyPageEdit'
+import { Notification } from './pages/Notification'
+import { NotificationDetail } from './pages/NotificationDetail'
 
 function App() {
   return (
@@ -29,6 +34,11 @@ function App() {
         <Route path='/post/detail' exact component={ PostDetail } />
         <Route path='/group/detail' exact component={ GroupDetail } />
         <Route path='/group/edit' exact component={ GroupEdit } />
+        <Route path='/home/chat' exact component={ Chat } />
+        <Route path='/mypage' exact component={ MyPage } />
+        <Route path='/mypage/edit' exact component={ MyPageEdit } />
+        <Route path='/notification' exact component={ Notification } />
+        <Route path='/notification/detail' exact component={ NotificationDetail } />
       </Switch>
       </BrowserRouter>
     </div>

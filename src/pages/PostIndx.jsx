@@ -4,6 +4,7 @@ import styled from "styled-components"
 import { FavoriteButton, PrimaryButton } from '../components/index'
 import ProfileLogo from '../images/profileLogo.jpeg'
 
+
 export const PostIndx = () => {
   const data = 
     [

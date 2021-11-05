@@ -35,7 +35,7 @@ export const GroupEdit = () => {
         <p className="post-list-item">ランク帯:<InputText styled={ "ml-4 w-7/10" } inputValue={ gropData.teamStyle } onChange={ onChangeEvent } /></p>
         <p className="post-list-item">募集人数:<InputText styled={"ml-4 w-7/10"} inputValue={gropData.recruitmentMenber} onChange={ onChangeEvent } /></p>
         <div className="flex justify-between mb-4">
-          <p className="post-list-item">参加人数:<span>{gropData.teamMenber}</span></p>
+          <p className="post-list-item">参加人数:<span className="ml-2">{gropData.teamMenber}</span></p>
           <div onClick={ onClickToggle }>
             <PrimaryButton styles={"bg-sub tex p-1 text-xs"}>メンバー一覧</PrimaryButton>
           </div>

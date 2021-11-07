@@ -17,3 +17,4 @@ export { default as SearchButton } from './atoms/button/SearchButton'
 // 入力欄
 export { default as PrimaryInput } from './atoms/input/PrimaryInput'
 export { default as InputText } from './atoms/input/InputText'
+export { default as ChatTextArea } from './atoms/input/ChatTextArea'

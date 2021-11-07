@@ -1,7 +1,9 @@
 import styled from 'styled-components'
-import Footer from '../components/Footer'
+import {
+  Footer
+} from '../components/index'
 
-export const Notification = (props) => {
+const Notification = (props) => {
   return (
     <>
       <NotificationSection className="h-screen bg-sub">
@@ -35,6 +37,8 @@ const NotificationSection = styled.section`
     border-top: none;
   }
 `
+
+export default Notification
 
 
 

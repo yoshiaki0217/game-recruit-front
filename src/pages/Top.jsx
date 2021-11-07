@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { LoginButton } from '../components/index'
 
-export const  Top = (props) => {
+const  Top = (props) => {
   return (
     <>
       <TopSection className="h-screen bg-main flex items-center justify-center">
@@ -21,4 +21,6 @@ const TopSection = styled.section`
 const Title = styled.h1`
   color: #fff;
 `
+
+export default Top
 

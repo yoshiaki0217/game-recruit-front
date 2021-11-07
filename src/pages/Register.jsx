@@ -1,9 +1,12 @@
 import styled from 'styled-components'
-import { InputText, InputButton } from '../components/index'
+import {
+  InputText,
+  InputButton
+} from '../components/index'
 import Ninja from '../images/ninja.svg'
 import Key from '../images/key.svg'
 
-export const Register = (props) => {
+const Register = (props) => {
   return (
     <>
       <RegisterSection className="h-screen bg-main flex items-center justify-center">
@@ -12,15 +15,15 @@ export const Register = (props) => {
           <from action="" className="login-wrap w-4/10 mx-auto p-10 tracking-widest"> 
               <div className="flex flex-row justify-center mb-2">
                 <InputIcon className="h-10 w-10 flex flex-row justify-center">
-                  <img src={Ninja} width="32" height="32" alt="アイコン" />
+                  <img src={ Ninja } width="32" height="32" alt="アイコン" />
                 </InputIcon>
-                <InputText placeholder={'ユーザーネーム'} />
+                <InputText placeholder={ 'ユーザーネーム' } />
               </div>
               <div className="flex flex-row justify-center mb-4">
                 <InputIcon className="h-10 w-10 flex flex-row justify-center">
-                  <img src={Key} width="32" height="32" alt="アイコン" />
+                  <img src={ Key } width="32" height="32" alt="アイコン" />
                 </InputIcon>
-                <InputText placeholder={'パスワード'} />
+                <InputText placeholder={ 'パスワード' } />
               </div>
             <InputButton>登録</InputButton>
           </from>
@@ -47,3 +50,4 @@ const Tiltle = styled.h2`
   color: #000;
 `
 
+export default Register

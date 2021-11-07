@@ -1,12 +1,18 @@
 import { useState,} from 'react';
 // import axios from 'axios';
 import styled from "styled-components"
-import { FavoriteButton, PrimaryButton,SearchModal,SearchButton } from '../components/index'
+import {
+  FavoriteButton,
+  PrimaryButton,
+  SearchModal,
+  SearchButton,
+  Footer
+} from '../components/index'
 import ProfileLogo from '../images/profileLogo.jpeg'
 import AddIcom from '../images/post-add.svg'
 
 
-export const PostIndx = () => {
+const PostIndx = () => {
   const data = 
     [
       {
@@ -78,11 +84,11 @@ export const PostIndx = () => {
         <ul className="">
           {data.map((data) => {
             return (
-              <li key={data.id}>
+              <li key={ data.id }>
                 <PostItem className="psot-item w-80 bg-white px-5 py-2 mb-10 m-auto">
                   <div className="absolute -top-4 -right-4">
                     <FavoriteButton
-                      status = {false}
+                      status = { false }
                     />
                   </div>
                   <div className="flex items-center mb-5">
@@ -122,6 +128,7 @@ export const PostIndx = () => {
             )
           }) }
         </ul>
+      <Footer />
       </PostWrap>
     </section>
   )
@@ -154,3 +161,5 @@ const PostItem = styled.div`
     color:#fff;
   }
 `
+
+export default PostIndx

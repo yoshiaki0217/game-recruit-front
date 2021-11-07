@@ -1,23 +1,25 @@
 import styled from 'styled-components'
+import {
+  PrimaryButton,
+  Footer,
+} from '../components/index'
 import Left from '../images/left-arrow.svg'
 import Siege from '../images/siege_logo.jpg'
-import Footer from '../components/Footer'
-import { PrimaryButton } from '../components/index'
 
-export const MyPage = (props) => {
+const MyPage = (props) => {
   return (
     <>
       <MyPageSection className="h-screen bg-sub">
         <div className="bg-main flex justify-between items-center fixed top-0 z-50 px-4 h-12 w-full">
           <button>
-            <img src={Left} width="28" height="28" alt="" />
+            <img src={ Left } width="28" height="28" alt="" />
           </button>
         </div>
 
         <div className="mt-12 mb-20">
           <div className="px-4 flex justify-center items-center">
             <div>
-              <img className="rounded-full m-3" src={Siege} width="150" height="150" alt="" />
+              <img className="rounded-full m-3" src={ Siege } width="150" height="150" alt="" />
               <h2 className="text-center text-xl">ユーザー名</h2>
             </div>
           </div>
@@ -30,7 +32,7 @@ export const MyPage = (props) => {
               <p className="break-words">テストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテスト</p>
             </div>
             <div className="flex justify-center break-words">
-              <PrimaryButton styles={"bg-sub text-sm p-2 m-2 w-4.5/10"}>編集する</PrimaryButton>
+              <PrimaryButton styles={ "bg-sub text-sm p-2 m-2 w-4.5/10" }>編集する</PrimaryButton>
             </div>
           </UserDetailItem>
         </div>
@@ -57,5 +59,5 @@ const UserDetailItem = styled.div`
   }
 `
 
-
+export default MyPage
 

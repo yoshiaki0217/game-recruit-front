@@ -71,7 +71,10 @@ const PostFavorite = () => {
     // );
   return (
     <section className="bg-sub">
-      <PostWrap className="pt-10 pb-24 relative">
+      <PostWrap className="pb-24 relative">
+        {!styledNone && (  
+          <div className="cover"></div>
+        )}
           <SearchModal
             onClickSearch={ onClickSearch }
             styledNone={ styledNone }
@@ -137,6 +140,16 @@ const PostFavorite = () => {
 
 const PostWrap = styled.div`
   margin:0 auto;
+  .cover{
+    height: 100%;
+    width: 100%;
+    background: #000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 90;
+    opacity: 0.4;
+  }
 `
 const PostItem = styled.div`
   position: relative;

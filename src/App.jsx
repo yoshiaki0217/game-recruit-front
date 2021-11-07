@@ -26,7 +26,7 @@ function App() {
     <div className="font-serif">
       <BrowserRouter>
         <Switch>
-          <Route path='/top' exact component={ Top } />
+          <Route path='/' exact component={ Top } />
           <Route path='/register' exact component={ Register } />
           <Route path='/login' exact component={ Login } />
           <Route path='/home' exact component={Home} />

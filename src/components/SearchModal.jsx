@@ -28,7 +28,7 @@ const ButtnWrap = styled.button`
     background: #4E0866;
     padding: 1rem 1rem 3rem 1rem;
     position: absolute;
-    top: 15%;
+    top: 10%;
     left: 50%;
     transform: translate(-50%);
     width: 80%;

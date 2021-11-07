@@ -20,43 +20,43 @@ const Home = (props) => {
           <div className="flex flex-row items-center">
             <h2 className="text-white w-20">グループ</h2>
             <button>
-              <img src={Down} width="16" height="16" alt="" />
+              <img src={ Down } width="16" height="16" alt="" />
             </button>
             <button>
-              <img src={Right} width="16" height="16" alt="" />
+              <img src={ Right } width="16" height="16" alt="" />
             </button>
           </div>
           <button className="">
-            <img src={Add} width="16" height="16" alt="" />
+            <img src={ Add } width="16" height="16" alt="" />
           </button>
         </div>
 
         <section>
           <div className="px-4 flex justify-between items-center bg-sub h-16 border-b-2 border-sub">
             <div className="flex flex-row items-center">
-              <img className="rounded-full m-1" src={Siege} width="42" height="42" alt="" />
+              <img className="rounded-full m-1" src={ Siege } width="42" height="42" alt="" />
               <p className="text-black w-20">グループ名</p>
             </div>
             <div>
               <button className="m-2">
-                <img src={Chat} width="28" height="28" alt="" />
+                <img src={ Chat } width="28" height="28" alt="" />
               </button>
               <button className="m-2">
-                <img src={Detail} width="28" height="28" alt="" />
+                <img src={ Detail } width="28" height="28" alt="" />
               </button>
             </div>
           </div>
           <div className="px-4 flex justify-between items-center bg-sub h-16 border-b-2 border-sub">
             <div className="flex flex-row items-center">
-              <img className="rounded-full m-1" src={Siege} width="42" height="42" alt="" />
+              <img className="rounded-full m-1" src={ Siege } width="42" height="42" alt="" />
               <p className="text-black w-20">グループ名</p>
             </div>
             <div>
               <button className="m-2">
-                <img src={Chat} width="28" height="28" alt="" />
+                <img src={ Chat } width="28" height="28" alt="" />
               </button>
               <button className="m-2">
-                <img src={Detail} width="28" height="28" alt="" />
+                <img src={ Detail } width="28" height="28" alt="" />
               </button>
             </div>
           </div>
@@ -66,10 +66,10 @@ const Home = (props) => {
           <div className="flex flex-row items-center">
             <h2 className="text-white w-20">友だち</h2>
             <button>
-              <img src={Down} width="16" height="16" alt="" />
+              <img src={ Down } width="16" height="16" alt="" />
             </button>
             <button>
-              <img src={Right} width="16" height="16" alt="" />
+              <img src={ Right } width="16" height="16" alt="" />
             </button>
           </div>
         </div>
@@ -77,29 +77,29 @@ const Home = (props) => {
         <section>
           <div className="px-4 flex justify-between items-center bg-sub h-16 border-b-2 border-sub">
             <div className="flex flex-row items-center">
-              <img className="rounded-full m-1" src={Siege} width="42" height="42" alt="" />
+              <img className="rounded-full m-1" src={ Siege } width="42" height="42" alt="" />
               <p className="text-black w-20">友だち名</p>
             </div>
             <div>
               <button className="m-2">
-                <img src={Chat} width="28" height="28" alt="" />
+                <img src={ Chat } width="28" height="28" alt="" />
               </button>
               <button className="m-2">
-                <img src={Detail} width="28" height="28" alt="" />
+                <img src={ Detail } width="28" height="28" alt="" />
               </button>
             </div>
           </div>
           <div className="px-4 flex justify-between items-center bg-sub h-16 border-b-2 border-sub">
             <div className="flex flex-row items-center">
-              <img className="rounded-full m-1" src={Siege} width="42" height="42" alt="" />
+              <img className="rounded-full m-1" src={ Siege } width="42" height="42" alt="" />
               <p className="text-black w-20">友だち名</p>
             </div>
             <div>
               <button className="m-2">
-                <img src={Chat} width="28" height="28" alt="" />
+                <img src={ Chat } width="28" height="28" alt="" />
               </button>
               <button className="m-2">
-                <img src={Detail} width="28" height="28" alt="" />
+                <img src={ Detail } width="28" height="28" alt="" />
               </button>
             </div>
           </div>

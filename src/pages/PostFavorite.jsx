@@ -73,11 +73,11 @@ const PostFavorite = () => {
     <section className="bg-sub">
       <PostWrap className="pt-10 pb-24 relative">
           <SearchModal
-            onClickSearch={onClickSearch}
+            onClickSearch={ onClickSearch }
             styledNone={ styledNone }
           />
         <div className="flex items-center justify-end  px-11 mb-3">
-          <div onClick={onClickSearch}>
+          <div onClick={ onClickSearch }>
             <SearchButton />
           </div>
           <p className="ml-3"><img className="w-7 h-7" src={ AddIcom } alt="投稿追加ボタン" /></p>
@@ -100,7 +100,7 @@ const PostFavorite = () => {
                   <p className="post-list-item">ランク帯:<span>{ data.teamStyle }</span></p>
                   <p className="post-list-item">募集人数:<span>{ data.recruitmentMenber }</span></p>
                   <div className="flex justify-between mb-4">
-                    <p className="post-list-item">参加人数:<span>{data.teamMenber}</span></p>
+                    <p className="post-list-item">参加人数:<span>{ data.teamMenber }</span></p>
                     <div onClick={ onClickToggle }>
                       <PrimaryButton styles={"bg-sub tex p-1 text-xs"}>メンバー一覧</PrimaryButton>
                     </div>

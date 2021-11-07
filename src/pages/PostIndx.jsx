@@ -84,11 +84,11 @@ const PostIndx = () => {
         <ul className="">
           {data.map((data) => {
             return (
-              <li key={data.id}>
+              <li key={ data.id }>
                 <PostItem className="psot-item w-80 bg-white px-5 py-2 mb-10 m-auto">
                   <div className="absolute -top-4 -right-4">
                     <FavoriteButton
-                      status = {false}
+                      status = { false }
                     />
                   </div>
                   <div className="flex items-center mb-5">

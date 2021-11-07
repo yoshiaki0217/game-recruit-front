@@ -42,26 +42,26 @@ const PostDetail = () => {
           <FavoriteButton />
         </div>
         <div className="flex mb-5">
-          <p className="profile-logo"><img className="rounded-full" src={ProfileLogo} alt="プロフィール画像" /></p>
+          <p className="profile-logo"><img className="rounded-full" src={ ProfileLogo } alt="プロフィール画像" /></p>
           <h3 className="post-team-name text-2xl ml-3 pt-4 break-all w-6.5/10">{ data.teamName }</h3>
         </div>
         <p className="post-list-item truncate">{ data.gameName }</p>
         <p className="post-list-item">ランク帯:<span>{ data.teamStyle }</span></p>
         <p className="post-list-item">募集人数:<span>{ data.recruitmentMenber }</span></p>
         <div className="flex justify-between mb-4">
-          <p className="post-list-item">参加人数:<span>{data.teamMenber}</span></p>
+          <p className="post-list-item">参加人数:<span>{ data.teamMenber }</span></p>
           <div onClick={ onClickToggle }>
-            <PrimaryButton styles={"bg-sub tex p-1 text-xs"}>メンバー一覧</PrimaryButton>
+            <PrimaryButton styles={ "bg-sub tex p-1 text-xs" }>メンバー一覧</PrimaryButton>
           </div>
         </div>
         <div className={ styledHidden }>
           <ul className="friend-list mb-8">
             <li　className="flex items-center mb-3">
-              <p className="firend-logo"><img className="rounded-full" src={ProfileLogo} alt="プロフィール画像" /></p>
+              <p className="firend-logo"><img className="rounded-full" src={ ProfileLogo } alt="プロフィール画像" /></p>
               <p className="ml-2">フレンド名</p>
             </li>
             <li　className="flex items-center">
-              <p className="firend-logo"><img className="rounded-full" src={ProfileLogo} alt="プロフィール画像" /></p>
+              <p className="firend-logo"><img className="rounded-full" src={ ProfileLogo } alt="プロフィール画像" /></p>
               <p className="ml-2">フレンド名</p>
             </li>
           </ul>
@@ -72,7 +72,7 @@ const PostDetail = () => {
             { data.teamDetail }
           </p>
         </div>
-        <PrimaryButton styles={"bg-sub py-1 px-7 py-2 text-sm m-auto"}>応募する</PrimaryButton>
+        <PrimaryButton styles={ "bg-sub py-1 px-7 py-2 text-sm m-auto" }>応募する</PrimaryButton>
       </PostItem>
       <Footer />
     </PostDetailWrap>

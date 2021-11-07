@@ -21,7 +21,7 @@ const PostCreate = () => {
         <textarea name="" id="" cols="30" rows="10"　className="post-detail">
           グループの説明グループの説明グループの説明グループの説明グループの説明
         </textarea>
-        <PrimaryButton styles={"bg-sub py-1 px-7 py-2 text-sm m-auto"}>作成</PrimaryButton>
+        <PrimaryButton styles={ "bg-sub py-1 px-7 py-2 text-sm m-auto" }>作成</PrimaryButton>
       </PostItem>
       <Footer />
     </GroupDetailWrap>

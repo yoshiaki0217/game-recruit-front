@@ -37,7 +37,7 @@ const GroupEdit = () => {
         </div>
         <p className="post-list-item truncate ">ゲーム名:<InputText styled={ "ml-4 w-7/10" } inputValue={ gropData.gameName } onChange={ onChangeEvent } /></p>
         <p className="post-list-item">ランク帯:<InputText styled={ "ml-4 w-7/10" } inputValue={ gropData.teamStyle } onChange={ onChangeEvent } /></p>
-        <p className="post-list-item">募集人数:<InputText styled={"ml-4 w-7/10"} inputValue={gropData.recruitmentMenber} onChange={ onChangeEvent } /></p>
+        <p className="post-list-item">募集人数:<InputText styled={"ml-4 w-7/10"} inputValue={ gropData.recruitmentMenber } onChange={ onChangeEvent } /></p>
         <div className="flex justify-between mb-4">
           <p className="post-list-item">参加人数:<span className="ml-2">{gropData.teamMenber}</span></p>
           <div onClick={ onClickToggle }>
@@ -47,11 +47,11 @@ const GroupEdit = () => {
         <div className={ styledHidden }>
           <ul className="friend-list mb-8">
             <li　className="flex items-center mb-3">
-              <p className="firend-logo"><img className="rounded-full" src={ProfileLogo} alt="プロフィール画像" /></p>
+              <p className="firend-logo"><img className="rounded-full" src={ ProfileLogo } alt="プロフィール画像" /></p>
               <p className="ml-2">フレンド名</p>
             </li>
             <li　className="flex items-center">
-              <p className="firend-logo"><img className="rounded-full" src={ProfileLogo} alt="プロフィール画像" /></p>
+              <p className="firend-logo"><img className="rounded-full" src={ ProfileLogo } alt="プロフィール画像" /></p>
               <p className="ml-2">フレンド名</p>
             </li>
           </ul>
@@ -60,7 +60,7 @@ const GroupEdit = () => {
         <textarea name="" id="" cols="30" rows="10"　className="post-detail">
           { gropData.teamDetail }
         </textarea>
-        <PrimaryButton styles={"bg-sub py-1 px-7 py-2 text-sm m-auto"}>保存する</PrimaryButton>
+        <PrimaryButton styles={ "bg-sub py-1 px-7 py-2 text-sm m-auto" }>保存する</PrimaryButton>
       </PostItem>
       <Footer />
     </GroupDetailWrap>

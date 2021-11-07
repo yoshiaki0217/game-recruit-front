@@ -12,14 +12,14 @@ const NotificationDetail = (props) => {
       <NotificationDetailSection className="h-screen bg-sub">
         <div className="bg-main flex justify-between items-center fixed top-0 z-50 px-4 h-12 w-full">
           <button>
-            <img src={Left} width="28" height="28" alt="" />
+            <img src={ Left } width="28" height="28" alt="" />
           </button>
         </div>
 
         <div className="mt-12 mb-20">
           <div className="px-4 flex justify-center items-center">
             <div>
-              <img className="rounded-full m-3" src={Siege} width="150" height="150" alt="" />
+              <img className="rounded-full m-3" src={ Siege } width="150" height="150" alt="" />
               <h2 className="text-center text-xl">ユーザー名</h2>
             </div>
           </div>
@@ -32,8 +32,8 @@ const NotificationDetail = (props) => {
               <p className="break-words">基本R6Sをやってます。夜8~9時ぐらいからやってます。基本R6Sをやってます。夜8~9時ぐらいからやってます。基本R6Sをやってます。夜8~9時ぐらいからやってます。基本R6Sをやってます。夜8~9時ぐらいからやってます。基本R6Sをやってます。夜8~9時ぐらいからやってます。基本R6Sをやってます。夜8~9時ぐらいからやってます。基本R6Sをやってます。夜8~9時ぐらいからやってます。基本R6Sをやってます。夜8~9時ぐらいからやってます。基本R6Sをやってます。夜8~9時ぐらいからやってます。基本R6Sをやってます。夜8~9時ぐらいからやってます。基本R6Sをやってます。夜8~9時ぐらいからやってます。基本R6Sをやってます。夜8~9時ぐらいからやってます。基本R6Sをやってます。夜8~9時ぐらいからやってます。基本R6Sをやってます。夜8~9時ぐらいからやってます。基本R6Sをやってます。夜8~9時ぐらいからやってます。基本R6Sをやってます。夜8~9時ぐらいからやってます。</p>
             </div>
             <div className="flex justify-center">
-              <PrimaryButton styles={"bg-sub text-sm p-2 m-2 w-4.5/10"}>許可する</PrimaryButton>
-              <PrimaryButton styles={"bg-sub text-sm p-2 m-2 w-4.5/10"}>拒否する</PrimaryButton>
+              <PrimaryButton styles={ "bg-sub text-sm p-2 m-2 w-4.5/10" }>許可する</PrimaryButton>
+              <PrimaryButton styles={ "bg-sub text-sm p-2 m-2 w-4.5/10" }>拒否する</PrimaryButton>
             </div>
           </UserDetailItem>
         </div>

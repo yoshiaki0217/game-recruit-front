@@ -9,7 +9,7 @@ const Chat = (props) => {
       <ChatSection className="h-screen bg-sub">
         <div className="bg-main flex justify-between items-center fixed top-0 z-50 h-12 w-full px-4">
           <button>
-            <img src={Left} width="28" height="28" alt="" />
+            <img src={ Left } width="28" height="28" alt="" />
           </button>
           <button className="text-white text-xl">
             グループ名
@@ -23,7 +23,7 @@ const Chat = (props) => {
           <div className="mt-12 mb-16 px-4 py-1 bg-sub line__contents scroll">
             {/* チャット　相手 */}
             <div className="opponent flex items-start py-1">
-              <img className="inline rounded-full m-1" src={Siege} width="35" height="35" alt="" />
+              <img className="inline rounded-full m-1" src={ Siege } width="35" height="35" alt="" />
               <div className="opponent-text">
                 <div className="name">名前</div>
                 <p className="text text-sm break-words">test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test</p>

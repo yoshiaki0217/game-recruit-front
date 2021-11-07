@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import Left from '../images/left-arrow.svg'
 import Siege from '../images/siege_logo.jpg'
-import ChatTextArea from '../components/index'
+import { ChatTextArea } from '../components/index'
 
 const Chat = (props) => {
   return (

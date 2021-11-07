@@ -8,7 +8,7 @@ import Detail from '../images/detail.svg'
 import Siege from '../images/siege_logo.jpg'
 import Footer from '../components/Footer'
 
-export const Home = (props) => {
+const Home = (props) => {
   return (
     <>
       <HomeSection className="h-screen bg-sub">
@@ -139,6 +139,8 @@ const HomeSection = styled.section`
 
   }
 `
+
+export default Home
 
 
 

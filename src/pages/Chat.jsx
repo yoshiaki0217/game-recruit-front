@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 import Left from '../images/left-arrow.svg'
 import Siege from '../images/siege_logo.jpg'
-import ChatTextArea from '../components/atoms/input/ChatTextArea'
+import ChatTextArea from '../components/index'
 
-export const Chat = (props) => {
+const Chat = (props) => {
   return (
     <>
       <ChatSection className="h-screen bg-sub">
@@ -157,8 +157,9 @@ const ChatArea = styled.div`
   font-size: 80%;
   color: #000;
 }
-
 `
+
+export default Chat
 
 
 

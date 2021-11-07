@@ -1,12 +1,18 @@
 import { useState,} from 'react';
 // import axios from 'axios';
 import styled from "styled-components"
-import { FavoriteButton, PrimaryButton,SearchModal,SearchButton } from '../components/index'
+import {
+  FavoriteButton,
+  PrimaryButton,
+  SearchModal,
+  SearchButton,
+  Footer
+} from '../components/index'
 import ProfileLogo from '../images/profileLogo.jpeg'
 import AddIcom from '../images/post-add.svg'
 
 
-export const PostFavorite = () => {
+const PostFavorite = () => {
   const data = 
     [
       {
@@ -124,6 +130,7 @@ export const PostFavorite = () => {
           }) }
         </ul>
       </PostWrap>
+      <Footer />
     </section>
   )
 }
@@ -155,3 +162,5 @@ const PostItem = styled.div`
     color:#fff;
   }
 `
+
+export default PostFavorite

@@ -1,9 +1,13 @@
 import { useState } from 'react'
 import styled from "styled-components";
-import { PrimaryButton,InputText } from '../components/index'
+import {
+  PrimaryButton,
+  InputText,
+  Footer
+} from '../components/index'
 import ProfileLogo from '../images/profileLogo.jpeg'
 
-export const GroupEdit = () => {
+const GroupEdit = () => {
   const [gropData, setGropData] = useState(
     {
       id:1,
@@ -58,6 +62,7 @@ export const GroupEdit = () => {
         </textarea>
         <PrimaryButton styles={"bg-sub py-1 px-7 py-2 text-sm m-auto"}>保存する</PrimaryButton>
       </PostItem>
+      <Footer />
     </GroupDetailWrap>
   )
 }
@@ -92,3 +97,5 @@ const PostItem = styled.div`
     color:#fff;
   }
 `
+
+export default GroupEdit

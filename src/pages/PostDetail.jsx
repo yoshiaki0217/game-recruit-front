@@ -1,10 +1,14 @@
 import { useState } from 'react'
 import styled from "styled-components";
-import { FavoriteButton,PrimaryButton } from '../components/index'
+import {
+  FavoriteButton,
+  PrimaryButton,
+  Footer
+} from '../components/index'
 import ProfileLogo from '../images/profileLogo.jpeg'
 
 
-export const PostDetail = () => {
+const PostDetail = () => {
   const data = {
       id:1,
       teamName: "FavFavFavFavFavFavFavFavFav",
@@ -70,6 +74,7 @@ export const PostDetail = () => {
         </div>
         <PrimaryButton styles={"bg-sub py-1 px-7 py-2 text-sm m-auto"}>応募する</PrimaryButton>
       </PostItem>
+      <Footer />
     </PostDetailWrap>
   )
 }
@@ -98,3 +103,5 @@ const PostItem = styled.div`
     overflow: hidden;
   }
 `
+
+export default PostDetail

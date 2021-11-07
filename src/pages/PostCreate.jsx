@@ -1,8 +1,12 @@
 import styled from "styled-components";
-import { PrimaryButton,InputText } from '../components/index'
+import {
+  PrimaryButton,
+  InputText,
+  Footer
+} from '../components/index'
 import ProfileLogo from '../images/profileLogo.jpeg'
 
-export const PostCreate = () => {
+const PostCreate = () => {
   return (
     <GroupDetailWrap className="bg-sub py-20">
       <PostItem className="psot-item w-80 bg-white px-5 pb-2 pt-6 mb-10 m-auto text-sm">
@@ -19,6 +23,7 @@ export const PostCreate = () => {
         </textarea>
         <PrimaryButton styles={"bg-sub py-1 px-7 py-2 text-sm m-auto"}>作成</PrimaryButton>
       </PostItem>
+      <Footer />
     </GroupDetailWrap>
   )
 }
@@ -53,3 +58,5 @@ const PostItem = styled.div`
     color:#fff;
   }
 `
+
+export default PostCreate

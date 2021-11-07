@@ -1,9 +1,12 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { PrimaryButton, } from '../components/index'
+import {
+  PrimaryButton,
+  Footer
+} from '../components/index'
 import ProfileLogo from '../images/profileLogo.jpeg'
 
-export const GroupDetail = (props) => {
+const GroupDetail = (props) => {
   const btnText = props
   const data = {
       id:1,
@@ -57,6 +60,7 @@ export const GroupDetail = (props) => {
         </div>
         <PrimaryButton styles={"bg-sub py-1 px-7 py-2 text-sm m-auto"}>{ btnText ? "募集する" : "募集をやめる" }</PrimaryButton>
       </PostItem>
+      <Footer />
     </GroupDetailWrap>
   )
 }
@@ -89,3 +93,5 @@ const PostItem = styled.div`
     color:#fff;
   }
 `
+
+export default GroupDetail

@@ -1,9 +1,12 @@
 import styled from 'styled-components'
-import { InputText, InputButton } from '../components/index'
+import {
+  InputText,
+  InputButton
+} from '../components/index'
 import Ninja from '../images/ninja.svg'
 import Key from '../images/key.svg'
 
-export const Register = (props) => {
+const Register = (props) => {
   return (
     <>
       <RegisterSection className="h-screen bg-main flex items-center justify-center">
@@ -47,3 +50,4 @@ const Tiltle = styled.h2`
   color: #000;
 `
 
+export default Register

@@ -1,10 +1,12 @@
 import styled from 'styled-components'
+import {
+  PrimaryButton,
+  Footer,
+} from '../components/index'
 import Left from '../images/left-arrow.svg'
 import Siege from '../images/siege_logo.jpg'
-import Footer from '../components/Footer'
-import { PrimaryButton } from '../components/index'
 
-export const MyPage = (props) => {
+const MyPage = (props) => {
   return (
     <>
       <MyPageSection className="h-screen bg-sub">
@@ -57,5 +59,5 @@ const UserDetailItem = styled.div`
   }
 `
 
-
+export default MyPage
 

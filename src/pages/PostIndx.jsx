@@ -1,12 +1,18 @@
 import { useState,} from 'react';
 // import axios from 'axios';
 import styled from "styled-components"
-import { FavoriteButton, PrimaryButton,SearchModal,SearchButton } from '../components/index'
+import {
+  FavoriteButton,
+  PrimaryButton,
+  SearchModal,
+  SearchButton,
+  Footer
+} from '../components/index'
 import ProfileLogo from '../images/profileLogo.jpeg'
 import AddIcom from '../images/post-add.svg'
 
 
-export const PostIndx = () => {
+const PostIndx = () => {
   const data = 
     [
       {
@@ -122,6 +128,7 @@ export const PostIndx = () => {
             )
           }) }
         </ul>
+      <Footer />
       </PostWrap>
     </section>
   )
@@ -154,3 +161,5 @@ const PostItem = styled.div`
     color:#fff;
   }
 `
+
+export default PostIndx

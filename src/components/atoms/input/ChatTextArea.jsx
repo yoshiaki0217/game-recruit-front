@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const ChatTextArea = (props) => {
+const ChatTextArea = (props) => {
   const MAX_ROWS = 10
   let rows = props.rows
   let beforeRows = ''

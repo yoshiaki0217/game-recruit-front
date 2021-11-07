@@ -1,10 +1,12 @@
 import styled from 'styled-components'
+import {
+  PrimaryButton,
+  Footer
+} from '../components/index'
 import Left from '../images/left-arrow.svg'
 import Siege from '../images/siege_logo.jpg'
-import Footer from '../components/Footer'
-import { PrimaryButton } from '../components/index'
 
-export const NotificationDetail = (props) => {
+const NotificationDetail = (props) => {
   return (
     <>
       <NotificationDetailSection className="h-screen bg-sub">
@@ -58,5 +60,6 @@ const UserDetailItem = styled.div`
   }
 `
 
+export default NotificationDetail
 
 

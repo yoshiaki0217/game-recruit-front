@@ -18,6 +18,7 @@ import { MyPage } from './pages/MyPage'
 import { MyPageEdit } from './pages/MyPageEdit'
 import { Notification } from './pages/Notification'
 import { NotificationDetail } from './pages/NotificationDetail'
+import { PostFavorite } from './pages/PostFavorite'
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path='/post/index' exact component={ PostIndx } />
         <Route path='/post/create' exact component={ PostCreate } />
         <Route path='/post/detail' exact component={ PostDetail } />
+        <Route path='/post/favorite' exact component={ PostFavorite } />
         <Route path='/group/detail' exact component={ GroupDetail } />
         <Route path='/group/edit' exact component={ GroupEdit } />
         <Route path='/home/chat' exact component={ Chat } />

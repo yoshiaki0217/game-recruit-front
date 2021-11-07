@@ -6,7 +6,7 @@ import ProfileLogo from '../images/profileLogo.jpeg'
 import AddIcom from '../images/post-add.svg'
 
 
-export const PostIndx = () => {
+export const PostFavorite = () => {
   const data = 
     [
       {
@@ -40,6 +40,7 @@ export const PostIndx = () => {
   
   const [styledHidden, setStyledHidden] = useState("hidden")
   const [styledNone, setStyledNone] = useState("search-modal-close")
+  
   
   const onClickToggle = () => {
     setStyledHidden(!styledHidden　? "hidden" : "" );
@@ -78,11 +79,11 @@ export const PostIndx = () => {
         <ul className="">
           {data.map((data) => {
             return (
-              <li key={data.id}>
+              <li key={ data.id }>
                 <PostItem className="psot-item w-80 bg-white px-5 py-2 mb-10 m-auto">
                   <div className="absolute -top-4 -right-4">
                     <FavoriteButton
-                      status = {false}
+                      status = { true }
                     />
                   </div>
                   <div className="flex items-center mb-5">
@@ -93,9 +94,9 @@ export const PostIndx = () => {
                   <p className="post-list-item">ランク帯:<span>{ data.teamStyle }</span></p>
                   <p className="post-list-item">募集人数:<span>{ data.recruitmentMenber }</span></p>
                   <div className="flex justify-between mb-4">
-                    <p className="post-list-item">参加人数:<span>{ data.teamMenber }</span></p>
+                    <p className="post-list-item">参加人数:<span>{data.teamMenber}</span></p>
                     <div onClick={ onClickToggle }>
-                      <PrimaryButton styles={ "bg-sub tex p-1 text-xs" }>メンバー一覧</PrimaryButton>
+                      <PrimaryButton styles={"bg-sub tex p-1 text-xs"}>メンバー一覧</PrimaryButton>
                     </div>
                   </div>
                   <div className={ styledHidden }>

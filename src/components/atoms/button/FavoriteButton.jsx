@@ -2,8 +2,9 @@ import { useState } from "react"
 import styled from "styled-components"
 
 
-const FavoriteButton = () => {
-  const [changeIcon, setChangeIcon] = useState(false);
+const FavoriteButton = (props) => {
+  const { status } = props;
+  const [changeIcon, setChangeIcon] = useState(status);
 
   const changeFavoriteButton = () => {
     const changeFavoriteIcon = !changeIcon

@@ -69,8 +69,8 @@ const PostIndx = () => {
     //   []
     // );
   return (
-    <section className="bg-sub">
-      <PostWrap className="pb-24 relative">
+    <section className="bg-sub pb-20">
+      <PostWrap className="relative">
         {!styledNone && (  
           <div className="cover"></div>
         )}

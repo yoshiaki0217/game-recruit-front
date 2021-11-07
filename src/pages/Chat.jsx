@@ -20,7 +20,7 @@ const Chat = (props) => {
         </div>
 
         <ChatArea>
-          <div className="mt-12 mb-16 px-4 py-1 bg-sub line__contents scroll">
+          <div className="mt-12 px-4 py-1 bg-sub line__contents scroll">
             {/* チャット　相手 */}
             <div className="opponent flex items-start py-1">
               <img className="inline rounded-full m-1" src={ Siege } width="35" height="35" alt="" />
@@ -35,13 +35,35 @@ const Chat = (props) => {
               <p className="text text-sm break-words">test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test</p>
               <span className="date">既読<br />0:30</span>
             </div>
+            <div className="myself flex flex-row items-center">
+              <p className="text text-sm break-words">test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test</p>
+              <span className="date">既読<br />0:30</span>
+            </div>
+            <div className="myself flex flex-row items-center">
+              <p className="text text-sm break-words">test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test</p>
+              <span className="date">既読<br />0:30</span>
+            </div>
+            <div className="myself flex flex-row items-center">
+              <p className="text text-sm break-words">test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test</p>
+              <span className="date">既読<br />0:30</span>
+            </div>
+            <div className="myself flex flex-row items-center">
+              <p className="text text-sm break-words">test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test</p>
+              <span className="date">既読<br />0:30</span>
+            </div>
+            <div className="myself flex flex-row items-center">
+              <p className="text text-sm break-words">test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test</p>
+              <span className="date">既読<br />0:30</span>
+            </div>
+            <div className="myself flex flex-row items-center">
+              <p className="text text-sm break-words">test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test</p>
+              <span className="date">既読<br />0:30</span>
+            </div>
           </div>
         </ChatArea>
 
-        <div className="p-2 bg-main flex items-end justify-center h-auto fixed bottom-0 w-full z-50">
-          <div className="w-full p-2 mx-1 rounded-lg bg-white flex items-center">
-            <ChatTextArea className="" rows="1" />
-          </div>
+        <div className="p-2 bg-main flex items-end fixed justify-center bottom-0 w-full z-50">
+          <ChatTextArea className="" rows="1" />
           <button className="w-20 h-12 rounded-lg bg-sub p-2 text-main text-xl">送信</button>
         </div>
       </ChatSection>
@@ -56,6 +78,9 @@ const ChatSection = styled.section`
 const ChatArea = styled.div`
   overflow: hidden;
   font-size: 80%;
+  .line__contents{
+    height: 86vh;
+  }
 
 /* 会話部分 */
 .line__contents {

@@ -15,7 +15,9 @@ import Footer from '../components/Footer'
 
 const Home = (props) => {
   let [friends, setFriends] = useState([]);
+  let [searchFriends, setSearchFriends] = useState([]);
   let [groups, setGroups] = useState([]);
+  let [searchGroups, setSearchGroups] = useState([]);
   let [groupDisplayFlag, setGroupDisplayFlag] = useState(true);
   let [friendDisplayFlag, setFriendDisplayFlag] = useState(true);
 
@@ -24,32 +26,35 @@ const Home = (props) => {
     getGroups(1);
   },[])
 
+  // 友だちのデータ取得
   const getFriends = (id) => {
     let url = 'http://localhost:80';
 
     axios.get(url + '/api/friends/' + id)
     .then((res) => {
-      console.log(res.data.results)
       setFriends(res.data.results)
+      setSearchFriends(res.data.results)
     })
     .catch((error) => {
       console.log(error)
     })
   }
 
+  // グループのデータ取得
   const getGroups = (id) => {
     let url = 'http://localhost:80';
 
     axios.get(url + '/api/groups/' + id)
     .then((res) => {
-      console.log(res.data.results)
       setGroups(res.data.results)
+      setSearchGroups(res.data.results)
     })
     .catch((error) => {
       console.log(error)
     })
   }
 
+  // グループの表示/非表示
   const changeDisplayGroup = () => {
     if (groupDisplayFlag === true) {
       setGroupDisplayFlag(false);
@@ -58,6 +63,7 @@ const Home = (props) => {
     }
   }
 
+  // 友だちの表示/非表示
   const changeDisplayFriend = () => {
     if (friendDisplayFlag === true) {
       setFriendDisplayFlag(false);
@@ -66,77 +72,66 @@ const Home = (props) => {
     }
   }
 
+  // 検索ワードを取得して、検索結果用に新たな配列を作成
+  const searchGroupData = (searchWord) => {
+    // グループデータの検索結果を返す
+    if(searchWord.target.value) {
+      let data = groups.filter((item) => {
+        return item.group.group_name.indexOf(searchWord.target.value) > -1;
+      })
+      setSearchGroups(data);
+    } else {
+      setSearchGroups(groups);
+    }
+
+    // 友だちデータの検索結果を返す
+    if(searchWord.target.value) {
+      let data = friends.filter((item) => {
+        return item.user.user_name.indexOf(searchWord.target.value) > -1;
+      })
+      setSearchFriends(data);
+    } else {
+      setSearchFriends(friends);
+    }
+  }
+
   return (
     <>
       <HomeSection className="h-screen bg-sub">
         <div className="flex items-center justify-center search-box">
-          <input className="m-3 w-56" placeholder="検索" type="search" />
+          <input className="m-3 w-56" placeholder="検索" type="search" onChange={searchGroupData} />
         </div>
 
-        <div className="px-4 flex justify-between items-center bg-main h-8 border-b-2 border-sub">
-          <div className="flex flex-row items-center">
-            <h2 className="text-white w-20">グループ</h2>
-            <button onClick={changeDisplayGroup} className={groupDisplayFlag ? '' : 'hidden'}>
-              <img src={ Down } width="16" height="16" alt="" />
-            </button>
-            <button onClick={changeDisplayGroup} className={groupDisplayFlag ? 'hidden' : ''}>
-              <img src={ Right } width="16" height="16" alt="" />
-            </button>
+        <div className="pb-16">
+          <div className="px-4 flex justify-between items-center bg-main h-8 border-b-2 border-sub">
+            <div className="flex flex-row items-center">
+              <h2 className="text-white w-20">グループ</h2>
+              <button onClick={changeDisplayGroup} className={groupDisplayFlag ? '' : 'hidden'}>
+                <img src={ Down } width="16" height="16" alt="" />
+              </button>
+              <button onClick={changeDisplayGroup} className={groupDisplayFlag ? 'hidden' : ''}>
+                <img src={ Right } width="16" height="16" alt="" />
+              </button>
+            </div>
+            <Link className="inline-block" to="/group/edit">
+              <img src={ Add } width="16" height="16" alt="" />
+            </Link>
           </div>
-          <button className="">
-            <img src={ Add } width="16" height="16" alt="" />
-          </button>
-        </div>
 
-        <section className={groupDisplayFlag ? '' : 'hidden'}>
-        {
-          groups.map((item, index) => {
-            return (
-              <div className="px-4 flex justify-between items-center bg-sub h-16 border-b-2 border-sub" key={index}>
-                <div className="flex flex-row items-center">
-                  <img className="rounded-full m-1" src={ Siege } width="42" height="42" alt="" />
-                  <p className="text-black w-20">{item.group.group_name}</p>
-                </div>
-                <div>
-                  <Link className="m-2 inline-block" to={'/home/chat/' + item.group.id}>
-                    <img src={ Chat } width="28" height="28" alt="" />
-                  </Link>
-                  <Link className="m-2 inline-block" to={'/group/detail/' + item.group.id}>
-                    <img src={ Detail } width="28" height="28" alt="" />
-                  </Link>
-                </div>
-              </div>
-            );
-          })
-        }
-        </section>
-
-        <div className="px-4 flex justify-between items-center bg-main h-8 border-b-2 border-sub">
-          <div className="flex flex-row items-center">
-            <h2 className="text-white w-20">友だち</h2>
-            <button onClick={changeDisplayFriend} className={friendDisplayFlag ? '' : 'hidden'}>
-              <img src={ Down } width="16" height="16" alt="" />
-            </button>
-            <button onClick={changeDisplayFriend} className={friendDisplayFlag ? 'hidden' : ''}>
-              <img src={ Right } width="16" height="16" alt="" />
-            </button>
-          </div>
-        </div>
-
-        <section className={friendDisplayFlag ? '' : 'hidden'}>
+          <section className={groupDisplayFlag ? '' : 'hidden'}>
           {
-            friends.map((item, index) => {
+            searchGroups.map((item, index) => {
               return (
                 <div className="px-4 flex justify-between items-center bg-sub h-16 border-b-2 border-sub" key={index}>
                   <div className="flex flex-row items-center">
                     <img className="rounded-full m-1" src={ Siege } width="42" height="42" alt="" />
-                    <p className="text-black w-auto">{item.user.user_name}</p>
+                    <p className="text-black w-20">{item.group.group_name}</p>
                   </div>
                   <div>
-                    <Link className="m-2 inline-block" to={'/home/chat/' + item.id}>
+                    <Link className="m-2 inline-block" to={'/home/chat/' + item.group.id}>
                       <img src={ Chat } width="28" height="28" alt="" />
                     </Link>
-                    <Link className="m-2 inline-block" to={'/mypage/' + item.user.id}>
+                    <Link className="m-2 inline-block" to={'/group/detail/' + item.group.id}>
                       <img src={ Detail } width="28" height="28" alt="" />
                     </Link>
                   </div>
@@ -144,7 +139,43 @@ const Home = (props) => {
               );
             })
           }
-        </section>
+          </section>
+
+          <div className="px-4 flex justify-between items-center bg-main h-8 border-b-2 border-sub">
+            <div className="flex flex-row items-center">
+              <h2 className="text-white w-20">友だち</h2>
+              <button onClick={changeDisplayFriend} className={friendDisplayFlag ? '' : 'hidden'}>
+                <img src={ Down } width="16" height="16" alt="" />
+              </button>
+              <button onClick={changeDisplayFriend} className={friendDisplayFlag ? 'hidden' : ''}>
+                <img src={ Right } width="16" height="16" alt="" />
+              </button>
+            </div>
+          </div>
+
+          <section className={friendDisplayFlag ? '' : 'hidden'}>
+            {
+              searchFriends.map((item, index) => {
+                return (
+                  <div className="px-4 flex justify-between items-center bg-sub h-16 border-b-2 border-sub" key={index}>
+                    <div className="flex flex-row items-center">
+                      <img className="rounded-full m-1" src={ Siege } width="42" height="42" alt="" />
+                      <p className="text-black w-auto">{item.user.user_name}</p>
+                    </div>
+                    <div>
+                      <Link className="m-2 inline-block" to={'/home/chat/' + item.id}>
+                        <img src={ Chat } width="28" height="28" alt="" />
+                      </Link>
+                      <Link className="m-2 inline-block" to={'/mypage/' + item.user.id}>
+                        <img src={ Detail } width="28" height="28" alt="" />
+                      </Link>
+                    </div>
+                  </div>
+                );
+              })
+            }
+          </section>
+        </div>
 
         <Footer />
       </HomeSection>

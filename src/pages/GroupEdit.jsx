@@ -41,7 +41,7 @@ const GroupEdit = (props) => {
   const getGroup = (id) => {
     let url = 'http://localhost:80';
 
-    axios.get(url + '/api/groups/get/groupid/' + id)
+    axios.get(url + '/api/groups/groupid/' + id)
     .then((res) => {
       setGroupData(res.data.results);
       setGameName(res.data.results.mst_game.game_name);

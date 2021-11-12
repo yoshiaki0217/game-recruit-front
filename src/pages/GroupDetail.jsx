@@ -1,64 +1,130 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from 'axios';
 import styled from "styled-components";
 import {
   PrimaryButton,
   Footer
-} from '../components/index'
-import ProfileLogo from '../images/profileLogo.jpeg'
+} from '../components/index';
+import ProfileLogo from '../images/profileLogo.jpeg';
+import { Link } from 'react-router-dom';
 
 const GroupDetail = (props) => {
-  const btnText = props
-  const data = {
-      id:1,
-      teamName: "FavFavFavFavFavFavFavFavFav",
-      gameName: "レインボーシックスレインボーシックスレインボーシックスレインボーシックスレインボーシックスレインボーシックステキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト",
-      teamMenber: 3,
-      teamStyle: "エンジョイ",
-      recruitmentMenber: 8,
-      teamDetail:"テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト"
+  const [groupData, setGroupData] = useState([]);
+  // オブジェクトになっているせいなのか、groupDataからmst_gameのゲーム名が取得できず、仕方なくゲーム名用の変数作成
+  // API呼び出し時にresponseから直接参照すると取得できるので、その際にこのgameNameにセットしている
+  // よく分からないので、とりあえずこの方法で対応
+  const [gameName, setGameName] = useState('');
+  const [styleName, setStyleName] = useState('');
+  const [groupMember, setGroupMember] = useState([]);
+  const [postData, setPostData] = useState([]);
+  const groupId = props.match.params.id;
+
+  useEffect(() => {
+    getGroup(groupId);
+    getGroupMember(groupId);
+    getPost(groupId);
+  },[groupId])
+
+  const getGroup = (id) => {
+    let url = 'http://localhost:80';
+
+    axios.get(url + '/api/groups/groupid/' + id)
+    .then((res) => {
+      setGroupData(res.data.results);
+      setGameName(res.data.results.mst_game.game_name);
+      setStyleName(res.data.results.mst_style.style_name);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }
-  const [styledHidden, setStyledHidden] = useState("hidden")
+
+  const getGroupMember = (id) => {
+    let url = 'http://localhost:80';
+
+    axios.get(url + '/api/group/member/' + id)
+    .then((res) => {
+      setGroupMember(res.data.results);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+
+  const [styledHidden, setStyledHidden] = useState("hidden");
   
   const onClickToggle = () => {
     setStyledHidden(!styledHidden　? "hidden" : "" );
   }
 
+  const getPost = (id) => {
+    let url = 'http://localhost:80';
+
+    axios.get(url + '/api/post/' + id)
+    .then((res) => {
+      setPostData(res.data.results);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+
+  const onClickUpsertPost = () => {
+    let url = 'http://localhost:80';
+    let statusFlag = postData && postData.status_flag === 0  ? 1 : 0;
+
+    axios.post(url + '/api/post/upsert', {
+      groupId : groupId,
+      statusFlag : statusFlag,
+    })
+    .then((res) => {
+      setPostData(res.data.results);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+
   return (
     <GroupDetailWrap className="bg-sub py-20">
       <PostItem className="psot-item w-80 bg-white px-5 pb-2 pt-6 mb-10 m-auto">
-        <PrimaryButton styles={"bg-sub tex p-1 text-xs ml-auto py-1 px-4"}>編集する</PrimaryButton>
+        <Link className="block bg-sub text-center p-1 text-xs ml-auto py-1 px-4 w-20" to={'/group/edit/' + groupData.id}>
+          編集する
+        </Link>
         <div className="flex mb-5">
           <p className="profile-logo"><img className="rounded-full" src={ ProfileLogo } alt="プロフィール画像" /></p>
-          <h3 className="post-team-name text-2xl ml-3 pt-4 break-all w-6.5/10">{ data.teamName }</h3>
+          <h3 className="post-team-name text-2xl ml-3 pt-4 break-all w-6.5/10">{ groupData.group_name }</h3>
         </div>
-        <p className="post-list-item truncate">{ data.gameName }</p>
-        <p className="post-list-item">ランク帯:<span>{ data.teamStyle }</span></p>
-        <p className="post-list-item">募集人数:<span>{ data.recruitmentMenber }</span></p>
+        <p className="post-list-item truncate">{ gameName }</p>
+        <p className="post-list-item">スタイル:<span>{ styleName }</span></p>
+        <p className="post-list-item">募集人数:<span>{ groupData.recruitment }</span></p>
         <div className="flex justify-between mb-4">
-          <p className="post-list-item">参加人数:<span>{ data.teamMenber }</span></p>
-          <div onClick={ onClickToggle }>
+          <p className="post-list-item">参加人数:<span>{ groupData.capacity }</span></p>
+          <div onClick={ onClickToggle } className={ groupMember[0] ? "" : "hidden" }>
             <PrimaryButton styles={ "bg-sub tex p-1 text-xs" }>メンバー一覧</PrimaryButton>
           </div>
         </div>
         <div className={ styledHidden }>
           <ul className="friend-list mb-8">
-            <li　className="flex items-center mb-3">
-              <p className="firend-logo"><img className="rounded-full" src={ ProfileLogo } alt="プロフィール画像" /></p>
-              <p className="ml-2">フレンド名</p>
-            </li>
-            <li　className="flex items-center">
-              <p className="firend-logo"><img className="rounded-full" src={ ProfileLogo } alt="プロフィール画像" /></p>
-              <p className="ml-2">フレンド名</p>
-            </li>
+            {
+              groupMember.map((data, index) => {
+                return (
+                  <li key={index} className="flex items-center mb-3">
+                    <p className="firend-logo"><img className="rounded-full" src={ ProfileLogo } alt="プロフィール画像" /></p>
+                    <p className="ml-2">{ data.user.user_name }</p>
+                  </li>
+                )
+              })
+            }
           </ul>
         </div>
         <p>グループ詳細</p>
         <div className="post-detail">
           <p>
-            { data.teamDetail }
+            { groupData.description }
           </p>
         </div>
-        <PrimaryButton styles={"bg-sub py-1 px-7 py-2 text-sm m-auto"}>{ btnText ? "募集する" : "募集をやめる" }</PrimaryButton>
+        <PrimaryButton styles={"bg-sub py-1 px-7 py-2 text-sm m-auto"} onClick={ onClickUpsertPost }>{ postData && postData.status_flag === 0 ? "募集をやめる" : "募集する" }</PrimaryButton>
       </PostItem>
       <Footer />
     </GroupDetailWrap>

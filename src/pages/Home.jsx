@@ -44,7 +44,7 @@ const Home = (props) => {
   const getGroups = (id) => {
     let url = 'http://localhost:80';
 
-    axios.get(url + '/api/groups/get/userid/' + id)
+    axios.get(url + '/api/groups/userid/' + id)
     .then((res) => {
       setGroups(res.data.results)
       setSearchGroups(res.data.results)

@@ -1,9 +1,9 @@
 import styled from "styled-components"
 
 const PrimaryButton = (props) => {
-  const { children,styles } = props
+  const { children,styles,onClick } = props
   return (
-    <Button className={styles}>{ children }</Button>
+    <Button className={styles} onClick={ onClick }>{ children }</Button>
   )
 }
 

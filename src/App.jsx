@@ -38,8 +38,8 @@ function App() {
           <Route path='/post/favorite' exact component={PostFavorite} />
           
           {/* グループ */}
-          <Route path='/group/detail' exact component={ GroupDetail } />
-          <Route path='/group/edit' exact component={GroupEdit} />
+          <Route path='/group/detail/:id' exact component={ GroupDetail } />
+          <Route path='/group/edit/:id' exact component={GroupEdit} />
           
           {/* チャット */}
           <Route path='/home/chat' exact component={Chat} />

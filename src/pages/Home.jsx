@@ -44,7 +44,7 @@ const Home = (props) => {
   const getGroups = (id) => {
     let url = 'http://localhost:80';
 
-    axios.get(url + '/api/groups/' + id)
+    axios.get(url + '/api/groups/get/userid/' + id)
     .then((res) => {
       setGroups(res.data.results)
       setSearchGroups(res.data.results)
@@ -56,20 +56,12 @@ const Home = (props) => {
 
   // グループの表示/非表示
   const changeDisplayGroup = () => {
-    if (groupDisplayFlag === true) {
-      setGroupDisplayFlag(false);
-    } else if(groupDisplayFlag === false) {
-      setGroupDisplayFlag(true);
-    }
+    setGroupDisplayFlag(groupDisplayFlag ? false : true);
   }
 
   // 友だちの表示/非表示
   const changeDisplayFriend = () => {
-    if (friendDisplayFlag === true) {
-      setFriendDisplayFlag(false);
-    } else if(friendDisplayFlag === false) {
-      setFriendDisplayFlag(true);
-    }
+    setFriendDisplayFlag(friendDisplayFlag ? false : true);
   }
 
   // 検索ワードを取得して、検索結果用に新たな配列を作成
@@ -125,7 +117,7 @@ const Home = (props) => {
                 <div className="px-4 flex justify-between items-center bg-sub h-16 border-b-2 border-sub" key={index}>
                   <div className="flex flex-row items-center">
                     <img className="rounded-full m-1" src={ Siege } width="42" height="42" alt="" />
-                    <p className="text-black w-20">{item.group.group_name}</p>
+                    <p className="text-black w-40 truncate">{item.group.group_name}</p>
                   </div>
                   <div>
                     <Link className="m-2 inline-block" to={'/home/chat/' + item.group.id}>
@@ -160,7 +152,7 @@ const Home = (props) => {
                   <div className="px-4 flex justify-between items-center bg-sub h-16 border-b-2 border-sub" key={index}>
                     <div className="flex flex-row items-center">
                       <img className="rounded-full m-1" src={ Siege } width="42" height="42" alt="" />
-                      <p className="text-black w-auto">{item.user.user_name}</p>
+                      <p className="text-black w-40 truncate">{item.user.user_name}</p>
                     </div>
                     <div>
                       <Link className="m-2 inline-block" to={'/home/chat/' + item.id}>

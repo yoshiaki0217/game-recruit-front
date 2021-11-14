@@ -11,7 +11,7 @@ export { default as Login } from './Login'
 export { default as Home } from './Home'
 
 // 投稿一覧
-export { default as PostIndx } from './PostIndx'
+export { default as PostIndex } from './PostIndex'
 
 // 投稿詳細
 export { default as PostDetail } from './PostDetail'

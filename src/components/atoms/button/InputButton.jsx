@@ -3,7 +3,7 @@ import styled from "styled-components"
 const InputButton = (props) => {
   const { children } = props
   return (
-    <Button className="primary-button w-1/2 py-2 text-center block mx-auto">{ children }</Button>
+    <Button type="submit" className="primary-button w-1/2 py-2 text-center block mx-auto">{ children }</Button>
   )
 }
 

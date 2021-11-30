@@ -1,33 +1,19 @@
 import styled from 'styled-components'
 
 const ChatTextArea = (props) => {
-  const MAX_ROWS = 10
-  let rows = props.rows
-  let beforeRows = ''
-  const rowsUpdate = (e) => {
-    let value = e.target.value
-    let line = value.split("\n").length
+  const { onChange,rows,onClick } = props
 
-    if(rows === MAX_ROWS) {
-      if(beforeRows > line) {
-        rows = line
-        e.target.setAttribute('rows', rows)
-        beforeRows = line
-      }
-      beforeRows = line
-    } else {
-      rows = line
-      e.target.setAttribute('rows', rows)
-      beforeRows = line
-    }
-    return true
-  }
   return (
-    <TextArea
-      className="w-full p-1 bg-white text-base"
-      rows={rows}
-      onChange={rowsUpdate}
-    />
+    <div className="p-2 bg-main flex items-end justify-center h-auto fixed bottom-0 w-full z-50">
+      <div className="chat-text-area w-full p-2 mx-1 rounded-lg bg-white flex items-center">
+        <TextArea
+          className="w-full p-1 bg-white text-base"
+          rows={ rows }
+          onChange={ onChange }
+        />
+      </div>
+      <button className="w-20 h-12 rounded-lg bg-sub p-2 text-main text-xl" onClick={ onClick }>送信</button>
+    </div>
   );
 }
 

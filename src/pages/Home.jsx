@@ -14,6 +14,8 @@ import Footer from '../components/Footer'
 
 
 const Home = (props) => {
+  // ログイン機能が完了したらログインしているユーザーのIDを取得
+  const loginedUserId = 1;
   let [friends, setFriends] = useState([]);
   let [searchFriends, setSearchFriends] = useState([]);
   let [groups, setGroups] = useState([]);
@@ -22,8 +24,8 @@ const Home = (props) => {
   let [friendDisplayFlag, setFriendDisplayFlag] = useState(true);
 
   useEffect(() => {
-    getFriends(1);
-    getGroups(1);
+    getFriends(loginedUserId);
+    getGroups(loginedUserId);
   },[])
 
   // 友だちのデータ取得
@@ -120,7 +122,13 @@ const Home = (props) => {
                     <p className="text-black w-40 truncate">{item.group.group_name}</p>
                   </div>
                   <div>
-                    <Link className="m-2 inline-block" to={'/home/chat/' + item.group.id}>
+                    <Link className="m-2 inline-block" to={{
+                        pathname: '/chat/group/' + item.group.id,
+                        state: { 
+                          groupName: item.group.group_name,
+                          groupId: item.group.id
+                        }
+                      }}>
                       <img src={ Chat } width="28" height="28" alt="" />
                     </Link>
                     <Link className="m-2 inline-block" to={'/group/detail/' + item.group.id}>
@@ -155,9 +163,18 @@ const Home = (props) => {
                       <p className="text-black w-40 truncate">{item.user.user_name}</p>
                     </div>
                     <div>
-                      <Link className="m-2 inline-block" to={'/home/chat/' + item.id}>
+                      <Link className="m-2 inline-block" to={{
+                        pathname: '/chat/private/' + item.private_room_id,
+                        state: { 
+                          friendName: item.user.user_name,
+                          friendId: item.user.id
+                        }
+                      }}>
                         <img src={ Chat } width="28" height="28" alt="" />
                       </Link>
+                      {/* <Link className="m-2 inline-block" to={'/home/chat/' + item.private_room_id}>
+                        <img src={ Chat } width="28" height="28" alt="" />
+                      </Link> */}
                       <Link className="m-2 inline-block" to={'/mypage/' + item.user.id}>
                         <img src={ Detail } width="28" height="28" alt="" />
                       </Link>

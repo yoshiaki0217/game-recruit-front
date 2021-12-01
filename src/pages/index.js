@@ -29,7 +29,8 @@ export { default as GroupDetail } from './GroupDetail'
 export { default as GroupEdit } from './GroupEdit'
 
 // チャット画面
-export { default as Chat } from './Chat'
+export { default as GroupChat } from './GroupChat'
+export { default as PrivateChat } from './PrivateChat'
 
 // マイページ
 export { default as MyPage } from './MyPage'

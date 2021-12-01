@@ -3,6 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Echo from 'laravel-echo';
+import dotenv from 'dotenv'
+window.Pusher = require('pusher-js');
+
+dotenv.config();
+
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: process.env.REACT_APP_PUSHER_APP_KEY,
+    cluster: process.env.REACT_APP_PUSHER_APP_CLUSTER,
+    encrypted: true
+});
 
 ReactDOM.render(
   <React.StrictMode>

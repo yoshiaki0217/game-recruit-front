@@ -14,7 +14,8 @@ import {
   PostFavorite,
   GroupDetail,
   GroupEdit,
-  Chat,
+  GroupChat,
+  PrivateChat,
   MyPage,
   MyPageEdit,
   Notification,
@@ -39,10 +40,11 @@ function App() {
           
           {/* グループ */}
           <Route path='/group/detail/:id' exact component={ GroupDetail } />
-          <Route path='/group/edit/:id' exact component={GroupEdit} />
+          <Route path='/group/edit/:id' exact component={ GroupEdit } />
           
           {/* チャット */}
-          <Route path='/home/chat' exact component={Chat} />
+          <Route path='/chat/group/:id' exact component={ GroupChat } />
+          <Route path='/chat/private/:id' exact component={ PrivateChat } />
 
           {/* マイページ */}
           <Route path='/mypage' exact component={MyPage} />

@@ -1,13 +1,17 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { LoginButton } from '../components/index'
 
-const  Top = (props) => {
+const Top = (props) => {
+  
   return (
     <>
       <TopSection className="h-screen bg-main flex items-center justify-center">
-        <div　className="container mx-auto">
+        <div className="container mx-auto">
           <Title className="text-6xl text-center mb-32">Game<br />Recruit</Title>
-          <LoginButton>ログイン</LoginButton>
+          <Link to="/login">
+            <LoginButton>ログイン</LoginButton>
+          </Link>
           <LoginButton>新規登録</LoginButton>
         </div>
       </TopSection>

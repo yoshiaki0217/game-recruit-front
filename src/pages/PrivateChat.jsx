@@ -8,7 +8,7 @@ import { ChatTextArea } from '../components/index'
 
 const PrivateChat = (props) => {
   // ログイン機能が完了したらログインしているユーザーのIDを取得
-  const loginedUserId = 1;
+  const loginedUserId = localStorage.getItem('userId');
   const friendData = props.location.state;
   const roomId = props.match.params.id;
   const [messages, setMessages] = useState([]);
@@ -94,20 +94,6 @@ const PrivateChat = (props) => {
     }
     return true
   }
-
-  // const getRead = (userId, friendId) => {
-  //   let url = 'http://localhost:80';
-
-  //   axios.get(url + '/api/read/' + userId + '/' + friendId)
-  //   .then((res) => {
-  //     let element = document.documentElement;
-  //     let bottom = element.scrollHeight - element.clientHeight;
-  //     window.scroll(0, bottom);
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   })
-  // }
 
   const upsertRead = (userId, friendId, roomId) => {
     let url = 'http://localhost:80';

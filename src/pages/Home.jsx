@@ -15,18 +15,22 @@ import Footer from '../components/Footer'
 
 const Home = (props) => {
   // ログイン機能が完了したらログインしているユーザーのIDを取得
-  const loginedUserId = 1;
-  let [friends, setFriends] = useState([]);
-  let [searchFriends, setSearchFriends] = useState([]);
-  let [groups, setGroups] = useState([]);
-  let [searchGroups, setSearchGroups] = useState([]);
-  let [groupDisplayFlag, setGroupDisplayFlag] = useState(true);
-  let [friendDisplayFlag, setFriendDisplayFlag] = useState(true);
+  const loginedUserId = localStorage.getItem('userId');
+  const [friends, setFriends] = useState([]);
+  const [searchFriends, setSearchFriends] = useState([]);
+  const [groups, setGroups] = useState([]);
+  const [searchGroups, setSearchGroups] = useState([]);
+  const [groupDisplayFlag, setGroupDisplayFlag] = useState(true);
+  const [friendDisplayFlag, setFriendDisplayFlag] = useState(true);
 
   useEffect(() => {
-    getFriends(loginedUserId);
-    getGroups(loginedUserId);
-  },[])
+    let unmounted = false;
+    if(!unmounted) {
+      getFriends(loginedUserId);
+      getGroups(loginedUserId);
+      unmounted = true
+    }
+  },[loginedUserId])
 
   // 友だちのデータ取得
   const getFriends = (id) => {

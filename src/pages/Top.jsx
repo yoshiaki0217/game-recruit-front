@@ -12,7 +12,9 @@ const Top = (props) => {
           <Link to="/login">
             <LoginButton>ログイン</LoginButton>
           </Link>
-          <LoginButton>新規登録</LoginButton>
+          <Link to="/register">
+            <LoginButton>新規登録</LoginButton>
+          </Link>
         </div>
       </TopSection>
     </>

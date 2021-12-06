@@ -5,6 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Echo from 'laravel-echo';
 import dotenv from 'dotenv'
+import store from './redux/index'
+import { Provider } from "react-redux"
 window.Pusher = require('pusher-js');
 
 dotenv.config();
@@ -17,9 +19,9 @@ window.Echo = new Echo({
 });
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 

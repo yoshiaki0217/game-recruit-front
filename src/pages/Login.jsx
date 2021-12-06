@@ -8,12 +8,16 @@ import Ninja from '../images/ninja.svg'
 import Key from '../images/key.svg'
 import axios from 'axios'
 import { useHistory } from 'react-router'
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import Left from '../images/left-arrow.svg';
 
 const Login = (props) => {
   const [userName, setUserName] = useState()
   const [userPassword, setUserPassword] = useState()
   const [errorMessage, setErrorMessage] = useState()
   const history = useHistory()
+  const dispatch = useDispatch();
 
   const onChangeUserNmae = (e) => {
     setUserName(e.target.value);
@@ -28,14 +32,22 @@ const Login = (props) => {
     e.preventDefault();
 
     const userData = {
-      name: userName,
+      user_name: userName,
       password: userPassword,
     }
-    console.log(userData);
     
     axios.post('http://localhost:80/api/login', userData)
       .then(res => {
-          
+        let payloadData = {
+          'userId' : res.data.results.id,
+          'userName' : res.data.results.user_name,
+        }
+        dispatch({
+          type: 'SIGN_IN',
+          payload: payloadData,
+        });
+        localStorage.setItem('userId', res.data.results.id);
+        history.push('/home');
       }).catch((error) => {
         setErrorMessage(true)
     })
@@ -44,6 +56,11 @@ const Login = (props) => {
   return (
     <>
       <LoginSection className="h-screen bg-main flex items-center justify-center">
+        <div className="bg-main flex justify-between items-center fixed top-0 z-50 h-12 w-full px-4">
+          <Link className="inline-block" to="/">
+            <img src={ Left } width="28" height="28" alt="" />
+          </Link>
+        </div>
         <Content className="w-4/5 py-10">
           <Tiltle className="text-center mb-5 text-3xl">ログイン</Tiltle>
           <form onSubmit={ handleSubmit } action="/home" className="login-wrap w-full mx-auto p-10 tracking-widest">
@@ -77,9 +94,9 @@ const Content = styled.div`
   background: #E8D1F0;
 `
 
-const InputIcon = styled.div`
-  background: #4E0866;
-`
+// const InputIcon = styled.div`
+//   background: #4E0866;
+// `
 
 const Tiltle = styled.h2`
   color: #000;

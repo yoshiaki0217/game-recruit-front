@@ -7,7 +7,7 @@ export const UsersReducers = (state = initialState.users, action) => {
     case Action.SIGN_IN:
       return {
         ...state,
-        ...action.paylod
+        ...action.payload
       }
     default:
       return state

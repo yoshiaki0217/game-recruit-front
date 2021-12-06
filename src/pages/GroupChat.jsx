@@ -8,7 +8,7 @@ import { ChatTextArea } from '../components/index'
 
 const GroupChat = (props) => {
   // ログイン機能が完了したらログインしているユーザーのIDを取得
-  const loginedUserId = 1;
+  const loginedUserId = localStorage.getItem('userId');
   const groupData = props.location.state;
   const groupId = props.match.params.id;
   const [messages, setMessages] = useState([]);
@@ -23,12 +23,10 @@ const GroupChat = (props) => {
     }
     window.Echo.channel('chat')
     .listen('MessageCreated', (e) => {
-      console.log('chat:');
       getMessages(groupId);
     });
     window.Echo.channel('read-group')
     .listen('ReadGroupCreated', (e) => {
-      console.log('read:');
       getMessages(groupId);
     });
   },[loginedUserId, groupId])
@@ -38,7 +36,6 @@ const GroupChat = (props) => {
 
     axios.get(url + '/api/messages/group/' + groupId)
     .then((res) => {
-      console.log(res.data.results);
       setMessages(res.data.results.messages);
       let element = document.documentElement;
       let bottom = element.scrollHeight - element.clientHeight;
@@ -107,7 +104,6 @@ const GroupChat = (props) => {
       watch_date : date.toLocaleString(),
     })
     .then((res) => {
-      console.log(res.data);
     })
     .catch((error) => {
       console.log(error);

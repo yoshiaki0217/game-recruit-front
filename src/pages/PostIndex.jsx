@@ -8,7 +8,7 @@ import {
   SearchButton,
   Footer
 } from '../components/index'
-import ProfileLogo from '../images/profileLogo.jpeg'
+import DefaultIcon from '../images/default-icon.png'
 import Add from '../images/post-add.svg'
 import { Link } from 'react-router-dom';
 
@@ -55,7 +55,7 @@ const PostIndx = () => {
   }
 
   return (
-    <section className="h-screen bg-sub pb-20">
+    <section className="h-full bg-sub pb-16">
       <PostWrap className="relative">
         {!styledNone && (  
           <div className="cover"></div>
@@ -86,7 +86,7 @@ const PostIndx = () => {
                     />
                   </div>
                   <div className="flex items-center mb-5">
-                    <p className="profile-logo"><img className="rounded-full" src={ ProfileLogo } alt="プロフィール画像" /></p>
+                    <p className="profile-logo"><img className="rounded-full" src={ data.group_detail.icon === null ? DefaultIcon : data.group_detail.icon } alt="プロフィール画像" /></p>
                     <h3 className="post-team-name text-2xl ml-3 truncate w-6/10">{ data.group_detail.group_name }</h3>
                   </div>
                   <p className="post-list-item truncate">{ data.group_detail.mst_game.game_name }</p>
@@ -104,7 +104,7 @@ const PostIndx = () => {
                         data.group_detail.group_member.map((data, index) => {
                           return (
                             <li key={ index } className="flex items-center mb-3">
-                              <p className="firend-logo"><img className="rounded-full" src={ ProfileLogo } alt="プロフィール画像" /></p>
+                              <p className="firend-logo"><img className="rounded-full" src={ data.user.icon === null ? DefaultIcon : data.user.icon } alt="プロフィール画像" /></p>
                               <p className="ml-2">{ data.user.user_name }</p>
                             </li>
                           )

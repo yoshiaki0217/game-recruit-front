@@ -7,7 +7,7 @@ import {
   InputText,
   Footer
 } from '../components/index'
-import ProfileLogo from '../images/profileLogo.jpeg'
+import DefaultIcon from '../images/default-icon.png'
 
 const GroupEdit = (props) => {
   const [gameStyles, setGameStyles] = useState([]);
@@ -97,7 +97,7 @@ const GroupEdit = (props) => {
     <GroupDetailWrap className="h-screen bg-sub py-20">
       <PostItem className="psot-item w-80 bg-white px-5 pb-2 pt-6 mb-10 m-auto text-sm">
         <div className="flex mb-5 items-center">
-          <p className="profile-logo"><img className="rounded-full" src={ ProfileLogo } alt="プロフィール画像" /></p>
+          <p className="profile-logo"><img className="rounded-full" src={ groupData.icon === null ? DefaultIcon : groupData.icon } alt="プロフィール画像" /></p>
           {/* <InputText name="group_name" styled={ "ml-4 w-7/10" } inputValue={ groupData.group_name } onChange={ onChangeEvent } /> */}
           <input type="text" name="group_name" className="ml-4 w-7/10" defaultValue={ groupData.group_name } onChange={ onChangeEvent } />
         </div>
@@ -127,7 +127,7 @@ const GroupEdit = (props) => {
               groupMember.map((data, index) => {
                 return (
                   <li key={index} className="flex items-center mb-3">
-                    <p className="firend-logo"><img className="rounded-full" src={ ProfileLogo } alt="プロフィール画像" /></p>
+                    <p className="firend-logo"><img className="rounded-full" src={ data.user.icon === null ? DefaultIcon : data.user.icon } alt="プロフィール画像" /></p>
                     <p className="ml-2">{ data.user.user_name }</p>
                   </li>
                 )

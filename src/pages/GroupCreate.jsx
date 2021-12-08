@@ -7,14 +7,14 @@ import {
   InputText,
   Footer
 } from '../components/index'
-import ProfileLogo from '../images/profileLogo.jpeg'
+import DefaultIcon from '../images/default-icon.png'
 
 const GroupCreate = (props) => {
   const loginedUserId = localStorage.getItem('userId');
   const [gameStyles, setGameStyles] = useState([]);
   const [gameNames, setGameNames] = useState([]);
   const [formData, setformData] = useState([]);
-  const [thumbnail, setThumbnail] = useState(ProfileLogo);
+  const [thumbnail, setThumbnail] = useState(DefaultIcon);
   const history = useHistory();
 
   useEffect(() => {
@@ -121,7 +121,7 @@ const GroupCreate = (props) => {
   }
 
   return (
-    <GroupDetailWrap className="bg-sub py-20">
+    <GroupDetailWrap className=" h-screen bg-sub py-20">
       <PostItem className="psot-item w-80 bg-white px-5 pb-2 pt-6 mb-10 m-auto text-sm">
         <div className="flex mb-5 items-center">
           <p className="profile-logo"><img className="rounded-full" src={ thumbnail } alt="プロフィール画像" onClick={ changeIcon } /></p>

@@ -9,7 +9,7 @@ import Right from '../images/right-arrow.svg'
 import Add from '../images/add.svg'
 import Chat from '../images/chat.svg'
 import Detail from '../images/detail.svg'
-import Siege from '../images/siege_logo.jpg'
+import DefaultIcon from '../images/default-icon.png'
 import Footer from '../components/Footer'
 
 
@@ -122,7 +122,7 @@ const Home = (props) => {
               return (
                 <div className="px-4 flex justify-between items-center bg-sub h-16 border-b-2 border-sub" key={index}>
                   <div className="flex flex-row items-center">
-                    <img className="rounded-full m-1" src={ Siege } width="42" height="42" alt="" />
+                    <img className="rounded-full m-1" src={ item.group.icon === null ? DefaultIcon : item.group.icon } width="42" height="42" alt="" />
                     <p className="text-black w-40 truncate">{item.group.group_name}</p>
                   </div>
                   <div>
@@ -163,7 +163,7 @@ const Home = (props) => {
                 return (
                   <div className="px-4 flex justify-between items-center bg-sub h-16 border-b-2 border-sub" key={index}>
                     <div className="flex flex-row items-center">
-                      <img className="rounded-full m-1" src={ Siege } width="42" height="42" alt="" />
+                      <img className="rounded-full m-1" src={ item.user.icon === null ? DefaultIcon : item.user.icon } width="42" height="42" alt="" />
                       <p className="text-black w-40 truncate">{item.user.user_name}</p>
                     </div>
                     <div>

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Left from '../images/left-arrow.svg'
-import Siege from '../images/siege_logo.jpg'
+import DefaultIcon from '../images/default-icon.png'
 import { ChatTextArea } from '../components/index'
 
 const GroupChat = (props) => {
@@ -137,7 +137,7 @@ const GroupChat = (props) => {
                     {/* チャット　相手 */}
                     { data.user.user_name && data.user.id !== loginedUserId &&
                       <div className="opponent flex items-start py-1">
-                        <img className="inline rounded-full m-1" src={ Siege } width="35" height="35" alt="" />
+                        <img className="inline rounded-full m-1" src={ data.user.icon === null ? DefaultIcon : data.user.icon } width="35" height="35" alt="" />
                         <div className="opponent-text">
                           <div className="name">{ data.user.user_name }</div>
                           <p className="text text-sm break-words">{ data.message }</p>

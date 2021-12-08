@@ -5,7 +5,7 @@ import {
   PrimaryButton,
   Footer
 } from '../components/index';
-import ProfileLogo from '../images/profileLogo.jpeg';
+import DefaultIcon from '../images/default-icon.png'
 import { Link } from 'react-router-dom';
 
 const GroupDetail = (props) => {
@@ -94,7 +94,7 @@ const GroupDetail = (props) => {
           編集する
         </Link>
         <div className="flex mb-5">
-          <p className="profile-logo"><img className="rounded-full" src={ ProfileLogo } alt="プロフィール画像" /></p>
+          <p className="profile-logo"><img className="rounded-full" src={ groupData.icon === null ? DefaultIcon : groupData.icon } alt="プロフィール画像" /></p>
           <h3 className="post-team-name text-2xl ml-3 pt-4 break-all w-6.5/10">{ groupData.group_name }</h3>
         </div>
         <p className="post-list-item truncate">{ gameName }</p>
@@ -112,7 +112,7 @@ const GroupDetail = (props) => {
               groupMember.map((data, index) => {
                 return (
                   <li key={index} className="flex items-center mb-3">
-                    <p className="firend-logo"><img className="rounded-full" src={ ProfileLogo } alt="プロフィール画像" /></p>
+                    <p className="firend-logo"><img className="rounded-full" src={ data.user.icon === null ? DefaultIcon : data.user.icon } alt="プロフィール画像" /></p>
                     <p className="ml-2">{ data.user.user_name }</p>
                   </li>
                 )

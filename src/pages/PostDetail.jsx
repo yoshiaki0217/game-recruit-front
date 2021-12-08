@@ -24,7 +24,7 @@ const PostDetail = () => {
     setStyledHidden(!styledHidden　? "hidden" : "" );
   }
   return (
-    <PostDetailWrap className="bg-sub pt-8 pb-20">
+    <PostDetailWrap className="h-screen bg-sub pt-8 pb-20">
       {/* <Post
         teamName={ data.teamName }
         gameName={ data.gameName }

@@ -9,7 +9,7 @@ import {
   Footer
 } from '../components/index'
 import ProfileLogo from '../images/profileLogo.jpeg'
-import AddIcom from '../images/post-add.svg'
+import Add from '../images/post-add.svg'
 import { Link } from 'react-router-dom';
 
 export const Post = React.createContext();
@@ -25,7 +25,11 @@ const PostIndx = () => {
   };
 
   useEffect(() => {
-    getPostDetail();
+    let unmounted = false;
+    if(!unmounted) {
+      getPostDetail();
+      unmounted = true
+    }
   },[])
 
   const getPostDetail = () => {
@@ -51,7 +55,7 @@ const PostIndx = () => {
   }
 
   return (
-    <section className="bg-sub pb-20">
+    <section className="h-screen bg-sub pb-20">
       <PostWrap className="relative">
         {!styledNone && (  
           <div className="cover"></div>
@@ -67,7 +71,9 @@ const PostIndx = () => {
           <div onClick={onClickSearch}>
             <SearchButton />
           </div>
-          <p className="ml-3"><img className="w-7 h-7" src={ AddIcom } alt="投稿追加ボタン" /></p>
+          <Link className="inline-block ml-3" to="/group/create">
+            <img src={ Add } className="w-7 h-7" alt="投稿追加ボタン" />
+          </Link>
         </div>
         <ul className="">
           {searchedPostDetail.map((data, index) => {

@@ -111,7 +111,7 @@ const Home = (props) => {
                 <img src={ Right } width="16" height="16" alt="" />
               </button>
             </div>
-            <Link className="inline-block" to="/group/edit">
+            <Link className="inline-block" to="/group/create">
               <img src={ Add } width="16" height="16" alt="" />
             </Link>
           </div>

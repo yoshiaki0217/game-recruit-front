@@ -94,7 +94,7 @@ const GroupEdit = (props) => {
   }
 
   return (
-    <GroupDetailWrap className="bg-sub py-20">
+    <GroupDetailWrap className="h-screen bg-sub py-20">
       <PostItem className="psot-item w-80 bg-white px-5 pb-2 pt-6 mb-10 m-auto text-sm">
         <div className="flex mb-5 items-center">
           <p className="profile-logo"><img className="rounded-full" src={ ProfileLogo } alt="プロフィール画像" /></p>

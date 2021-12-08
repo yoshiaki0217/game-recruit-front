@@ -88,7 +88,7 @@ const GroupDetail = (props) => {
   }
 
   return (
-    <GroupDetailWrap className="bg-sub py-20">
+    <GroupDetailWrap className="h-screen bg-sub py-20">
       <PostItem className="psot-item w-80 bg-white px-5 pb-2 pt-6 mb-10 m-auto">
         <Link className="block bg-sub text-center p-1 text-xs ml-auto py-1 px-4 w-20" to={'/group/edit/' + groupData.id}>
           編集する

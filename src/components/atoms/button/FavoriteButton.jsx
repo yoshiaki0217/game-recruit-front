@@ -1,14 +1,30 @@
 import { useState } from "react"
 import styled from "styled-components"
+import axios from 'axios';
 
 
 const FavoriteButton = (props) => {
-  const { status } = props;
+  const { status, postId, userId } = props;
   const [changeIcon, setChangeIcon] = useState(status);
 
   const changeFavoriteButton = () => {
     const changeFavoriteIcon = !changeIcon
+    const url = 'http://localhost:80';
+    let statusFlag = changeFavoriteIcon ? 0 : 1;
+    
     setChangeIcon(changeFavoriteIcon);
+    
+    axios.post(url + '/api/favorite/upsert', {
+      user_id : userId,
+      post_id : postId,
+      status_flag : statusFlag
+    })
+    .then((res) => {
+      
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }
 
   return (

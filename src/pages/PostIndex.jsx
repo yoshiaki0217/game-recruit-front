@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom';
 export const Post = React.createContext();
 
 const PostIndx = () => {
+  const loginedUserId = Number(localStorage.getItem('userId'));
   const [styledHidden, setStyledHidden] = useState("hidden")
   const [styledNone, setStyledNone] = useState("search-modal-close")
   const [postDetail, setPostDetail] = useState([]);
@@ -27,15 +28,15 @@ const PostIndx = () => {
   useEffect(() => {
     let unmounted = false;
     if(!unmounted) {
-      getPostDetail();
+      getPostDetail(loginedUserId);
       unmounted = true
     }
-  },[])
+  },[loginedUserId])
 
-  const getPostDetail = () => {
+  const getPostDetail = (userId) => {
     let url = 'http://localhost:80';
 
-    axios.get(url + '/api/post/detail/all')
+    axios.get(url + '/api/post/detail/all/' + userId)
     .then((res) => {
       setPostDetail(res.data.results);
       setSearchedPostDetail(res.data.results);
@@ -81,9 +82,54 @@ const PostIndx = () => {
               <li key={ index }>
                 <PostItem className="psot-item w-80 bg-white px-5 py-2 mb-10 m-auto">
                   <div className="absolute -top-4 -right-4">
-                    <FavoriteButton
+                    {(() => {
+                      let trueFavoriteButton ='';
+                      let falseFavoriteButton ='';
+                      let flag = 0;
+                      if(data.favorite[0]) {
+                        data.favorite.forEach(element => {
+                          if(element.user_id === Number(loginedUserId) && element.status_flag === 0) {
+                            flag = 1;
+                            trueFavoriteButton = (
+                              <FavoriteButton
+                                status = { true }
+                                postId = { data.id }
+                                userId = { loginedUserId }
+                              />
+                            )
+                          } else {
+                            falseFavoriteButton = (
+                              <FavoriteButton
+                                status = { false }
+                                postId = { data.id }
+                                userId = { loginedUserId }
+                              />
+                            )
+                          }
+                        });
+                      } else {
+                        flag = 1;
+                        trueFavoriteButton = (
+                          <FavoriteButton
+                            status = { false }
+                            postId = { data.id }
+                            userId = { loginedUserId }
+                          />
+                        )
+                      }
+
+                      if(flag === 0) {
+                        return falseFavoriteButton;
+                      } else {
+                        return trueFavoriteButton;
+                      }
+
+                    })()}
+                    {/* <FavoriteButton
                       status = { false }
-                    />
+                      postId = { data.id }
+                      userId = { loginedUserId }
+                    /> */}
                   </div>
                   <div className="flex items-center mb-5">
                     <p className="profile-logo"><img className="rounded-full" src={ data.group_detail.icon === null ? DefaultIcon : data.group_detail.icon } alt="プロフィール画像" /></p>
@@ -93,7 +139,7 @@ const PostIndx = () => {
                   <p className="post-list-item">スタイル:<span>{ data.group_detail.mst_style.style_name }</span></p>
                   <p className="post-list-item">募集人数:<span>{ data.group_detail.recruitment }</span></p>
                   <div className="flex justify-between mb-4">
-                    <p className="post-list-item">参加人数:<span>{ data.group_detail.capacity }</span></p>
+                    <p className="post-list-item">参加人数:<span>{ data.group_detail.participants }</span></p>
                     <div onClick={ onClickToggle }>
                       <PrimaryButton styles={ "bg-sub tex p-1 text-xs" }>メンバー一覧</PrimaryButton>
                     </div>

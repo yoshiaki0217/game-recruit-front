@@ -101,7 +101,7 @@ const GroupDetail = (props) => {
         <p className="post-list-item">スタイル:<span>{ styleName }</span></p>
         <p className="post-list-item">募集人数:<span>{ groupData.recruitment }</span></p>
         <div className="flex justify-between mb-4">
-          <p className="post-list-item">参加人数:<span>{ groupData.capacity }</span></p>
+          <p className="post-list-item">参加人数:<span>{ groupData.participants }</span></p>
           <div onClick={ onClickToggle } className={ groupMember[0] ? "" : "hidden" }>
             <PrimaryButton styles={ "bg-sub tex p-1 text-xs" }>メンバー一覧</PrimaryButton>
           </div>

@@ -10,7 +10,7 @@ import {
 import DefaultIcon from '../images/default-icon.png'
 
 const GroupCreate = (props) => {
-  const loginedUserId = localStorage.getItem('userId');
+  const loginedUserId = Number(localStorage.getItem('userId'));
   const [gameStyles, setGameStyles] = useState([]);
   const [gameNames, setGameNames] = useState([]);
   const [formData, setformData] = useState([]);

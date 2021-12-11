@@ -15,7 +15,7 @@ import Footer from '../components/Footer'
 
 const Home = (props) => {
   // ログイン機能が完了したらログインしているユーザーのIDを取得
-  const loginedUserId = localStorage.getItem('userId');
+  const loginedUserId = Number(localStorage.getItem('userId'));
   const [friends, setFriends] = useState([]);
   const [searchFriends, setSearchFriends] = useState([]);
   const [groups, setGroups] = useState([]);

@@ -8,7 +8,7 @@ import { ChatTextArea } from '../components/index'
 
 const PrivateChat = (props) => {
   // ログイン機能が完了したらログインしているユーザーのIDを取得
-  const loginedUserId = localStorage.getItem('userId');
+  const loginedUserId = Number(localStorage.getItem('userId'));
   const friendData = props.location.state;
   const roomId = props.match.params.id;
   const [messages, setMessages] = useState([]);

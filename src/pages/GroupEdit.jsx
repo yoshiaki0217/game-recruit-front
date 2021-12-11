@@ -116,7 +116,7 @@ const GroupEdit = (props) => {
         </p>
         <p className="post-list-item">募集人数:<InputText name="recruitment" styled={"ml-4 w-7/10"} inputValue={ groupData.recruitment } onChange={ onChangeEvent } /></p>
         <div className="flex justify-between mb-4">
-          <p className="post-list-item">参加人数:<span className="ml-2">{ groupData.capacity }</span></p>
+          <p className="post-list-item">参加人数:<span className="ml-2">{ groupData.participants }</span></p>
           <div onClick={ onClickToggle } className={ groupMember[0] ? "" : "hidden" }>
             <PrimaryButton styles={"bg-sub tex p-1 text-xs"}>メンバー一覧</PrimaryButton>
           </div>

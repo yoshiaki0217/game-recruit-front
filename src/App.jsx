@@ -49,8 +49,8 @@ function App() {
           <Route path='/chat/private/:id' exact component={ PrivateChat } />
 
           {/* マイページ */}
-          <Route path='/mypage' exact component={MyPage} />
-          <Route path='/mypage/edit' exact component={MyPageEdit} />
+          <Route path='/mypage/:id' exact component={MyPage} />
+          <Route path='/mypage/info/edit' exact component={MyPageEdit} />
           
           {/* 通知 */}
           <Route path='/notification' exact component={ Notification } />

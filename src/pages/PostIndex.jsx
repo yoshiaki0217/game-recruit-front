@@ -125,11 +125,6 @@ const PostIndx = () => {
                       }
 
                     })()}
-                    {/* <FavoriteButton
-                      status = { false }
-                      postId = { data.id }
-                      userId = { loginedUserId }
-                    /> */}
                   </div>
                   <div className="flex items-center mb-5">
                     <p className="profile-logo"><img className="rounded-full" src={ data.group_detail.icon === null ? DefaultIcon : data.group_detail.icon } alt="プロフィール画像" /></p>
@@ -164,10 +159,9 @@ const PostIndx = () => {
                       { data.group_detail.description }
                     </p>
                   </div>
-                  <Link className="inline-block bg-sub py-1 px-6 text-sm mx-20" to={'/group/detail/' + data.group_detail.id}>
+                  <Link className="inline-block bg-sub py-1 px-6 text-sm mx-20" to={'/post/detail/' + data.group_detail.id}>
                   詳細を見る
                   </Link>
-                  {/* <PrimaryButton styles={ "bg-sub py-1 px-6 text-sm m-auto" }>詳細を見る</PrimaryButton> */}
                 </PostItem>
               </li>
             )

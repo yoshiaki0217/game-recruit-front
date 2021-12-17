@@ -35,7 +35,7 @@ function App() {
           
           {/* 投稿 */}
           <Route path='/post/index' exact component={ PostIndex } />
-          <Route path='/post/detail' exact component={ PostDetail } />
+          <Route path='/post/detail/:id' exact component={ PostDetail } />
           <Route path='/post/create' exact component={ PostCreate } />
           <Route path='/post/favorite' exact component={PostFavorite} />
           

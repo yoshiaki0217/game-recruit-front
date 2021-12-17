@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 const GroupDetail = (props) => {
   // ログイン機能が完了したらログインしているユーザーのIDを取得
-  const logined_user_id = 1;
+  const loginedUserId = Number(localStorage.getItem('userId'));
   const [groupData, setGroupData] = useState([]);
   // オブジェクトになっているせいなのか、groupDataからmst_gameのゲーム名が取得できず、仕方なくゲーム名用の変数作成
   // API呼び出し時にresponseから直接参照すると取得できるので、その際にこのgameNameにセットしている
@@ -126,7 +126,7 @@ const GroupDetail = (props) => {
             { groupData.description }
           </p>
         </div>
-        <div className={groupData.leader_id === logined_user_id ? '' : 'hidden'}>
+        <div className={groupData.leader_id === loginedUserId ? '' : 'hidden'}>
           <PrimaryButton styles={"bg-sub py-1 px-7 py-2 text-sm m-auto"} onClick={ onClickUpsertPost }>{ postData && postData.status_flag === 0 ? "募集をやめる" : "募集する" }</PrimaryButton>
         </div>
       </PostItem>

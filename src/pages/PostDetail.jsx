@@ -91,6 +91,7 @@ const PostDetail = (props) => {
     axios.post(url + '/api/subscriptions', {
       user_id : loginedUserId,
       post_id : postData.id,
+      leader_id : groupData.leader_id,
     })
     .then((res) => {
       

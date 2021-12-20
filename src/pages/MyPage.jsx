@@ -17,13 +17,13 @@ const MyPage = (props) => {
   useEffect(() => {
     let unmounted = false;
     if(!unmounted) {
-      getUseDetail(userId);
+      getUserDetail(userId);
       unmounted = true
     }
   },[userId])
 
   // 友だちのデータ取得
-  const getUseDetail = (userId) => {
+  const getUserDetail = (userId) => {
     let url = 'http://localhost:80';
 
     axios.get(url + '/api/mypage/' + userId)

@@ -8,14 +8,119 @@ import {
   Footer
 } from '../components/index'
 import DefaultIcon from '../images/default-icon.png'
+import Joi from 'joi-browser';
+
+const schema = Joi.object({
+  leader_id: Joi.number()
+    .required(),
+
+  group_name: Joi.string()
+    .max(256)
+    .required()
+    .error(errors => {
+      errors.forEach(err => {
+        switch (err.type) {
+          case "any.empty":
+            err.message = "＊グループ名は必須です";
+            break;
+          case "string.max":
+            err.message = `＊グループ名は${err.context.limit}文字以内で設定してください`;
+            break;
+          default:
+            break;
+        }
+      });
+      return new Error(errors);
+    }),
+
+  icon: Joi,
+
+  game_id: Joi.number()
+    .required()
+    .error(errors => {
+      errors.forEach(err => {
+        switch (err.type) {
+          case "any.empty":
+            err.message = "＊ゲーム名は必須です";
+            break;
+          case "number.base":
+            err.message = `＊ゲームは選択肢から選んでください`;
+            break;
+          default:
+            break;
+        }
+      });
+      return new Error(errors);
+    }),
+  
+  style_id: Joi.number()
+    .required()
+    .error(errors => {
+      errors.forEach(err => {
+        switch (err.type) {
+          case "any.empty":
+            err.message = "＊スタイルは必須です";
+            break;
+          case "number.base":
+            err.message = `＊スタイルは選択肢から選んでください`;
+            break;
+          default:
+            break;
+        }
+      });
+      return new Error(errors);
+    }),
+
+  recruitment: Joi.number()
+    .required()
+    .error(errors => {
+      errors.forEach(err => {
+        switch (err.type) {
+          case "any.empty":
+            err.message = "＊募集人数は必須です";
+            break;
+          case "number.base":
+            err.message = `＊募集人数は数字を指定してください`;
+            break;
+          default:
+            break;
+        }
+      });
+      return new Error(errors);
+    }),
+
+  description: Joi.string()
+    .required()
+    .error(errors => {
+      errors.forEach(err => {
+        switch (err.type) {
+          case "any.empty":
+            err.message = "＊詳細は必須です";
+            break;
+          default:
+            break;
+        }
+      });
+      return new Error(errors);
+    }),
+})
 
 const GroupCreate = (props) => {
   const loginedUserId = Number(localStorage.getItem('userId'));
   const [gameStyles, setGameStyles] = useState([]);
   const [gameNames, setGameNames] = useState([]);
-  const [formData, setformData] = useState([]);
   const [thumbnail, setThumbnail] = useState(DefaultIcon);
   const history = useHistory();
+  const [errorMessages, setValidationMessages] = useState([])
+  const [formData, setFormData] = useState({
+    'group_name' : '',
+    'leader_id' : loginedUserId,
+    'icon' : '',
+    'style_id' : '',
+    'game_id' : '',
+    'recruitment' : '',
+    'description' : '',
+  })
 
   useEffect(() => {
     let unmounted = false;
@@ -52,7 +157,7 @@ const GroupCreate = (props) => {
   
   const onChangeEvent = (e) => {
     const name = e.target.name;
-    setformData({
+    setFormData({
       ...formData,
       [name]: e.target.value
     });
@@ -60,8 +165,20 @@ const GroupCreate = (props) => {
 
   const onClickCreateGroupData = () => {
     let url = 'http://localhost:80';
-
     let formDatas = new FormData();
+    let validationCheckFlag = false;
+
+    // バリデーション実行
+    const { error } = schema.validate(formData, {abortEarly: false});
+
+    if(error) {
+      let messages = error.message.split(',');
+      setValidationMessages(messages);
+      return false;
+    } else {
+      validationCheckFlag = true;
+    }
+
     formDatas.append("group_name", formData.group_name)
     formDatas.append("leader_id", loginedUserId)
     formDatas.append("icon", formData.icon)
@@ -76,13 +193,24 @@ const GroupCreate = (props) => {
       }
     }
 
-    axios.post(url + '/api/group/create', formDatas, config)
-    .then((res) => {
-      history.push('/home');
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+    if(validationCheckFlag) {
+      axios.post(url + '/api/group/create', formDatas, config)
+      .then((res) => {
+        history.push('/home');
+      })
+      .catch((error) => {
+        // エラーメッセージの配列を用意
+        let messages = [];
+        // レスポンスをオブジェクトから配列に変換
+        let arr = Object.entries(error.response.data.errors);
+        // レスポンスの配列からメッセージだけを取り出し、エラーメッセージの配列にセット
+        arr.forEach(function (value) {
+          messages.push(value[1][0]);
+        })
+        // 表示用の配列にセット
+        setValidationMessages(messages);
+      })
+    }
   }
 
   const setImage = (e) => {
@@ -100,7 +228,7 @@ const GroupCreate = (props) => {
           alert("選択されたファイルはアップロードできません")
           return false
       }
-      setformData({
+      setFormData({
         ...formData,
         [name]: file
       });
@@ -108,7 +236,7 @@ const GroupCreate = (props) => {
         setThumbnail(window.URL.createObjectURL(file))
       }
     } else {
-      setformData({
+      setFormData({
         ...formData,
         [name]: ''
       });
@@ -122,6 +250,13 @@ const GroupCreate = (props) => {
 
   return (
     <GroupDetailWrap className=" h-screen bg-sub py-20">
+      {
+      errorMessages.map((item, index) => {
+        return (
+          <p key={ index }>{ item }</p>
+        )
+      })
+      }
       <PostItem className="psot-item w-80 bg-white px-5 pb-2 pt-6 mb-10 m-auto text-sm">
         <div className="flex mb-5 items-center">
           <p className="profile-logo"><img className="rounded-full" src={ thumbnail } alt="プロフィール画像" onClick={ changeIcon } /></p>

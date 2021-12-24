@@ -11,46 +11,106 @@ import { useHistory } from 'react-router'
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Left from '../images/left-arrow.svg';
+import Joi from 'joi-browser';
+
+const schema = Joi.object({
+  user_name: Joi.string()
+    .required()
+    .error(errors => {
+      errors.forEach(err => {
+        switch (err.type) {
+          case "any.empty":
+            err.message = "＊ユーザー名を入力してください";
+            break;
+          default:
+            break;
+        }
+      });
+      return new Error(errors);
+    }),
+
+  password: Joi.string()
+    .required()
+    .error(errors => {
+      errors.forEach(err => {
+        switch (err.type) {
+          case "any.empty":
+            err.message = "＊パスワードを入力してください";
+            break;
+          default:
+            break;
+        }
+      });
+      return new Error(errors);
+    }),
+})
 
 const Login = (props) => {
-  const [userName, setUserName] = useState()
-  const [userPassword, setUserPassword] = useState()
-  const [errorMessage, setErrorMessage] = useState()
+  const [formData, setFormData] = useState({
+    'user_name' : '',
+    'password' : '',
+  })
+  const [errorMessages, setValidationMessages] = useState([])
   const history = useHistory()
   const dispatch = useDispatch();
 
-  const onChangeUserNmae = (e) => {
-    setUserName(e.target.value);
-  }
-
-  const onChangeUserPassword = (e) => {
-    setUserPassword(e.target.value);
+  const onChangeEvent = (e) => {
+    const name = e.target.name;
+    setFormData({
+      ...formData,
+      [name]: e.target.value
+    });
   }
 
   const handleSubmit = (e) => {
+    let validationCheckFlag = false;
 
     e.preventDefault();
 
-    const userData = {
-      user_name: userName,
-      password: userPassword,
+    // バリデーション実行
+    const { error } = schema.validate(formData, {abortEarly: false});
+
+    if(error) {
+      let messages = error.message.split(',');
+      setValidationMessages(messages);
+      return false;
+    } else {
+      validationCheckFlag = true;
     }
     
-    axios.post('http://localhost:80/api/login', userData)
-      .then(res => {
-        let payloadData = {
-          'userId' : res.data.results.id,
-          'userName' : res.data.results.user_name,
-        }
-        dispatch({
-          type: 'SIGN_IN',
-          payload: payloadData,
-        });
-        localStorage.setItem('userId', res.data.results.id);
-        history.push('/home');
-      }).catch((error) => {
-        setErrorMessage(true)
-    })
+    if(validationCheckFlag) {
+      axios.post('http://localhost:80/api/login', formData)
+        .then(res => {
+          let payloadData = {
+            'userId' : res.data.results.id,
+            'userName' : res.data.results.user_name,
+          }
+          dispatch({
+            type: 'SIGN_IN',
+            payload: payloadData,
+          });
+          localStorage.setItem('userId', res.data.results.id);
+          history.push('/home');
+        }).catch((error) => {
+          // エラーメッセージの配列を用意
+          let messages = [];
+
+          if(error.response.data.errors) {
+            // ユーザー名またはパスワードが入力されていなかった際の処理
+            // レスポンスをオブジェクトから配列に変換
+            let arr = Object.entries(error.response.data.errors);
+            // レスポンスの配列からメッセージだけを取り出し、エラーメッセージの配列にセット
+            arr.forEach(function (value) {
+              messages.push(value[1][0]);
+            })
+          } else {
+            // ユーザー情報が見つからなかった際の処理
+            messages.push(error.response.data.message);
+          }
+          // 表示用の配列にセット
+          setValidationMessages(messages);
+        })
+    }
   }
 
   return (
@@ -63,21 +123,27 @@ const Login = (props) => {
         </div>
         <Content className="w-4/5 py-10">
           <Tiltle className="text-center mb-5 text-3xl">ログイン</Tiltle>
+          {
+          errorMessages.map((item, index) => {
+            return (
+              <p key={ index }>{ item }</p>
+            )
+          })
+          }
           <form onSubmit={ handleSubmit } action="/home" className="login-wrap w-full mx-auto p-10 tracking-widest">
             <div className="flex justify-center mb-2">
               <p className="bg-main w-10 h-10 p-1" >
                 <img src={Ninja} alt="アイコン" />
               </p>
-              <InputText onChange={ onChangeUserNmae } placeholder={ 'ユーザーネーム' } />
+              <InputText name={ 'user_name' } onChange={ onChangeEvent } placeholder={ 'ユーザーネーム' } />
               </div>
             <div className="flex justify-center mb-4">
               <p className="bg-main w-10 h-10 p-1" >
                 <img src={Key} alt="アイコン" />
               </p>
-              <InputText onChange={ onChangeUserPassword } placeholder={ 'パスワード' } />
+              <InputText name={ 'password' } onChange={ onChangeEvent } placeholder={ 'パスワード' } />
               </div>
             <InputButton>ログイン</InputButton>
-            <p>{ errorMessage ? "ログイン情報が違います" : "" }</p>
           </form>
         </Content>
       </LoginSection>

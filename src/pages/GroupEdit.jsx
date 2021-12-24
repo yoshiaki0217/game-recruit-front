@@ -8,6 +8,82 @@ import {
   Footer
 } from '../components/index'
 import DefaultIcon from '../images/default-icon.png'
+import Joi from 'joi-browser';
+
+const schema = Joi.object({
+  id: Joi.number()
+    .required(),
+
+  group_name: Joi.string()
+    .max(256)
+    .required()
+    .error(errors => {
+      errors.forEach(err => {
+        switch (err.type) {
+          case "any.empty":
+            err.message = "＊グループ名は必須です";
+            break;
+          case "string.max":
+            err.message = `＊グループ名は${err.context.limit}文字以内で設定してください`;
+            break;
+          default:
+            break;
+        }
+      });
+      return new Error(errors);
+    }),
+
+  style_id: Joi.number()
+    .required()
+    .error(errors => {
+      errors.forEach(err => {
+        switch (err.type) {
+          case "any.empty":
+            err.message = "＊スタイルは必須です";
+            break;
+          case "number.base":
+            err.message = `＊スタイルは選択肢から選んでください`;
+            break;
+          default:
+            break;
+        }
+      });
+      return new Error(errors);
+    }),
+
+  recruitment: Joi.number()
+    .required()
+    .error(errors => {
+      errors.forEach(err => {
+        switch (err.type) {
+          case "any.empty":
+            err.message = "＊募集人数は必須です";
+            break;
+          case "number.base":
+            err.message = `＊募集人数は数字を指定してください`;
+            break;
+          default:
+            break;
+        }
+      });
+      return new Error(errors);
+    }),
+
+  description: Joi.string()
+    .required()
+    .error(errors => {
+      errors.forEach(err => {
+        switch (err.type) {
+          case "any.empty":
+            err.message = "＊詳細は必須です";
+            break;
+          default:
+            break;
+        }
+      });
+      return new Error(errors);
+    }),
+})
 
 const GroupEdit = (props) => {
   const [gameStyles, setGameStyles] = useState([]);
@@ -19,6 +95,14 @@ const GroupEdit = (props) => {
   const [groupMember, setGroupMember] = useState([]);
   const groupId = props.match.params.id;
   const history = useHistory();
+  const [errorMessages, setValidationMessages] = useState([])
+  const [formData, setFormData] = useState({
+    'id' : '',
+    'group_name' : '',
+    'style_id' : '',
+    'recruitment' : '',
+    'description' : '',
+  })
 
   useEffect(() => {
     getGroup(groupId);
@@ -43,8 +127,16 @@ const GroupEdit = (props) => {
 
     axios.get(url + '/api/groups/groupid/' + id)
     .then((res) => {
+      const { id, group_name, style_id, recruitment, description } = res.data.results;
       setGroupData(res.data.results);
       setGameName(res.data.results.mst_game.game_name);
+      setFormData({
+        'id' : id,
+        'group_name' : group_name,
+        'style_id' : style_id,
+        'recruitment' : recruitment,
+        'description' : description,
+      });
     })
     .catch((error) => {
       console.log(error)
@@ -67,15 +159,11 @@ const GroupEdit = (props) => {
   
   const onChangeEvent = (e) => {
     const name = e.target.name;
-    setGroupData({
-      ...groupData,
+    setFormData({
+      ...formData,
       [name]: e.target.value
     });
   }
-
-  // const onChangeGameNameEvent = (e) => {
-  //   setGameName(e.target.value);
-  // }
 
   const onClickToggle = () => {
     setStyledHidden(!styledHidden　? "hidden" : "" );
@@ -83,26 +171,54 @@ const GroupEdit = (props) => {
 
   const onClickSaveGroupData = () => {
     let url = 'http://localhost:80';
+    let validationCheckFlag = false;
 
-    axios.post(url + '/api/group/edit', groupData)
-    .then((res) => {
-      history.push('/group/detail/' + res.data.results.id);
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+    // バリデーション実行
+    const { error } = schema.validate(formData, {abortEarly: false});
+
+    if(error) {
+      let messages = error.message.split(',');
+      setValidationMessages(messages);
+      return false;
+    } else {
+      validationCheckFlag = true;
+    }
+
+    if(validationCheckFlag) {
+      axios.post(url + '/api/group/edit', formData)
+      .then((res) => {
+        history.push('/group/detail/' + res.data.results.id);
+      })
+      .catch((error) => {
+        // エラーメッセージの配列を用意
+        let messages = [];
+        // レスポンスをオブジェクトから配列に変換
+        let arr = Object.entries(error.response.data.errors);
+        // レスポンスの配列からメッセージだけを取り出し、エラーメッセージの配列にセット
+        arr.forEach(function (value) {
+          messages.push(value[1][0]);
+        })
+        // 表示用の配列にセット
+        setValidationMessages(messages);
+      })
+    }
   }
 
   return (
     <GroupDetailWrap className="h-screen bg-sub py-20">
+      {
+      errorMessages.map((item, index) => {
+        return (
+          <p key={ index }>{ item }</p>
+        )
+      })
+      }
       <PostItem className="psot-item w-80 bg-white px-5 pb-2 pt-6 mb-10 m-auto text-sm">
         <div className="flex mb-5 items-center">
           <p className="profile-logo"><img className="rounded-full" src={ groupData.icon === null ? DefaultIcon : groupData.icon } alt="プロフィール画像" /></p>
-          {/* <InputText name="group_name" styled={ "ml-4 w-7/10" } inputValue={ groupData.group_name } onChange={ onChangeEvent } /> */}
           <input type="text" name="group_name" className="ml-4 w-7/10" defaultValue={ groupData.group_name } onChange={ onChangeEvent } />
         </div>
         <p className="post-list-item truncate">{ gameName }</p>
-        {/* <p className="post-list-item truncate ">ゲーム名:<InputText name="game_name" styled={ "ml-4 w-7/10" } inputValue={ gameName } onChange={ onChangeGameNameEvent } /></p> */}
         <p className="post-list-item">スタイル:
           <select name="style_id" className="ml-4 w-7/10" value={ groupData.style_id } onChange={ onChangeEvent }>
             {

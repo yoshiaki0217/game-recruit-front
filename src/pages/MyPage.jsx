@@ -37,7 +37,7 @@ const MyPage = (props) => {
   return (
     <>
       <MyPageSection className="h-screen bg-sub">
-        <div className="mt-12 mb-20">
+        <div className="mt-3 mb-20">
           <div className="px-4 flex justify-center items-center">
             <div>
               <img className="rounded-full m-3" src={ userDetail.icon === null ? DefaultIcon : userDetail.icon } width="150" height="150" alt="" />

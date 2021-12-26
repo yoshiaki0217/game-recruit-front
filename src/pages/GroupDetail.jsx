@@ -3,7 +3,8 @@ import axios from 'axios';
 import styled from "styled-components";
 import {
   PrimaryButton,
-  Footer
+  Footer,
+  HeaderBackButton
 } from '../components/index';
 import DefaultIcon from '../images/default-icon.png'
 import { Link } from 'react-router-dom';
@@ -88,51 +89,54 @@ const GroupDetail = (props) => {
   }
 
   return (
-    <GroupDetailWrap className="h-screen bg-sub py-20">
-      <PostItem className="psot-item w-80 bg-white px-5 pb-2 pt-6 mb-10 m-auto">
-        <div className={groupData.leader_id === loginedUserId ? '' : 'hidden'}>
-          <Link className="block bg-sub text-center p-1 text-xs ml-auto py-1 px-4 w-20" to={'/group/edit/' + groupData.id}>
-            編集する
-          </Link>
-        </div>
-        <div className="flex mb-5">
-          <p className="profile-logo"><img className="rounded-full" src={ groupData.icon === null ? DefaultIcon : groupData.icon } alt="プロフィール画像" /></p>
-          <h3 className="post-team-name text-2xl ml-3 pt-4 break-all w-6.5/10">{ groupData.group_name }</h3>
-        </div>
-        <p className="post-list-item truncate">{ gameName }</p>
-        <p className="post-list-item">スタイル:<span>{ styleName }</span></p>
-        <p className="post-list-item">募集人数:<span>{ groupData.recruitment }</span></p>
-        <div className="flex justify-between mb-4">
-          <p className="post-list-item">参加人数:<span>{ groupData.participants }</span></p>
-          <div onClick={ onClickToggle } className={ groupMember[0] ? "" : "hidden" }>
-            <PrimaryButton styles={ "bg-sub tex p-1 text-xs" }>メンバー一覧</PrimaryButton>
+    <GroupDetailWrap className="h-screen bg-sub">
+      <div className="bg-sub py-16">
+        <HeaderBackButton />
+        <PostItem className="psot-item w-80 bg-white px-5 pb-2 pt-6 mb-6 m-auto">
+          <div className={groupData.leader_id === loginedUserId ? '' : 'hidden'}>
+            <Link className="block bg-sub text-center p-1 text-xs ml-auto py-1 px-4 w-20" to={'/group/edit/' + groupData.id}>
+              編集する
+            </Link>
           </div>
-        </div>
-        <div className={ styledHidden }>
-          <ul className="friend-list mb-8">
-            {
-              groupMember.map((data, index) => {
-                return (
-                  <li key={index} className="flex items-center mb-3">
-                    <p className="firend-logo"><img className="rounded-full" src={ data.user.icon === null ? DefaultIcon : data.user.icon } alt="プロフィール画像" /></p>
-                    <p className="ml-2">{ data.user.user_name }</p>
-                  </li>
-                )
-              })
-            }
-          </ul>
-        </div>
-        <p>グループ詳細</p>
-        <div className="post-detail">
-          <p>
-            { groupData.description }
-          </p>
-        </div>
-        <div className={groupData.leader_id === loginedUserId ? '' : 'hidden'}>
-          <PrimaryButton styles={"bg-sub py-1 px-7 py-2 text-sm m-auto"} onClick={ onClickUpsertPost }>{ postData && postData.status_flag === 0 ? "募集をやめる" : "募集する" }</PrimaryButton>
-        </div>
-      </PostItem>
-      <Footer />
+          <div className="flex mb-5">
+            <p className="profile-logo"><img className="rounded-full" src={ groupData.icon === null ? DefaultIcon : groupData.icon } alt="プロフィール画像" /></p>
+            <h3 className="post-team-name text-2xl ml-3 pt-4 break-all w-6.5/10">{ groupData.group_name }</h3>
+          </div>
+          <p className="post-list-item truncate">{ gameName }</p>
+          <p className="post-list-item">スタイル:<span>{ styleName }</span></p>
+          <p className="post-list-item">募集人数:<span>{ groupData.recruitment }</span></p>
+          <div className="flex justify-between mb-4">
+            <p className="post-list-item">参加人数:<span>{ groupData.participants }</span></p>
+            <div onClick={ onClickToggle } className={ groupMember[0] ? "" : "hidden" }>
+              <PrimaryButton styles={ "bg-sub tex p-1 text-xs" }>メンバー一覧</PrimaryButton>
+            </div>
+          </div>
+          <div className={ styledHidden }>
+            <ul className="friend-list mb-8">
+              {
+                groupMember.map((data, index) => {
+                  return (
+                    <li key={index} className="flex items-center mb-3">
+                      <p className="firend-logo"><img className="rounded-full" src={ data.user.icon === null ? DefaultIcon : data.user.icon } alt="プロフィール画像" /></p>
+                      <p className="ml-2">{ data.user.user_name }</p>
+                    </li>
+                  )
+                })
+              }
+            </ul>
+          </div>
+          <p>グループ詳細</p>
+          <div className="post-detail">
+            <p>
+              { groupData.description }
+            </p>
+          </div>
+          <div className={groupData.leader_id === loginedUserId ? '' : 'hidden'}>
+            <PrimaryButton styles={"bg-sub py-1 px-7 py-2 text-sm m-auto"} onClick={ onClickUpsertPost }>{ postData && postData.status_flag === 0 ? "募集をやめる" : "募集する" }</PrimaryButton>
+          </div>
+        </PostItem>
+        <Footer />
+      </div>
     </GroupDetailWrap>
   )
 }
@@ -157,7 +161,6 @@ const PostItem = styled.div`
     width: 100%;
     margin: 0 0 18px 0;
     padding: 0 3px;
-    border:solid 1px #000;
     overflow: hidden;
   }
   .primary-button{

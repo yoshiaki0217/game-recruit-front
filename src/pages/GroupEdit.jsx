@@ -5,7 +5,8 @@ import styled from "styled-components";
 import {
   PrimaryButton,
   InputText,
-  Footer
+  Footer,
+  HeaderBackButton
 } from '../components/index'
 import DefaultIcon from '../images/default-icon.png'
 import Joi from 'joi-browser';
@@ -71,11 +72,15 @@ const schema = Joi.object({
 
   description: Joi.string()
     .required()
+    .max(5000)
     .error(errors => {
       errors.forEach(err => {
         switch (err.type) {
           case "any.empty":
             err.message = "＊詳細は必須です";
+            break;
+          case "string.max":
+            err.message = `＊詳細は${err.context.limit}文字以内で設定してください`;
             break;
           default:
             break;
@@ -205,15 +210,20 @@ const GroupEdit = (props) => {
   }
 
   return (
-    <GroupDetailWrap className="h-screen bg-sub py-20">
-      {
-      errorMessages.map((item, index) => {
-        return (
-          <p key={ index }>{ item }</p>
-        )
-      })
-      }
-      <PostItem className="psot-item w-80 bg-white px-5 pb-2 pt-6 mb-10 m-auto text-sm">
+    <GroupDetailWrap className="h-screen bg-sub py-16">
+      <HeaderBackButton />
+      <div className={ errorMessages.length === 0 ? 'hidden' : 'bg-red-100 w-80 mx-auto p-1 mb-2' }>
+        <ul className="mx-auto px-3 text-red-600">
+          {
+          errorMessages.map((item, index) => {
+            return (
+                <li key={ index }>{ item }</li>
+                )
+              })
+          }
+        </ul>
+      </div>
+      <PostItem className="psot-item w-80 bg-white px-5 pb-2 pt-6 mb-6 m-auto">
         <div className="flex mb-5 items-center">
           <p className="profile-logo"><img className="rounded-full" src={ groupData.icon === null ? DefaultIcon : groupData.icon } alt="プロフィール画像" /></p>
           <input type="text" name="group_name" className="ml-4 w-7/10" defaultValue={ groupData.group_name } onChange={ onChangeEvent } />
@@ -252,7 +262,7 @@ const GroupEdit = (props) => {
           </ul>
         </div>
         <p>グループ詳細</p>
-        <textarea name="description" id="" cols="30" rows="10"　className="post-detail" defaultValue={ groupData.description } onChange={ onChangeEvent }></textarea>
+        <textarea name="description" style={{ overflow:'auto', resize: 'none'}} cols="30" rows="13"　className="post-detail" defaultValue={ groupData.description } onChange={ onChangeEvent }></textarea>
         <PrimaryButton styles={ "bg-sub py-1 px-7 py-2 text-sm m-auto" } onClick={ onClickSaveGroupData }>保存する</PrimaryButton>
       </PostItem>
       <Footer />

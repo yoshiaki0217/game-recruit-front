@@ -1,12 +1,12 @@
 import { useState, useEffect} from 'react';
 import axios from 'axios'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import {
   PrimaryButton,
-  Footer
+  Footer,
+  HeaderBackButton
 } from '../components/index'
-import Left from '../images/left-arrow.svg'
 import DefaultIcon from '../images/default-icon.png'
 import Joi from 'joi-browser';
 
@@ -33,7 +33,6 @@ const validate = (formData) => {
     // エラー内容を一つ一つ出すやり方
     user_name: Joi.string()
       .max(256)
-      .allow('')
       .required()
       .error(errors => {
         errors.forEach(err => {
@@ -53,6 +52,7 @@ const validate = (formData) => {
 
     game: Joi.string()
       .max(5000)
+      .allow('')
       .error(errors => {
         errors.forEach(err => {
           switch (err.type) {
@@ -234,20 +234,20 @@ const MyPageEdit = (props) => {
   return (
     <>
       <MyPageEditSection className="h-screen bg-sub">
-        <div className="bg-main flex justify-between items-center fixed top-0 z-50 px-4 h-12 w-full">
-          <Link className="inline-block" to={'/mypage/' + userDetail.id }>
-            <img src={ Left } width="28" height="28" alt="" />
-          </Link>
-        </div>
+        <HeaderBackButton />
 
-        <div className="mt-12 mb-20">
-          {
-          errorMessages.map((item, index) => {
-            return (
-              <p key={ index }>{ item }</p>
-            )
-          })
-          }
+        <div className="mt-16 mb-20">
+          <div className={ errorMessages.length === 0 ? 'hidden' : 'bg-red-100 w-80 mx-auto p-1 mb-2' }>
+            <ul className="mx-auto px-3 text-red-600">
+              {
+              errorMessages.map((item, index) => {
+                return (
+                    <li key={ index }>{ item }</li>
+                    )
+                  })
+              }
+            </ul>
+          </div>
           <div className="px-4 flex justify-center items-center">
             <div>
               <img className="rounded-full my-3 mx-auto" src={ thumbnail } onClick={ changeIcon } width="150" height="150" alt="" />
@@ -259,9 +259,9 @@ const MyPageEdit = (props) => {
           <section className="">
             <div className="psot-item w-80 bg-white p-4 my-5 mx-auto">
               <p className="post-list-item truncate">ゲーム:</p>
-              <TextArea className="p-1 w-full" rows="2" name="game" placeholder="ゲームの種類" defaultValue={ userDetail.game } onChange={ onChangeEvent }></TextArea>
+              <TextArea className="p-1 w-full" cols="30" rows="2" name="game" placeholder="ゲームの種類" defaultValue={ userDetail.game } onChange={ onChangeEvent }></TextArea>
               <p>自己紹介:</p>
-              <TextArea className="p-1 w-full" rows="7" name="introduction" placeholder="自己紹介文" defaultValue={ userDetail.introduction } onChange={ onChangeEvent }></TextArea>
+              <TextArea className="p-1 w-full" cols="30" rows="10" name="introduction" placeholder="自己紹介文" defaultValue={ userDetail.introduction } onChange={ onChangeEvent }></TextArea>
               <div className="flex justify-center">
                 <PrimaryButton styles={ "bg-sub text-sm p-2 m-2 w-4.5/10" } onClick={ sendUserDetail }>保存する</PrimaryButton>
               </div>

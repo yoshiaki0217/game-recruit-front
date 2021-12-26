@@ -16,7 +16,6 @@ export const Post = React.createContext();
 
 const PostIndx = () => {
   const loginedUserId = Number(localStorage.getItem('userId'));
-  const [styledHidden, setStyledHidden] = useState("hidden")
   const [styledNone, setStyledNone] = useState("search-modal-close")
   const [postDetail, setPostDetail] = useState([]);
   const [searchedPostDetail, setSearchedPostDetail] = useState([]);
@@ -47,8 +46,13 @@ const PostIndx = () => {
   }
   
   
-  const onClickToggle = () => {
-    setStyledHidden(!styledHidden　? "hidden" : "" );
+  const changeDisplayGroup = (e) => {
+    let groupMember = e.target.parentNode.parentNode.nextElementSibling;
+    if(groupMember.className === 'hidden') {
+      groupMember.classList.remove("hidden");
+    } else {
+      groupMember.classList.add("hidden");
+    }
   }
 
   const onClickSearch = () => {
@@ -56,11 +60,12 @@ const PostIndx = () => {
   }
 
   return (
-    <section className="h-full bg-sub pb-16">
+    <section className="h-screen bg-sub">
+      <div className="bg-sub pb-16">
       <PostWrap className="relative">
-        {!styledNone && (  
+        {/* {!styledNone && (  
           <div className="cover"></div>
-        )}
+        )} */}
 
         <Post.Provider value={ value }>
           <SearchModal
@@ -68,7 +73,7 @@ const PostIndx = () => {
             styledNone={ styledNone }
           />
         </Post.Provider>
-        <div className="flex items-center justify-end  px-11 mb-3">
+        <div className="flex items-center justify-end px-11 mb-3 pt-3">
           <div onClick={onClickSearch}>
             <SearchButton />
           </div>
@@ -135,11 +140,11 @@ const PostIndx = () => {
                   <p className="post-list-item">募集人数:<span>{ data.group_detail.recruitment }</span></p>
                   <div className="flex justify-between mb-4">
                     <p className="post-list-item">参加人数:<span>{ data.group_detail.participants }</span></p>
-                    <div onClick={ onClickToggle }>
+                    <div onClick={ changeDisplayGroup }>
                       <PrimaryButton styles={ "bg-sub tex p-1 text-xs" }>メンバー一覧</PrimaryButton>
                     </div>
                   </div>
-                  <div className={ styledHidden }>
+                  <div className={ 'hidden' }>
                     <ul className="friend-list mb-8">
                       {
                         data.group_detail.group_member.map((data, index) => {
@@ -169,6 +174,7 @@ const PostIndx = () => {
         </ul>
       <Footer />
       </PostWrap>
+      </div>
     </section>
   )
 }

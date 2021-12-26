@@ -1,12 +1,12 @@
 import styled from 'styled-components'
 import { useState, useEffect} from 'react';
 import axios from 'axios';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import {
   PrimaryButton,
-  Footer
+  Footer,
+  HeaderBackButton
 } from '../components/index'
-import Left from '../images/left-arrow.svg'
 import DefaultIcon from '../images/default-icon.png'
 
 const NotificationDetail = (props) => {
@@ -53,35 +53,33 @@ const NotificationDetail = (props) => {
   return (
     <>
       <NotificationDetailSection className="h-screen bg-sub">
-        <div className="bg-main flex justify-between items-center fixed top-0 z-50 px-4 h-12 w-full">
-          <Link className="inline-block" to={　'/notification' }>
-            <img src={ Left } width="28" height="28" alt="" />
-          </Link>
-        </div>
+        <div className="mt-3 mb-20">
+          <HeaderBackButton />
 
-        <div className="mt-12 mb-20">
-          <div className="px-4 flex justify-center items-center">
-            <div>
-              <img className="rounded-full m-3" src={ userDetail.icon === null ? DefaultIcon : userDetail.icon } width="150" height="150" alt="" />
-              <h2 className="text-center text-xl">{ userDetail.user_name }</h2>
+          <div className="mt-12 mb-20">
+            <div className="px-4 flex justify-center items-center">
+              <div>
+                <img className="rounded-full m-3" src={ userDetail.icon === null ? DefaultIcon : userDetail.icon } width="150" height="150" alt="" />
+                <h2 className="text-center text-xl">{ userDetail.user_name }</h2>
+              </div>
             </div>
+
+            <UserDetailItem className="psot-item w-80 bg-white p-4 my-5 mx-auto">
+              <p className="post-list-item truncate">ゲーム:</p>
+              <p className="post-list-item mx-3">{ userDetail.game }</p>
+              <p>自己紹介:</p>
+              <div className="h-auto mx-3">
+                <p className="break-words">{ userDetail.introduction }</p>
+              </div>
+              <div className="flex justify-center">
+                <PrimaryButton styles={ "bg-sub text-sm p-2 m-2 w-4.5/10" } name={ 'permission' } onClick={ sendReply }>許可する</PrimaryButton>
+                <PrimaryButton styles={ "bg-sub text-sm p-2 m-2 w-4.5/10" } name={ 'rejection' } onClick={ sendReply }>拒否する</PrimaryButton>
+              </div>
+            </UserDetailItem>
           </div>
 
-          <UserDetailItem className="psot-item w-80 bg-white p-4 my-5 mx-auto">
-            <p className="post-list-item truncate">ゲーム:</p>
-            <p className="post-list-item mx-3">{ userDetail.game }</p>
-            <p>自己紹介:</p>
-            <div className="h-auto mx-3">
-              <p className="break-words">{ userDetail.introduction }</p>
-            </div>
-            <div className="flex justify-center">
-              <PrimaryButton styles={ "bg-sub text-sm p-2 m-2 w-4.5/10" } name={ 'permission' } onClick={ sendReply }>許可する</PrimaryButton>
-              <PrimaryButton styles={ "bg-sub text-sm p-2 m-2 w-4.5/10" } name={ 'rejection' } onClick={ sendReply }>拒否する</PrimaryButton>
-            </div>
-          </UserDetailItem>
+          <Footer />
         </div>
-
-        <Footer />
       </NotificationDetailSection>
     </>
   )

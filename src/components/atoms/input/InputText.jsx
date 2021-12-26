@@ -4,7 +4,6 @@ const InputText = (props) => {
   const { styled,placeholder,inputValue,onChange,name,type } = props
   return (
     <Input name={name} className={styled} type={type} defaultValue={ inputValue } placeholder={ placeholder } onChange={ onChange } />
-    // <Input className="primary-input w-3/5 border-gray-500 block h-10 p-1" type="text" value={ inputText } onChange={ changeInputText }  placeholder={ placeholder } />
   )
 }
 

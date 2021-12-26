@@ -75,27 +75,27 @@ const SearchModal = (props) => {
   }
 
   return (
-    <ButtnWrap className="search-modal py-3" onSubmit={searchPost}>
-      <form className="search-modal" onSubmit={searchPost}>
-        <div className={styledNone ? "search-modal-close" : "search-modal-open"}>
-          <button onClick={ onClickSearch } className="ml-auto block mb-5">
-            <img src={ CloseButton } alt="閉じるボタン" />
-          </button>
+    <ButtnWrap className={styledNone ? "hidden" : "bg-gray-500 bg-opacity-50 fixed flex items-center justify-center h-screen w-full z-50"}>
+      <div className="bg-main w-80 mx-auto px-2 py-4 justify-center">
+        <button onClick={ onClickSearch } className="ml-auto block mb-5">
+          <img src={ CloseButton } alt="閉じるボタン" />
+        </button>
+        <form onSubmit={searchPost}>
           <InputText name={ "keyword" } styled={ "mb-4 block w-9/10 h-10 m-auto pl-2" } placeholder={ "キーワード" } />
           <select name="style_id" className="mb-4 block w-9/10 h-10 m-auto pl-2">
             <option value="0">スタイル</option>
             {
-              groupStyles.map((data, index) => {
-                return (
-                  <option key={ index } value={ data.id }>{ data.style_name }</option>
-                  );
-                })
-              }
+            groupStyles.map((data, index) => {
+              return (
+                <option key={ index } value={ data.id }>{ data.style_name }</option>
+              )
+            })
+            }
           </select>
           <InputText name={ "recruitment" } styled={ "mb-4 block w-9/10 h-10 m-auto pl-2" } placeholder={ "募集人数" } />
           <PrimaryButton type={ "submit" } styles={ "bg-sub px-2 py-1 m-auto" } >この条件で絞り込む</PrimaryButton>
-        </div>
-      </form>
+        </form>
+      </div>
     </ButtnWrap>
   )
 }

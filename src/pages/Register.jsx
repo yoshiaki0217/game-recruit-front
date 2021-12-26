@@ -139,33 +139,35 @@ const Register = (props) => {
             <img src={ Left } width="28" height="28" alt="" />
           </Link>
         </div>
-        <Content className="w-4/5 py-10">
+        <Content className="w-80 py-10">
           <Tiltle className="text-center mb-5 text-3xl">新規登録</Tiltle>
-          {
-          errorMessages.map((item, index) => {
-            return (
-              <p key={ index }>{ item }</p>
-            )
-          })
-          }
-          <form onSubmit={ handleSubmit } action="" className="login-wrap w-full mx-auto p-10 tracking-widest"> 
+          <ul className="mx-auto px-5 text-red-600">
+            {
+            errorMessages.map((item, index) => {
+              return (
+                  <li key={ index }>{ item }</li>
+                  )
+                })
+            }
+          </ul>
+          <form onSubmit={ handleSubmit } className="login-wrap w-full mx-auto py-6 tracking-widest"> 
               <div className="flex justify-center mb-2">
                 <p className="bg-main w-10 h-10 p-1" >
                   <img src={ Ninja }  alt="アイコン" />
                 </p>
-                <InputText name={ 'user_name' } type="text" placeholder={ 'ユーザーネーム' } onChange={ onChangeEvent } />
+                <InputText name={ 'user_name' } styled={ 'w-9/12 p-1' } type="text" placeholder={ 'ユーザーネーム' } onChange={ onChangeEvent } />
               </div>
               <div className="flex justify-center mb-2">
                 <p className="bg-main w-10 h-10 p-1" >
                   <img src={ Key }  alt="アイコン" />
                 </p>
-                <InputText name={ 'password' } type="password" placeholder={ 'パスワード' } onChange={ onChangeEvent } />
+                <InputText name={ 'password' } styled={ 'w-9/12 p-1' } type="password" placeholder={ 'パスワード' } onChange={ onChangeEvent } />
               </div>
               <div className="flex justify-center mb-4">
                 <p className="bg-main w-10 h-10 p-1" >
                   <img src={ Key }  alt="アイコン" />
                 </p>
-                <InputText name={ 'confirm_password' } type="password" placeholder={ '確認用パスワード' } onChange={ onChangeEvent } />
+                <InputText name={ 'confirm_password' } styled={ 'w-9/12 p-1' } type="password" placeholder={ '確認用パスワード' } onChange={ onChangeEvent } />
               </div>
             <InputButton >登録</InputButton>
           </form>

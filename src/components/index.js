@@ -18,3 +18,6 @@ export { default as SearchButton } from './atoms/button/SearchButton'
 export { default as PrimaryInput } from './atoms/input/PrimaryInput'
 export { default as InputText } from './atoms/input/InputText'
 export { default as ChatTextArea } from './atoms/input/ChatTextArea'
+
+// ヘッダー
+export { default as HeaderBackButton } from './HeaderBackButton'

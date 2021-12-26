@@ -42,63 +42,65 @@ const PostFavorite = () => {
   }
 
   return (
-    <section className="h-full bg-sub pt-10 pb-16">
-      <PostWrap className="relative">
-        <ul className="">
-          {favoriteList.map((data, index) => {
-            return (
-              <li key={ index }>
-                <PostItem className="psot-item w-80 bg-white px-5 py-2 mb-10 m-auto">
-                  <div className="absolute -top-4 -right-4">
-                    <FavoriteButton
-                      status = { true }
-                      postId = { data.post_id }
-                      userId = { loginedUserId }
-                    />
-                  </div>
-                  <div className="flex items-center mb-5">
-                    <p className="profile-logo"><img className="rounded-full" src={ data.post.group_detail.icon === null ? DefaultIcon : data.post.group_detail.icon } alt="プロフィール画像" /></p>
-                    <h3 className="post-team-name text-2xl ml-3 truncate w-6/10">{ data.post.group_detail.group_name }</h3>
-                  </div>
-                  <p className="post-list-item truncate">{ data.post.group_detail.mst_game.game_name }</p>
-                  <p className="post-list-item">スタイル:<span>{ data.post.group_detail.mst_style.style_name }</span></p>
-                  <p className="post-list-item">募集人数:<span>{ data.post.group_detail.recruitment }</span></p>
-                  <div className="flex justify-between mb-4">
-                    <p className="post-list-item">参加人数:<span>{ data.post.group_detail.participants }</span></p>
-                    <div onClick={ onClickToggle }>
-                      <PrimaryButton styles={ "bg-sub tex p-1 text-xs" }>メンバー一覧</PrimaryButton>
+    <section className="h-screen bg-sub">
+      <div className="pt-10 pb-16">
+        <PostWrap className="relative">
+          <ul className="">
+            {favoriteList.map((data, index) => {
+              return (
+                <li key={ index }>
+                  <PostItem className="psot-item w-80 bg-white px-5 py-2 mb-10 m-auto">
+                    <div className="absolute -top-4 -right-4">
+                      <FavoriteButton
+                        status = { true }
+                        postId = { data.post_id }
+                        userId = { loginedUserId }
+                      />
                     </div>
-                  </div>
-                  <div className={ styledHidden }>
-                    <ul className="friend-list mb-8">
-                      {
-                        data.post.group_detail.group_member.map((data, index) => {
-                          return (
-                            <li key={ index } className="flex items-center mb-3">
-                              <p className="firend-logo"><img className="rounded-full" src={ data.user.icon === null ? DefaultIcon : data.user.icon } alt="プロフィール画像" /></p>
-                              <p className="ml-2">{ data.user.user_name }</p>
-                            </li>
-                          )
-                        })
-                      }
-                    </ul>
-                  </div>
-                  <p>グループ詳細</p>
-                  <div className="post-detail overflow-hidden max-h-24">
-                    <p>
-                      { data.post.group_detail.description }
-                    </p>
-                  </div>
-                  <Link className="inline-block bg-sub py-1 px-6 text-sm mx-20" to={'/group/detail/' + data.post.group_detail.id}>
-                  詳細を見る
-                  </Link>
-                </PostItem>
-              </li>
-            )
-          }) }
-        </ul>
-      <Footer />
-      </PostWrap>
+                    <div className="flex items-center mb-5">
+                      <p className="profile-logo"><img className="rounded-full" src={ data.post.group_detail.icon === null ? DefaultIcon : data.post.group_detail.icon } alt="プロフィール画像" /></p>
+                      <h3 className="post-team-name text-2xl ml-3 truncate w-6/10">{ data.post.group_detail.group_name }</h3>
+                    </div>
+                    <p className="post-list-item truncate">{ data.post.group_detail.mst_game.game_name }</p>
+                    <p className="post-list-item">スタイル:<span>{ data.post.group_detail.mst_style.style_name }</span></p>
+                    <p className="post-list-item">募集人数:<span>{ data.post.group_detail.recruitment }</span></p>
+                    <div className="flex justify-between mb-4">
+                      <p className="post-list-item">参加人数:<span>{ data.post.group_detail.participants }</span></p>
+                      <div onClick={ onClickToggle }>
+                        <PrimaryButton styles={ "bg-sub tex p-1 text-xs" }>メンバー一覧</PrimaryButton>
+                      </div>
+                    </div>
+                    <div className={ styledHidden }>
+                      <ul className="friend-list mb-8">
+                        {
+                          data.post.group_detail.group_member.map((data, index) => {
+                            return (
+                              <li key={ index } className="flex items-center mb-3">
+                                <p className="firend-logo"><img className="rounded-full" src={ data.user.icon === null ? DefaultIcon : data.user.icon } alt="プロフィール画像" /></p>
+                                <p className="ml-2">{ data.user.user_name }</p>
+                              </li>
+                            )
+                          })
+                        }
+                      </ul>
+                    </div>
+                    <p>グループ詳細</p>
+                    <div className="post-detail overflow-hidden max-h-24">
+                      <p>
+                        { data.post.group_detail.description }
+                      </p>
+                    </div>
+                    <Link className="inline-block bg-sub py-1 px-6 text-sm mx-20" to={'/group/detail/' + data.post.group_detail.id}>
+                    詳細を見る
+                    </Link>
+                  </PostItem>
+                </li>
+              )
+            }) }
+          </ul>
+        <Footer />
+        </PostWrap>
+      </div>
     </section>
   )
 }

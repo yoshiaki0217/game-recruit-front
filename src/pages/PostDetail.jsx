@@ -3,7 +3,8 @@ import axios from 'axios';
 import styled from "styled-components";
 import {
   PrimaryButton,
-  Footer
+  Footer,
+  HeaderBackButton
 } from '../components/index';
 import DefaultIcon from '../images/default-icon.png'
 import { Link } from 'react-router-dom';
@@ -116,7 +117,8 @@ const PostDetail = (props) => {
   }
 
   return (
-    <GroupDetailWrap className="h-screen bg-sub py-20">
+    <GroupDetailWrap className="h-screen bg-sub py-16">
+      <HeaderBackButton />
       <PostItem className="psot-item w-80 bg-white px-5 pb-2 pt-6 mb-10 m-auto">
         <div className="flex mb-5">
           <p className="profile-logo"><img className="rounded-full" src={ groupData.icon === null ? DefaultIcon : groupData.icon } alt="プロフィール画像" /></p>

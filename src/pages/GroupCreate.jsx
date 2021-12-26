@@ -5,7 +5,8 @@ import styled from "styled-components";
 import {
   PrimaryButton,
   InputText,
-  Footer
+  Footer,
+  HeaderBackButton
 } from '../components/index'
 import DefaultIcon from '../images/default-icon.png'
 import Joi from 'joi-browser';
@@ -249,15 +250,20 @@ const GroupCreate = (props) => {
   }
 
   return (
-    <GroupDetailWrap className=" h-screen bg-sub py-20">
-      {
-      errorMessages.map((item, index) => {
-        return (
-          <p key={ index }>{ item }</p>
-        )
-      })
-      }
-      <PostItem className="psot-item w-80 bg-white px-5 pb-2 pt-6 mb-10 m-auto text-sm">
+    <GroupDetailWrap className="h-screen bg-sub py-16">
+      <HeaderBackButton />
+      <div className={ errorMessages.length === 0 ? 'hidden' : 'bg-red-100 w-80 mx-auto p-1 mb-2' }>
+        <ul className="mx-auto px-3 text-red-600">
+          {
+          errorMessages.map((item, index) => {
+            return (
+                <li key={ index }>{ item }</li>
+                )
+              })
+          }
+        </ul>
+      </div>
+      <PostItem className="psot-item w-80 bg-white px-5 pb-2 pt-6 mb-10 m-auto">
         <div className="flex mb-5 items-center">
           <p className="profile-logo"><img className="rounded-full" src={ thumbnail } alt="プロフィール画像" onClick={ changeIcon } /></p>
           <input style={{display: 'none'}} name="icon" id="icon" type="file" onChange={setImage} />
@@ -308,7 +314,7 @@ const GroupCreate = (props) => {
           </select>
         </p>
         <p>グループ詳細</p>
-        <textarea name="description" id="" cols="30" rows="10"　className="post-detail" onChange={ onChangeEvent }></textarea>
+        <textarea name="description" style={{ overflow:'auto', resize: 'none'}} cols="30" rows="13"　className="post-detail" onChange={ onChangeEvent }></textarea>
         <PrimaryButton styles={ "bg-sub py-1 px-7 py-2 text-sm m-auto" } onClick={ onClickCreateGroupData }>作成する</PrimaryButton>
       </PostItem>
       <Footer />

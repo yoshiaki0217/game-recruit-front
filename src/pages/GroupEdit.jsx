@@ -15,6 +15,8 @@ const schema = Joi.object({
   id: Joi.number()
     .required(),
 
+  icon: Joi,
+
   group_name: Joi.string()
     .max(256)
     .required()
@@ -97,12 +99,14 @@ const GroupEdit = (props) => {
   // API呼び出し時にresponseから直接参照すると取得できるので、その際にこのgameNameにセットしている
   // よく分からないので、とりあえずこの方法で対応
   const [gameName, setGameName] = useState('');
+  const [thumbnail, setThumbnail] = useState(DefaultIcon);
   const [groupMember, setGroupMember] = useState([]);
   const groupId = props.match.params.id;
   const history = useHistory();
   const [errorMessages, setValidationMessages] = useState([])
   const [formData, setFormData] = useState({
     'id' : '',
+    'icon' : '',
     'group_name' : '',
     'style_id' : '',
     'recruitment' : '',
@@ -110,9 +114,12 @@ const GroupEdit = (props) => {
   })
 
   useEffect(() => {
-    getGroup(groupId);
-    getGroupMember(groupId);
-    getGameStyle();
+    let unmounted = false;
+    if(!unmounted) {
+      getGroup(groupId);
+      getGroupMember(groupId);
+      getGameStyle();
+    }
   },[groupId])
 
   const getGameStyle = () => {
@@ -132,11 +139,13 @@ const GroupEdit = (props) => {
 
     axios.get(url + '/api/groups/groupid/' + id)
     .then((res) => {
-      const { id, group_name, style_id, recruitment, description } = res.data.results;
+      const { id, icon, group_name, style_id, recruitment, description } = res.data.results;
       setGroupData(res.data.results);
+      setThumbnail(res.data.results.icon === null ? DefaultIcon : res.data.results.icon);
       setGameName(res.data.results.mst_game.game_name);
       setFormData({
         'id' : id,
+        'icon' : icon,
         'group_name' : group_name,
         'style_id' : style_id,
         'recruitment' : recruitment,
@@ -176,6 +185,7 @@ const GroupEdit = (props) => {
 
   const onClickSaveGroupData = () => {
     let url = 'http://localhost:80';
+    let formDatas = new FormData();
     let validationCheckFlag = false;
 
     // バリデーション実行
@@ -189,8 +199,21 @@ const GroupEdit = (props) => {
       validationCheckFlag = true;
     }
 
+    formDatas.append("id", formData.id)
+    formDatas.append("icon", formData.icon)
+    formDatas.append("group_name", formData.group_name)
+    formDatas.append("style_id", formData.style_id)
+    formDatas.append("recruitment", formData.recruitment)
+    formDatas.append("description", formData.description)
+
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data"
+      }
+    }
+
     if(validationCheckFlag) {
-      axios.post(url + '/api/group/edit', formData)
+      axios.post(url + '/api/group/edit', formDatas, config)
       .then((res) => {
         history.push('/group/detail/' + res.data.results.id);
       })
@@ -209,6 +232,41 @@ const GroupEdit = (props) => {
     }
   }
 
+  const setImage = (e) => {
+    const name = e.target.name;
+    const files = e.target;
+
+    if (files.files[0] !== undefined) {
+      const file = files.files[0]
+      const type = file.type
+      if (
+          type !== "image/jpeg" &&
+          type !== "image/png" &&
+          type !== "image/webp"
+      ) {
+          alert("選択されたファイルはアップロードできません")
+          return false
+      }
+      setFormData({
+        ...formData,
+        [name]: file
+      });
+      if (type.startsWith("image/")) {
+        setThumbnail(window.URL.createObjectURL(file))
+      }
+    } else {
+      setFormData({
+        ...formData,
+        [name]: ''
+      });
+    }
+  }
+
+  const changeIcon = () => {
+    let icon = document.getElementById('icon');
+    icon.click();
+  }
+
   return (
     <GroupDetailWrap className="h-screen bg-sub py-16">
       <HeaderBackButton />
@@ -225,7 +283,8 @@ const GroupEdit = (props) => {
       </div>
       <PostItem className="psot-item w-80 bg-white px-5 pb-2 pt-6 mb-6 m-auto">
         <div className="flex mb-5 items-center">
-          <p className="profile-logo"><img className="rounded-full" src={ groupData.icon === null ? DefaultIcon : groupData.icon } alt="プロフィール画像" /></p>
+          <p className="profile-logo"><img className="rounded-full" src={ thumbnail } onClick={ changeIcon } alt="プロフィール画像" /></p>
+          <input style={{display: 'none'}} name="icon" id="icon" type="file" onChange={setImage} />
           <input type="text" name="group_name" className="ml-4 w-7/10" defaultValue={ groupData.group_name } onChange={ onChangeEvent } />
         </div>
         <p className="post-list-item truncate">{ gameName }</p>

@@ -250,7 +250,7 @@ const MyPageEdit = (props) => {
           </div>
           <div className="px-4 flex justify-center items-center">
             <div>
-              <img className="rounded-full my-3 mx-auto" src={ thumbnail } onClick={ changeIcon } width="150" height="150" alt="" />
+              <img className="rounded-full my-3 mx-auto" src={ thumbnail } onClick={ changeIcon } width="150" height="150" alt="プロフィール画像" />
               <input style={{display: 'none'}} name="icon" id="icon" type="file" onChange={setImage} />
               <input className="bg-indigo-600 bg-opacity-0 text-center text-xl p-1 border-b border-main" type="text" name="user_name" placeholder="ユーザー名" defaultValue={ userDetail.user_name } onChange={ onChangeEvent } />
             </div>

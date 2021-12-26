@@ -23,9 +23,12 @@ const GroupDetail = (props) => {
   const groupId = props.match.params.id;
 
   useEffect(() => {
-    getGroup(groupId);
-    getGroupMember(groupId);
-    getPost(groupId);
+    let unmounted = false;
+    if(!unmounted) {
+      getGroup(groupId);
+      getGroupMember(groupId);
+      getPost(groupId);
+    }
   },[groupId])
 
   const getGroup = (id) => {

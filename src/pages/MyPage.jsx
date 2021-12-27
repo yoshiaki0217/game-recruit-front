@@ -24,7 +24,7 @@ const MyPage = (props) => {
 
   // 友だちのデータ取得
   const getUserDetail = (userId) => {
-    let url = 'http://localhost:80';
+    let url = process.env.REACT_APP_BACKEND_PATH;
 
     axios.get(url + '/api/mypage/' + userId)
     .then((res) => {

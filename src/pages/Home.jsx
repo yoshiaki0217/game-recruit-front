@@ -34,7 +34,7 @@ const Home = (props) => {
 
   // 友だちのデータ取得
   const getFriends = (id) => {
-    let url = 'http://localhost:80';
+    let url = process.env.REACT_APP_BACKEND_PATH;
 
     axios.get(url + '/api/friends/' + id)
     .then((res) => {
@@ -48,7 +48,7 @@ const Home = (props) => {
 
   // グループのデータ取得
   const getGroups = (id) => {
-    let url = 'http://localhost:80';
+    let url = process.env.REACT_APP_BACKEND_PATH;
 
     axios.get(url + '/api/groups/userid/' + id)
     .then((res) => {

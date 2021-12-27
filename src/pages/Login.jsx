@@ -13,38 +13,6 @@ import { Link } from 'react-router-dom';
 import Left from '../images/left-arrow.svg';
 import Joi from 'joi-browser';
 
-const schema = Joi.object({
-  user_name: Joi.string()
-    .required()
-    .error(errors => {
-      errors.forEach(err => {
-        switch (err.type) {
-          case "any.empty":
-            err.message = "＊ユーザー名を入力してください";
-            break;
-          default:
-            break;
-        }
-      });
-      return new Error(errors);
-    }),
-
-  password: Joi.string()
-    .required()
-    .error(errors => {
-      errors.forEach(err => {
-        switch (err.type) {
-          case "any.empty":
-            err.message = "＊パスワードを入力してください";
-            break;
-          default:
-            break;
-        }
-      });
-      return new Error(errors);
-    }),
-})
-
 const Login = (props) => {
   const [formData, setFormData] = useState({
     'user_name' : '',
@@ -53,6 +21,38 @@ const Login = (props) => {
   const [errorMessages, setValidationMessages] = useState([])
   const history = useHistory()
   const dispatch = useDispatch();
+
+  const schema = Joi.object({
+    user_name: Joi.string()
+      .required()
+      .error(errors => {
+        errors.forEach(err => {
+          switch (err.type) {
+            case "any.empty":
+              err.message = "＊ユーザー名を入力してください";
+              break;
+            default:
+              break;
+          }
+        });
+        return new Error(errors);
+      }),
+  
+    password: Joi.string()
+      .required()
+      .error(errors => {
+        errors.forEach(err => {
+          switch (err.type) {
+            case "any.empty":
+              err.message = "＊パスワードを入力してください";
+              break;
+            default:
+              break;
+          }
+        });
+        return new Error(errors);
+      }),
+  })
 
   const onChangeEvent = (e) => {
     const name = e.target.name;

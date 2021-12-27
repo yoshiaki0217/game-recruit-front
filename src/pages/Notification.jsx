@@ -19,7 +19,7 @@ const Notification = (props) => {
   },[loginedUserId])
 
   const getNotification = (id) => {
-    let url = 'http://localhost:80';
+    let url = process.env.REACT_APP_BACKEND_PATH;
 
     axios.get(url + '/api/notification/' + id)
     .then((res) => {

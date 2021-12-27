@@ -31,7 +31,7 @@ const PostDetail = (props) => {
   },[groupId, loginedUserId])
 
   const getGroup = (id) => {
-    let url = 'http://localhost:80';
+    let url = process.env.REACT_APP_BACKEND_PATH;
 
     axios.get(url + '/api/groups/groupid/' + id)
     .then((res) => {
@@ -45,7 +45,7 @@ const PostDetail = (props) => {
   }
 
   const getGroupMember = (id, userId, checkGroupMember) => {
-    let url = 'http://localhost:80';
+    let url = process.env.REACT_APP_BACKEND_PATH;
 
     axios.get(url + '/api/group/member/' + id)
     .then((res) => {
@@ -64,7 +64,7 @@ const PostDetail = (props) => {
   }
 
   const getPost = (groupId, userId, checkJoinRequested) => {
-    let url = 'http://localhost:80';
+    let url = process.env.REACT_APP_BACKEND_PATH;
 
     axios.get(url + '/api/post/' + groupId)
     .then((res) => {
@@ -85,7 +85,7 @@ const PostDetail = (props) => {
   }
 
   const sendJoinRequest = () => {
-    let url = 'http://localhost:80';
+    let url = process.env.REACT_APP_BACKEND_PATH;
 
     setJoinRequestedFlag(true)
 
@@ -103,7 +103,7 @@ const PostDetail = (props) => {
   }
 
   const checkJoinRequested = (userId, postId) => {
-    let url = 'http://localhost:80';
+    let url = process.env.REACT_APP_BACKEND_PATH;
 
     axios.get(url + '/api/subscriptions/' + userId + '/' + postId)
     .then((res) => {

@@ -32,7 +32,7 @@ const GroupDetail = (props) => {
   },[groupId])
 
   const getGroup = (id) => {
-    let url = 'http://localhost:80';
+    let url = process.env.REACT_APP_BACKEND_PATH;
 
     axios.get(url + '/api/groups/groupid/' + id)
     .then((res) => {
@@ -46,7 +46,7 @@ const GroupDetail = (props) => {
   }
 
   const getGroupMember = (id) => {
-    let url = 'http://localhost:80';
+    let url = process.env.REACT_APP_BACKEND_PATH;
 
     axios.get(url + '/api/group/member/' + id)
     .then((res) => {
@@ -64,7 +64,7 @@ const GroupDetail = (props) => {
   }
 
   const getPost = (id) => {
-    let url = 'http://localhost:80';
+    let url = process.env.REACT_APP_BACKEND_PATH;
 
     axios.get(url + '/api/post/' + id)
     .then((res) => {
@@ -76,7 +76,7 @@ const GroupDetail = (props) => {
   }
 
   const onClickUpsertPost = () => {
-    let url = 'http://localhost:80';
+    let url = process.env.REACT_APP_BACKEND_PATH;
     let statusFlag = postData && postData.status_flag === 0  ? 1 : 0;
 
     axios.post(url + '/api/post/upsert', {

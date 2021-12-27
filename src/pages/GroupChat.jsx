@@ -32,7 +32,7 @@ const GroupChat = (props) => {
   },[loginedUserId, groupId])
 
   const getMessages = (groupId) => {
-    let url = 'http://localhost:80';
+    let url = process.env.REACT_APP_BACKEND_PATH;
 
     axios.get(url + '/api/messages/group/' + groupId)
     .then((res) => {
@@ -50,7 +50,7 @@ const GroupChat = (props) => {
     if(!message) {
       return false;
     }
-    let url = 'http://localhost:80';
+    let url = process.env.REACT_APP_BACKEND_PATH;
 
     e.target.parentElement.querySelector('textarea').value = '';
 
@@ -95,7 +95,7 @@ const GroupChat = (props) => {
   }
 
   const upsertRead = (userId, groupId) => {
-    let url = 'http://localhost:80';
+    let url = process.env.REACT_APP_BACKEND_PATH;
     const date = new Date();
 
     axios.post(url + '/api/read/group/upsert', {

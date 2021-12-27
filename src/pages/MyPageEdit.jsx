@@ -10,106 +10,6 @@ import {
 import DefaultIcon from '../images/default-icon.png'
 import Joi from 'joi-browser';
 
-const validate = (formData) => {
-  const schema = Joi.object({
-    id: Joi.number()
-      .required(),
-
-    icon: Joi,
-
-    // エラー内容を一気に出すやり方（メッセージをオーバーライドする方法がわからないため保留）
-    // user_name: Joi.string()
-    //   .max(256)
-    //   .required(),
-
-    // game: Joi.string()
-    // .max(256)
-    // .required(),
-    
-    // introduction: Joi.string()
-    // .max(5000)
-    // .required(),
-
-    // エラー内容を一つ一つ出すやり方
-    user_name: Joi.string()
-      .max(256)
-      .required()
-      .error(errors => {
-        errors.forEach(err => {
-          switch (err.type) {
-            case "any.empty":
-              err.message = "＊ユーザー名は必須です";
-              break;
-            case "string.max":
-              err.message = `＊ユーザー名は${err.context.limit}文字以内で設定してください`;
-              break;
-            default:
-              break;
-          }
-        });
-        return new Error(errors);
-      }),
-
-    game: Joi.string()
-      .max(5000)
-      .allow('')
-      .error(errors => {
-        errors.forEach(err => {
-          switch (err.type) {
-            case "string.base":
-              err.message = "＊ゲーム名は文字列を入力してください";
-              break;
-            case "string.max":
-              err.message = `＊ゲーム名は${err.context.limit}文字以内で設定してください`;
-              break;
-            default:
-              break;
-          }
-        });
-        return new Error(errors);
-      }),
-
-    introduction: Joi.string()
-      .max(5000)
-      .allow('')
-      .error(errors => {
-        errors.forEach(err => {
-          console.log(err.type);
-          switch (err.type) {
-            case "string.base":
-              err.message = "＊自己紹介は文字列を入力してください";
-              break;
-            case "string.max":
-              err.message = `＊自己紹介は${err.context.limit}文字以内で設定してください`;
-              break;
-            default:
-              break;
-          }
-        });
-        return new Error(errors);
-      }),
-  })
-
-  // バリデーション実行
-  const result = schema.validate(formData, {abortEarly: false});
-  let errors = [];
-  
-  // エラー内容を一気に出すやり方（メッセージをオーバーライドする方法がわからないため保留）
-  // if(!result.error) return null;
-  // for(let item of result.error.details) {
-  //   errors.push(item.message);
-  // }
-
-  // エラー内容を一つ一つ出すやり方
-  if(result.error) {
-    errors = result.error.message.split(',');
-  } else {
-    errors = null;
-  }
-
-  return errors;
-}
-
 const MyPageEdit = (props) => {
   const userId = props.location.state.userId;
   const [userDetail, setUserDetail] = useState([]);
@@ -126,17 +26,9 @@ const MyPageEdit = (props) => {
     }
   },[userId])
 
-  const onChangeEvent = (e) => {
-    const name = e.target.name;
-    setFormData({
-      ...formData,
-      [name]: e.target.value
-    });
-  }
-
   // 友だちのデータ取得
   const getUserDetail = (userId) => {
-    let url = 'http://localhost:80';
+    let url = process.env.REACT_APP_BACKEND_PATH;
 
     axios.get(url + '/api/mypage/' + userId)
     .then((res) => {
@@ -154,6 +46,114 @@ const MyPageEdit = (props) => {
     .catch((error) => {
       console.log(error)
     })
+  }
+
+  const validate = (formData) => {
+    const schema = Joi.object({
+      id: Joi.number()
+        .required(),
+  
+      icon: Joi,
+  
+      // エラー内容を一気に出すやり方（メッセージをオーバーライドする方法がわからないため保留）
+      // user_name: Joi.string()
+      //   .max(256)
+      //   .required(),
+  
+      // game: Joi.string()
+      // .max(256)
+      // .required(),
+      
+      // introduction: Joi.string()
+      // .max(5000)
+      // .required(),
+  
+      // エラー内容を一つ一つ出すやり方
+      user_name: Joi.string()
+        .max(256)
+        .required()
+        .error(errors => {
+          errors.forEach(err => {
+            switch (err.type) {
+              case "any.empty":
+                err.message = "＊ユーザー名は必須です";
+                break;
+              case "string.max":
+                err.message = `＊ユーザー名は${err.context.limit}文字以内で設定してください`;
+                break;
+              default:
+                break;
+            }
+          });
+          return new Error(errors);
+        }),
+  
+      game: Joi.string()
+        .max(5000)
+        .allow('')
+        .error(errors => {
+          errors.forEach(err => {
+            switch (err.type) {
+              case "string.base":
+                err.message = "＊ゲーム名は文字列を入力してください";
+                break;
+              case "string.max":
+                err.message = `＊ゲーム名は${err.context.limit}文字以内で設定してください`;
+                break;
+              default:
+                break;
+            }
+          });
+          return new Error(errors);
+        }),
+  
+      introduction: Joi.string()
+        .max(5000)
+        .allow('')
+        .error(errors => {
+          errors.forEach(err => {
+            console.log(err.type);
+            switch (err.type) {
+              case "string.base":
+                err.message = "＊自己紹介は文字列を入力してください";
+                break;
+              case "string.max":
+                err.message = `＊自己紹介は${err.context.limit}文字以内で設定してください`;
+                break;
+              default:
+                break;
+            }
+          });
+          return new Error(errors);
+        }),
+    })
+  
+    // バリデーション実行
+    const result = schema.validate(formData, {abortEarly: false});
+    let errors = [];
+    
+    // エラー内容を一気に出すやり方（メッセージをオーバーライドする方法がわからないため保留）
+    // if(!result.error) return null;
+    // for(let item of result.error.details) {
+    //   errors.push(item.message);
+    // }
+  
+    // エラー内容を一つ一つ出すやり方
+    if(result.error) {
+      errors = result.error.message.split(',');
+    } else {
+      errors = null;
+    }
+  
+    return errors;
+  }
+
+  const onChangeEvent = (e) => {
+    const name = e.target.name;
+    setFormData({
+      ...formData,
+      [name]: e.target.value
+    });
   }
 
   const changeIcon = () => {
@@ -188,7 +188,7 @@ const MyPageEdit = (props) => {
   }
 
   const sendUserDetail = () => {
-    let url = 'http://localhost:80';
+    let url = process.env.REACT_APP_BACKEND_PATH;
     let formDatas = new FormData();
 
     const errors = validate(formData);

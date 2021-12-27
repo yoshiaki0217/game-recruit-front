@@ -33,7 +33,7 @@ const PrivateChat = (props) => {
   },[roomId, loginedUserId, friendData])
 
   const getMessages = (roomId) => {
-    let url = 'http://localhost:80';
+    let url = process.env.REACT_APP_BACKEND_PATH;
 
     axios.get(url + '/api/messages/private/' + roomId)
     .then((res) => {
@@ -51,7 +51,7 @@ const PrivateChat = (props) => {
     if(!message) {
       return false;
     }
-    let url = 'http://localhost:80';
+    let url = process.env.REACT_APP_BACKEND_PATH;
 
     e.target.parentElement.querySelector('textarea').value = '';
 
@@ -96,7 +96,7 @@ const PrivateChat = (props) => {
   }
 
   const upsertRead = (userId, friendId, roomId) => {
-    let url = 'http://localhost:80';
+    let url = process.env.REACT_APP_BACKEND_PATH;
     const date = new Date();
 
     axios.post(url + '/api/read/upsert', {

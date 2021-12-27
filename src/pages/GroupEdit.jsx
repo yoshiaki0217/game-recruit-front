@@ -11,87 +11,6 @@ import {
 import DefaultIcon from '../images/default-icon.png'
 import Joi from 'joi-browser';
 
-const schema = Joi.object({
-  id: Joi.number()
-    .required(),
-
-  icon: Joi,
-
-  group_name: Joi.string()
-    .max(256)
-    .required()
-    .error(errors => {
-      errors.forEach(err => {
-        switch (err.type) {
-          case "any.empty":
-            err.message = "＊グループ名は必須です";
-            break;
-          case "string.max":
-            err.message = `＊グループ名は${err.context.limit}文字以内で設定してください`;
-            break;
-          default:
-            break;
-        }
-      });
-      return new Error(errors);
-    }),
-
-  style_id: Joi.number()
-    .required()
-    .error(errors => {
-      errors.forEach(err => {
-        switch (err.type) {
-          case "any.empty":
-            err.message = "＊スタイルは必須です";
-            break;
-          case "number.base":
-            err.message = `＊スタイルは選択肢から選んでください`;
-            break;
-          default:
-            break;
-        }
-      });
-      return new Error(errors);
-    }),
-
-  recruitment: Joi.number()
-    .required()
-    .error(errors => {
-      errors.forEach(err => {
-        switch (err.type) {
-          case "any.empty":
-            err.message = "＊募集人数は必須です";
-            break;
-          case "number.base":
-            err.message = `＊募集人数は数字を指定してください`;
-            break;
-          default:
-            break;
-        }
-      });
-      return new Error(errors);
-    }),
-
-  description: Joi.string()
-    .required()
-    .max(5000)
-    .error(errors => {
-      errors.forEach(err => {
-        switch (err.type) {
-          case "any.empty":
-            err.message = "＊詳細は必須です";
-            break;
-          case "string.max":
-            err.message = `＊詳細は${err.context.limit}文字以内で設定してください`;
-            break;
-          default:
-            break;
-        }
-      });
-      return new Error(errors);
-    }),
-})
-
 const GroupEdit = (props) => {
   const [gameStyles, setGameStyles] = useState([]);
   const [groupData, setGroupData] = useState([]);
@@ -123,7 +42,7 @@ const GroupEdit = (props) => {
   },[groupId])
 
   const getGameStyle = () => {
-    let url = 'http://localhost:80';
+    let url = process.env.REACT_APP_BACKEND_PATH;
 
     axios.get(url + '/api/game/styles')
     .then((res) => {
@@ -135,7 +54,7 @@ const GroupEdit = (props) => {
   }
 
   const getGroup = (id) => {
-    let url = 'http://localhost:80';
+    let url = process.env.REACT_APP_BACKEND_PATH;
 
     axios.get(url + '/api/groups/groupid/' + id)
     .then((res) => {
@@ -158,7 +77,7 @@ const GroupEdit = (props) => {
   }
 
   const getGroupMember = (id) => {
-    let url = 'http://localhost:80';
+    let url = process.env.REACT_APP_BACKEND_PATH;
 
     axios.get(url + '/api/group/member/' + id)
     .then((res) => {
@@ -168,6 +87,87 @@ const GroupEdit = (props) => {
       console.log(error)
     })
   }
+
+  const schema = Joi.object({
+    id: Joi.number()
+      .required(),
+  
+    icon: Joi,
+  
+    group_name: Joi.string()
+      .max(256)
+      .required()
+      .error(errors => {
+        errors.forEach(err => {
+          switch (err.type) {
+            case "any.empty":
+              err.message = "＊グループ名は必須です";
+              break;
+            case "string.max":
+              err.message = `＊グループ名は${err.context.limit}文字以内で設定してください`;
+              break;
+            default:
+              break;
+          }
+        });
+        return new Error(errors);
+      }),
+  
+    style_id: Joi.number()
+      .required()
+      .error(errors => {
+        errors.forEach(err => {
+          switch (err.type) {
+            case "any.empty":
+              err.message = "＊スタイルは必須です";
+              break;
+            case "number.base":
+              err.message = `＊スタイルは選択肢から選んでください`;
+              break;
+            default:
+              break;
+          }
+        });
+        return new Error(errors);
+      }),
+  
+    recruitment: Joi.number()
+      .required()
+      .error(errors => {
+        errors.forEach(err => {
+          switch (err.type) {
+            case "any.empty":
+              err.message = "＊募集人数は必須です";
+              break;
+            case "number.base":
+              err.message = `＊募集人数は数字を指定してください`;
+              break;
+            default:
+              break;
+          }
+        });
+        return new Error(errors);
+      }),
+  
+    description: Joi.string()
+      .required()
+      .max(5000)
+      .error(errors => {
+        errors.forEach(err => {
+          switch (err.type) {
+            case "any.empty":
+              err.message = "＊詳細は必須です";
+              break;
+            case "string.max":
+              err.message = `＊詳細は${err.context.limit}文字以内で設定してください`;
+              break;
+            default:
+              break;
+          }
+        });
+        return new Error(errors);
+      }),
+  })
   
   const [styledHidden, setStyledHidden] = useState("hidden")
   
@@ -184,7 +184,7 @@ const GroupEdit = (props) => {
   }
 
   const onClickSaveGroupData = () => {
-    let url = 'http://localhost:80';
+    let url = process.env.REACT_APP_BACKEND_PATH;
     let formDatas = new FormData();
     let validationCheckFlag = false;
 

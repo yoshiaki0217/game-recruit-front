@@ -90,7 +90,7 @@ const PostFavorite = () => {
                         { data.post.group_detail.description }
                       </p>
                     </div>
-                    <Link className="inline-block bg-sub py-1 px-6 text-sm mx-20" to={'/group/detail/' + data.post.group_detail.id}>
+                    <Link className="inline-block bg-sub py-1 px-6 text-sm mx-20" to={'/post/detail/' + data.post.group_detail.id}>
                     詳細を見る
                     </Link>
                   </PostItem>

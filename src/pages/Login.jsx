@@ -137,7 +137,7 @@ const Login = (props) => {
               <p className="bg-main w-10 h-10 p-1" >
                 <img src={Ninja} alt="アイコン" />
               </p>
-              <InputText name={ 'user_name' } styled={ 'w-9/12 p-1' } onChange={ onChangeEvent } placeholder={ 'ユーザーネーム' } />
+              <InputText name={ 'user_name' } styled={ 'w-9/12 p-1' } onChange={ onChangeEvent } placeholder={ 'ユーザー名' } />
               </div>
             <div className="flex justify-center mb-4">
               <p className="bg-main w-10 h-10 p-1" >

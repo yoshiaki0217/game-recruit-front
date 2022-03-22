@@ -9,4 +9,4 @@ build:
   docker:
     web: Dockerfile
 run:
-  web: npm start
+  web: sh -c "npm start"

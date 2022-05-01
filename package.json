@@ -24,7 +24,7 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "webpack --mode production",
+    "build": "react-scripts build",
     "test": "craco test",
     "eject": "react-scripts eject",
     "heroku-postbuild": "craco start"

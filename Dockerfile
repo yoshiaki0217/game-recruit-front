@@ -1,24 +1,20 @@
 FROM node:14.15.0
-# WORKDIR /usr/src/app/
+WORKDIR /usr/src/app/
 
-# RUN npm install
-
-# RUN npm build
-
-
-
-ENV HOME=/${WORKDIR} \
-    LANG=C.UTF-8 \
-    TZ=Asia/Tokyo \
-    HOST=0.0.0.0 \
-    API_URL=${API_URL}
-
-WORKDIR ${HOME}
-
-# 追加
-COPY package*.json ./
 RUN npm install
 
-COPY . ./
+# ENV HOME=/usr/src/app/ \
+#     LANG=C.UTF-8 \
+#     TZ=Asia/Tokyo \
+#     HOST=0.0.0.0 \
+#     API_URL=${API_URL}
 
-RUN npm run build
+# WORKDIR ${HOME}
+
+# # 追加
+# COPY package*.json ./usr/src/app/
+# RUN npm install
+
+# COPY . ./usr/src/app/
+
+# RUN npm run build

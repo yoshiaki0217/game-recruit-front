@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { InputText, PrimaryButton } from "./index"
 import CloseButton from '../images/close-search.svg'
 import { Post } from '../pages/PostIndex'
-import { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from 'axios'
 
 const SearchModal = (props) => {

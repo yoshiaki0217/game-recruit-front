@@ -13,7 +13,7 @@ WORKDIR ${HOME}
 
 # 追加
 COPY package*.json ./
-RUN npm install
+RUN npm install --no-optional
 
 COPY . ./
 

@@ -1,9 +1,9 @@
-FROM node:14.15.0
+FROM node:16.13.1
 # WORKDIR /usr/src/app/
 
 # RUN npm install
 
-ENV HOME=/${WORKDIR} \
+ENV HOME=/app \
     LANG=C.UTF-8 \
     TZ=Asia/Tokyo \
     HOST=0.0.0.0 \
@@ -13,7 +13,7 @@ WORKDIR ${HOME}
 
 # 追加
 COPY package*.json ./
-RUN npm install --no-optional
+RUN npm install
 
 COPY . ./
 

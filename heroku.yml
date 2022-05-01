@@ -9,7 +9,7 @@ build:
   docker:
     web: Dockerfile
   config:
-    WORKDIR: /usr/src/app/
+    WORKDIR: app
     API_URL: http://https://game-recruit-api.herokuapp.com/
 run:
   web: npm start

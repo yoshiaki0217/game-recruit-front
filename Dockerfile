@@ -3,7 +3,7 @@ FROM node:14.15.0
 
 # RUN npm install
 
-ENV HOME=/usr/src/app/ \
+ENV HOME=/${WORKDIR} \
     LANG=C.UTF-8 \
     TZ=Asia/Tokyo \
     HOST=0.0.0.0 \
@@ -12,9 +12,9 @@ ENV HOME=/usr/src/app/ \
 WORKDIR ${HOME}
 
 # 追加
-COPY package*.json ./usr/src/app/
+COPY package*.json ./
 RUN npm install
 
-COPY . ./usr/src/app/
+COPY . ./
 
 RUN npm run build

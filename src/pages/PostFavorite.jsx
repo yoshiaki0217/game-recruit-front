@@ -45,6 +45,11 @@ const PostFavorite = () => {
     <section className="h-screen bg-sub">
       <div className="pt-10 pb-16">
         <PostWrap className="relative">
+          {(() => {
+            if(!favoriteList.length) {
+              return (<p className="p-10 text-center">お気に入り登録している投稿がありません</p>)
+            }
+          })()}
           <ul className="">
             {favoriteList.map((data, index) => {
               return (

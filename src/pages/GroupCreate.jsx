@@ -197,7 +197,7 @@ const GroupCreate = (props) => {
     if(validationCheckFlag) {
       axios.post(url + '/api/group/create', formDatas, config)
       .then((res) => {
-        history.push('/home');
+        history.push(`/group/detail/${res.data.results.id}`);
       })
       .catch((error) => {
         // エラーメッセージの配列を用意

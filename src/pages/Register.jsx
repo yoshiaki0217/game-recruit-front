@@ -98,6 +98,7 @@ const Register = (props) => {
   // 送信処理
   const handleSubmit = (e) => {
     let validationCheckFlag = false;
+    let url = process.env.REACT_APP_BACKEND_PATH;
     // from入力の動作を制御
     e.preventDefault();
 
@@ -113,7 +114,7 @@ const Register = (props) => {
     }
 
     if(validationCheckFlag) {
-      axios.post('http://localhost:80/api/register', formData)
+      axios.post(url + '/api/register', formData)
       .then(res => {
         history.push('/login');
       }).catch((error) => {

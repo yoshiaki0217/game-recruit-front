@@ -9,7 +9,7 @@ const FavoriteButton = (props) => {
 
   const changeFavoriteButton = () => {
     const changeFavoriteIcon = !changeIcon
-    const url = 'http://localhost:80';
+    let url = process.env.REACT_APP_BACKEND_PATH;
     let statusFlag = changeFavoriteIcon ? 0 : 1;
     
     setChangeIcon(changeFavoriteIcon);

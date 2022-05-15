@@ -2,7 +2,7 @@ setup:
   config:
     NODE_ENV: production
     SKIP_PREFLIGHT_CHECK: true
-    REACT_APP_BACKEND_PATH: http://localhost:80
+    REACT_APP_BACKEND_PATH: https://game-recruit-api.herokuapp.com
     REACT_APP_PUSHER_APP_KEY: 12eaa957c8aac9f71905
     REACT_APP_PUSHER_APP_CLUSTER: ap3
 build:

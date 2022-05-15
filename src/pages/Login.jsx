@@ -64,6 +64,7 @@ const Login = (props) => {
 
   const handleSubmit = (e) => {
     let validationCheckFlag = false;
+    let url = process.env.REACT_APP_BACKEND_PATH;
 
     e.preventDefault();
 
@@ -79,7 +80,7 @@ const Login = (props) => {
     }
     
     if(validationCheckFlag) {
-      axios.post('http://localhost:80/api/login', formData)
+      axios.post(url + '/api/login', formData)
         .then(res => {
           let payloadData = {
             'userId' : res.data.results.id,
@@ -137,13 +138,13 @@ const Login = (props) => {
               <p className="bg-main w-10 h-10 p-1" >
                 <img src={Ninja} alt="アイコン" />
               </p>
-              <InputText name={ 'user_name' } styled={ 'w-9/12 p-1' } onChange={ onChangeEvent } placeholder={ 'ユーザー名' } />
+              <InputText name={ 'user_name' } styled={ 'w-9/12 p-1' } type={ 'text' } onChange={ onChangeEvent } placeholder={ 'ユーザー名' } />
               </div>
             <div className="flex justify-center mb-4">
               <p className="bg-main w-10 h-10 p-1" >
                 <img src={Key} alt="アイコン" />
               </p>
-              <InputText name={ 'password' } styled={ 'w-9/12 p-1' } onChange={ onChangeEvent } placeholder={ 'パスワード' } />
+              <InputText name={ 'password' } styled={ 'w-9/12 p-1' } type={ 'password' } onChange={ onChangeEvent } placeholder={ 'パスワード' } />
               </div>
             <InputButton>ログイン</InputButton>
           </form>

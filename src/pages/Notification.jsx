@@ -32,7 +32,12 @@ const Notification = (props) => {
   return (
     <>
       <NotificationSection className="h-screen bg-sub">
-        <div className="bg-sub pb-16">
+        <div className="bg-sub pt-10 pb-16">
+          {(() => {
+            if(!notifications.length) {
+              return (<p className="p-10 text-center">通知はありません</p>)
+            }
+          })()}
           <div className="flex flex-col items-center p-2 mb-16">
           {
             notifications.map((item, index) => {

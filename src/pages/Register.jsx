@@ -155,19 +155,19 @@ const Register = (props) => {
                 <p className="bg-main w-10 h-10 p-1" >
                   <img src={ Ninja }  alt="アイコン" />
                 </p>
-                <InputText name={ 'user_name' } styled={ 'w-9/12 p-1' } type="text" placeholder={ 'ユーザー名' } onChange={ onChangeEvent } />
+                <InputText name={ 'user_name' } styled={ 'w-9/12 p-1' } type={ 'text' } placeholder={ 'ユーザー名' } onChange={ onChangeEvent } />
               </div>
               <div className="flex justify-center mb-2">
                 <p className="bg-main w-10 h-10 p-1" >
                   <img src={ Key }  alt="アイコン" />
                 </p>
-                <InputText name={ 'password' } styled={ 'w-9/12 p-1' } type="password" placeholder={ 'パスワード' } onChange={ onChangeEvent } />
+                <InputText name={ 'password' } styled={ 'w-9/12 p-1' } type={ 'password' } placeholder={ 'パスワード' } onChange={ onChangeEvent } />
               </div>
               <div className="flex justify-center mb-4">
                 <p className="bg-main w-10 h-10 p-1" >
                   <img src={ Key }  alt="アイコン" />
                 </p>
-                <InputText name={ 'confirm_password' } styled={ 'w-9/12 p-1' } type="password" placeholder={ '確認用パスワード' } onChange={ onChangeEvent } />
+                <InputText name={ 'confirm_password' } styled={ 'w-9/12 p-1' } type={ 'password' } placeholder={ '確認用パスワード' } onChange={ onChangeEvent } />
               </div>
             <InputButton >登録</InputButton>
           </form>

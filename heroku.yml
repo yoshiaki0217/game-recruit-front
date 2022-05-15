@@ -11,5 +11,3 @@ build:
   config:
     WORKDIR: app
     API_URL: http://https://game-recruit-api.herokuapp.com/
-# run:
-#   web: npm start

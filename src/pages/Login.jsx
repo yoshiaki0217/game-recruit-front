@@ -64,6 +64,7 @@ const Login = (props) => {
 
   const handleSubmit = (e) => {
     let validationCheckFlag = false;
+    let url = process.env.REACT_APP_BACKEND_PATH;
 
     e.preventDefault();
 
@@ -79,7 +80,7 @@ const Login = (props) => {
     }
     
     if(validationCheckFlag) {
-      axios.post('http://localhost:80/api/login', formData)
+      axios.post(url + '/api/login', formData)
         .then(res => {
           let payloadData = {
             'userId' : res.data.results.id,
